@@ -1,0 +1,25 @@
+<%= form_with(model: value, local: true) do |form| %>
+  <% if value.errors.any? %>
+    <div class="message is-danger">
+      <h2 class="title is-5"><%= pluralize(value.errors.count, "error") %> error impidió guardar el valor:</h2>
+      <div class="message-body">
+        <ul>
+          <% value.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.text_field :title, class: "input is-info" %>
+    </div>
+  </div>
+
+  <div class="actifield is-grouped margin-small-topons">
+    <%= form.submit "Guardar", class: "button is-primary" %>
+  </div>
+<% end %>

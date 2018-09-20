@@ -1,0 +1,73 @@
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li> <%= link_to  "Inicio", root_path %></li>
+    <li class="is-active">      
+      <a href="#" aria-current="page">Crear cuenta</a>
+    </li>
+  </ul>
+</nav>
+
+
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter">
+      <div class="card margin-small">
+        <div class="card-content">
+          <p class="title is-4 has-text-centered"><%= t('.title') %></p>
+          <p class="subtitle is-6 has-text-centered">Ingresa para que podamos comunicarnos.</p>
+                      
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {class: "padding-small"}) do |f| %>
+            <%- if resource.errors.any? %>
+              <div class="message is-danger">
+                <div class="message-body">
+                  <%= devise_error_messages! %>
+                </div>
+              </div>
+            <% end %>
+            <div class="field">
+              <%= f.label :email, class: "label is-normal" %>    
+              <div class="control has-icons-left">                  
+                <%= f.email_field :email, autofocus: true, autocomplete: "email" , class: "input is-primary", placeholder: "example@mail.com"%> 
+          
+                <span class="icon is-small is-left">
+                  <i class="mdi mdi-email mdi-24px"></i>
+                </span>
+              </div>
+            </div>
+
+            <div class="field">
+              <%= f.label :password, class: "label is-normal" %>  
+              <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> <%= t('.characters_minimum') %>)</em>
+              <% end %>    
+              <div class="control has-icons-left">            
+                <%= f.password_field :password, autocomplete: "new-password", class: "input is-primary", placeholder: "***********" %>
+                <span class="icon is-small is-left">
+                  <i class="mdi mdi-lock mdi-24px"></i>
+                </span>
+              </div>
+            </div>
+
+            <div class="field">
+              <%= f.label :password_confirmation, class: "label is-normal" %>                  
+              <div class="control has-icons-left">            
+                <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input is-primary", placeholder: "***********" %>
+                <span class="icon is-small is-left">
+                  <i class="mdi mdi-lock mdi-24px"></i>
+                </span>
+              </div>
+            </div>
+
+            <div class="field is-grouped margin-small-top">
+              <div class="control level">
+                <%= f.submit t('.btn_label'), class: "button is-primary" %>
+              </div>
+            </div>
+          <% end %>
+            <%= render "devise/shared/links", class: "is-pulled-right" %>
+          
+        </div>
+      </div>
+  </div> 
+
+  
+</div>

@@ -1,0 +1,33 @@
+<nav class="navbar is-link ">
+    <div class="container">
+    <div class="navbar-brand is-middle">
+        <div class="toggle-menu">
+            <i class="mdi mdi-menu mdi-36px has-text-white"></i>
+        </div>
+        <h4 class="title is-4">
+            <%= link_to  "BSCMin", root_path, class: "navbar-item has-text-white" %>
+        </h4>   
+    </div>
+    <div class="navbar-menu">
+        <div class="navbar-end">  
+            <%- if user_signed_in?  %>
+                <div class="navbar-item has-dropdown is-hoverable">                  
+                    <a class="navbar-link has-text-white">
+                        <%= current_user.email %>                       
+                    </a>
+                    <div class="navbar-dropdown">
+                        <%= link_to  "Cerra sesión", destroy_user_session_path, method: :delete , class: "navbar-item"%>
+                    </div>
+                </div> 
+            <% else %>
+                <div class="navbar-item ">     
+                    <%= link_to  "Iniciar sesión", new_user_session_path , class: "has-text-white"%>
+                </div> 
+                <div class="navbar-item ">
+                    <%= link_to  "Crear cuenta", new_user_registration_path , class: "button is-danger is-rounded"%>
+                </div> 
+            <% end %>
+        </div>
+    </div>
+    </div>
+</nav>

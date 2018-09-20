@@ -1,0 +1,25 @@
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li> <%= link_to  "Valores", values_path %></li>
+    <li class="is-active">      
+      <a href="#" aria-current="page">Crear Valor</a>
+    </li>
+  </ul>
+</nav>
+
+
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter">
+      <div class="card margin-small">
+        <div class="card-content">
+          <p class="title is-4 has-text-centered">Crear Valor</p>
+          <p class="subtitle is-6 has-text-centered">Nuevo valor de la organización.</p>
+                      
+          <%= render 'form', value: @value %>
+
+            <%= link_to 'Regresar', values_path %>
+      </div>
+  </div> 
+
+  
+</div>

@@ -1,0 +1,21 @@
+es: 
+  missions:
+    index:
+      new_link: "Agregar"
+      edit_link: "Editar"
+      remove_link: "Eliminar"
+  devise:
+    sessions:
+      new:
+        title: 'Iniciar Sesión'
+        btn_label: 'Ingresar'
+    shared:
+      links:
+        sign_up: 'Crear cuenta'
+        sign_in: 'Iniciar sesión'
+        forgot_password: 'Olvidaste tu contraseña?'
+    registrations:
+      new:
+        title: 'Crear cuenta'
+        btn_label: 'Registrarse'  
+        characters_minimum:  'caracteres como mínimo'

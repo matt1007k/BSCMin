@@ -1,0 +1,10 @@
+es:
+  activerecord:
+    attributes:
+      user:
+        email: 'Correo electrónico'
+        name: 'Nombre'
+        password: 'Contraseña'
+        password_confirmation: 'Repetir contraseña'
+        remember_me: 'Recordarme'
+        log_in: 'Ingresar'

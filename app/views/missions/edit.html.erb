@@ -1,0 +1,26 @@
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li> <%= link_to  "Misión", missions_path %></li>
+    <li class="is-active">      
+      <a href="#" aria-current="page">Editar misión</a>
+    </li>
+  </ul>
+</nav>
+
+
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter">
+      <div class="card margin-small">
+        <div class="card-content">
+          <p class="title is-4 has-text-centered">Editar Misión</p>
+          <p class="subtitle is-6 has-text-centered">Editar la misión de la organización.</p>
+                      
+          <%= render 'form', mission: @mission %>
+
+            <%= link_to 'Regresar', missions_path %>
+      </div>
+  </div> 
+
+  
+</div>
+

@@ -1,0 +1,85 @@
+<div class="menu-bg">
+    <div class="main-sidebar bg-white shadow-cm">
+        <div class="toggle-close is-pulled-right margin-extra-small-right">
+            <i class="mdi mdi-arrow-left mdi-36px"></i>
+        </div>
+        <aside class="menu">
+            <p class="menu-label padding-small-all">
+                Ministerio Público             
+            </p>
+            <ul class="menu-list">
+                <%- if user_signed_in? %>
+                    <li>
+                        <%= link_to(missions_path, html_options = {class: "item"}) do %> 
+                            <i class="mdi mdi-note mdi-24px"></i>
+                            Misión
+                        <% end %>
+                    </li>
+                    <li>
+                        <%= link_to visions_path, class: "item" do %> 
+                            <i class="mdi mdi-eye mdi-24px"></i>
+                            Visión
+                        <% end %>
+                    </li>
+                    <li>
+                        <%= link_to(values_path, html_options = {class: "item"}) do %> 
+                            <i class="mdi mdi-verified mdi-24px"></i>
+                            Valores
+                        <% end %>
+                    </li>
+                    <li>
+                        <%= link_to(missions_path, html_options = {class: "item"}) do %> 
+                            <i class="mdi mdi-domain mdi-24px"></i>
+                            Organigrama
+                        <% end %>
+                    </li>
+                    <li>
+                        <%= link_to(missions_path, html_options = {class: "item"}) do %> 
+                            <i class="mdi mdi-map mdi-24px"></i>
+                            Macroproceso
+                        <% end %>
+                    </li>
+                    <li>
+                        <%= link_to(missions_path, html_options = {class: "item"}) do %> 
+                            <i class="mdi mdi-trending-up mdi-24px"></i>
+                            Cadena de valor
+                        <% end %>
+                    </li>
+                <% else %>
+                    <li>
+                        <%= link_to(missions_path, html_options = {class: "item is-middle"}) do %> 
+                            <i class="mdi mdi-eye mdi-24px"></i>
+                            Misión y visión
+                        <% end %>
+                    </li>
+                    <li>
+                        <%= link_to(missions_path, html_options = {class: "item"}) do %> 
+                            <i class="mdi mdi-verified mdi-24px"></i>
+                            Valores
+                        <% end %>
+                    </li>
+                    <li>
+                        <%= link_to(missions_path, html_options = {class: "item"}) do %> 
+                            <i class="mdi mdi-domain mdi-24px"></i>
+                            Organigrama
+                        <% end %>
+                    </li>
+                    <li>
+                        <%= link_to(missions_path, html_options = {class: "item"}) do %> 
+                            <i class="mdi mdi-map mdi-24px"></i>
+                            Macroproceso
+                        <% end %>
+                    </li>
+                    <li>
+                        <%= link_to(missions_path, html_options = {class: "item"}) do %> 
+                            <i class="mdi mdi-trending-up mdi-24px"></i>
+                            Cadena de valor
+                        <% end %>
+                    </li>
+                    
+                <% end %>
+            </ul>
+            
+        </aside>
+    </div>
+</div>
