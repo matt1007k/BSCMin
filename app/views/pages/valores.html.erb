@@ -1,0 +1,33 @@
+<% @title = "Valores" %>
+
+
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li> <%= link_to  "Dashboard", root_path %></li>
+    <li class="is-active">      
+      <a href="#" aria-current="page">Los Valores</a>
+    </li>
+  </ul>
+</nav>
+
+
+<div class="columns">
+  <div class="column is-three-fifths is-offset-one-fifth">
+      <div class="card margin-small shadow-cm">
+        <div class="card-content">
+          <p class="title is-4 has-text-centered">Los Valores</p>
+          <p class="subtitle is-6 has-text-centered">Los valores de la organización.</p>
+
+
+          <% @values.each do |value| %>
+            <h3>
+              <span class="icon">
+                <i class="mdi mdi-check"></i>
+              </span><%= value.title %>
+            </h3>
+          <%  end %>
+
+        </div>
+      </div>
+  </div>
+</div>

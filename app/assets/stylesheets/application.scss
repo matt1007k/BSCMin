@@ -27,6 +27,7 @@ $menu-item-hover-background-color: #3273dc;
 $menu-item-hover-color: $white;
 
 @import 'bulma';
+@import 'bulma-extensions';
 //@import '~font-awesome/scss/font-awesome';
 .is-bg-indigo{
     background: $indigo;
@@ -126,6 +127,8 @@ html, body{
     }
 }
 
+
+
 .bg-accent{
     background-color: $accent;
     color: white;
@@ -141,12 +144,17 @@ html, body{
 }
 
 .hero-img{
-    background: url('./assets/img/hero.jpg') center center;
+    background: url(#{'./assets/img/hero.jpg'}) center center;
     background-size: cover;
 }
 
 .is-middle{
     display: flex;
+    align-items: center;
+}
+.is-between{
+    display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -174,6 +182,7 @@ html, body{
 .padding-small-all{
     padding: 0.75em;
 }
+
 
 
 

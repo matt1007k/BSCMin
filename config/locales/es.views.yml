@@ -4,6 +4,14 @@ es:
       new_link: "Agregar"
       edit_link: "Editar"
       remove_link: "Eliminar"
+  activities:
+    index:
+      new_area_link: "Agregar área"
+      edit_area_link: "Editar área"
+      remove_area_link: "Eliminar área"
+      new_link: "Agregar actividad"
+      edit_link: "Editar actividad"
+      remove_link: "Eliminar actividad"
   devise:
     sessions:
       new:

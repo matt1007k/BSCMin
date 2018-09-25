@@ -18,6 +18,7 @@ gem 'webpacker'
 
 #bulma css
 gem 'bulma-rails', '~> 0.7.1'
+gem 'bulma-extensions-rails'
 gem 'devise'
 gem 'jquery-rails', '~> 4.1', '>= 4.1.1'
 

@@ -1,3 +1,5 @@
+<% @title = "Editar valor" %>
+
 <nav class="breadcrumb" aria-label="breadcrumbs">
   <ul>
     <li> <%= link_to  "Valores", values_path %></li>
@@ -17,9 +19,9 @@
                       
           <%= render 'form', value: @value %>
 
-            <%= link_to 'Regresar', values_path %>
+          <%= link_to 'Regresar', values_path %>
+        </div>
       </div>
-  </div> 
 
-  
+  </div>
 </div>

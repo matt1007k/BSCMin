@@ -1,7 +1,7 @@
 <%= form_with(model: value, local: true) do |form| %>
   <% if value.errors.any? %>
     <div class="message is-danger">
-      <h2 class="title is-5"><%= pluralize(value.errors.count, "error") %> error impidió guardar el valor:</h2>
+      <h2 class="title is-5"><%= pluralize(value.errors.count, "error") %> al realizar está operación:</h2>
       <div class="message-body">
         <ul>
           <% value.errors.full_messages.each do |message| %>

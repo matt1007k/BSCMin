@@ -8,3 +8,8 @@ es:
         password_confirmation: 'Repetir contraseña'
         remember_me: 'Recordarme'
         log_in: 'Ingresar'
+      activity:
+        name: 'Actividad'
+        area: 'Área'
+      area:
+        name: 'Área'

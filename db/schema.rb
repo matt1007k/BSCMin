@@ -10,10 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_20_072149) do
+ActiveRecord::Schema.define(version: 2018_09_20_201643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.text "name"
+    t.integer "alta", default: 0
+    t.integer "media", default: 0
+    t.integer "baja", default: 0
+    t.integer "muy_bueno", default: 0
+    t.integer "bueno", default: 0
+    t.integer "deficiente", default: 0
+    t.integer "muy_deficiente", default: 0
+    t.integer "valor", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "area_id"
+    t.index ["area_id"], name: "index_activities_on_area_id"
+  end
+
+  create_table "areas", force: :cascade do |t|
+    t.text "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "missions", force: :cascade do |t|
     t.text "title"
@@ -45,4 +67,5 @@ ActiveRecord::Schema.define(version: 2018_09_20_072149) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "activities", "areas"
 end

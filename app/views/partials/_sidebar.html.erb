@@ -10,68 +10,68 @@
             <ul class="menu-list">
                 <%- if user_signed_in? %>
                     <li>
-                        <%= link_to(missions_path, html_options = {class: "item"}) do %> 
+                        <%= link_to(missions_path, html_options = {class: "item #{ current_class?(missions_path) }"}) do %> 
                             <i class="mdi mdi-note mdi-24px"></i>
                             Misión
                         <% end %>
                     </li>
                     <li>
-                        <%= link_to visions_path, class: "item" do %> 
+                        <%= link_to visions_path, class: "item #{ current_class?(visions_path) }" do %> 
                             <i class="mdi mdi-eye mdi-24px"></i>
                             Visión
                         <% end %>
                     </li>
                     <li>
-                        <%= link_to(values_path, html_options = {class: "item"}) do %> 
+                        <%= link_to(values_path, html_options = {class: "item #{ current_class?(values_path) }"}) do %> 
                             <i class="mdi mdi-verified mdi-24px"></i>
                             Valores
                         <% end %>
                     </li>
                     <li>
-                        <%= link_to(missions_path, html_options = {class: "item"}) do %> 
+                        <%= link_to(missions_path, html_options = {class: "item #{ current_class?(mision_vision_path) }"}) do %> 
                             <i class="mdi mdi-domain mdi-24px"></i>
                             Organigrama
                         <% end %>
                     </li>
                     <li>
-                        <%= link_to(missions_path, html_options = {class: "item"}) do %> 
+                        <%= link_to(missions_path, html_options = {class: "item #{ current_class?(missions_path) }"}) do %> 
                             <i class="mdi mdi-map mdi-24px"></i>
                             Macroproceso
                         <% end %>
                     </li>
                     <li>
-                        <%= link_to(missions_path, html_options = {class: "item"}) do %> 
+                        <%= link_to(activities_path, html_options = {class: "item #{ current_class?(activities_path) }"}) do %>
                             <i class="mdi mdi-trending-up mdi-24px"></i>
                             Cadena de valor
                         <% end %>
                     </li>
                 <% else %>
                     <li>
-                        <%= link_to(missions_path, html_options = {class: "item is-middle"}) do %> 
+                        <%= link_to(mision_vision_path, html_options = {class: "item is-middle #{ current_class?(mision_vision_path) }"}) do %> 
                             <i class="mdi mdi-eye mdi-24px"></i>
                             Misión y visión
                         <% end %>
                     </li>
                     <li>
-                        <%= link_to(missions_path, html_options = {class: "item"}) do %> 
+                        <%= link_to(valores_path, html_options = {class: "item #{ current_class?(valores_path) }"}) do %> 
                             <i class="mdi mdi-verified mdi-24px"></i>
                             Valores
                         <% end %>
                     </li>
                     <li>
-                        <%= link_to(missions_path, html_options = {class: "item"}) do %> 
+                        <%= link_to(organigrama_path, html_options = {class: "item #{ current_class?(organigrama_path) }"}) do %> 
                             <i class="mdi mdi-domain mdi-24px"></i>
                             Organigrama
                         <% end %>
                     </li>
                     <li>
-                        <%= link_to(missions_path, html_options = {class: "item"}) do %> 
+                        <%= link_to(macroproceso_path, html_options = {class: "item #{ current_class?(macroproceso_path) }"}) do %> 
                             <i class="mdi mdi-map mdi-24px"></i>
                             Macroproceso
                         <% end %>
                     </li>
                     <li>
-                        <%= link_to(missions_path, html_options = {class: "item"}) do %> 
+                        <%= link_to(cadena_valor_path, html_options = {class: "item #{ current_class?(cadena_valor_path) }"}) do %> 
                             <i class="mdi mdi-trending-up mdi-24px"></i>
                             Cadena de valor
                         <% end %>

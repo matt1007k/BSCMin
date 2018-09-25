@@ -1,0 +1,93 @@
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li> <%= link_to  "Dashboard", root_path %></li>
+    <li class="is-active">      
+      <a href="#" aria-current="page">Cadena de valor</a>
+    </li>
+  </ul>
+</nav>
+
+
+<div class="columns">
+  <div class="column">
+      <div class="card margin-small shadow-cm">
+        <div class="card-content">
+          <p class="subtitle has-text-centered">Las áreas y actividades de la organización.</p>
+          <div class="is-between">
+            <p class="title is-4">Cadena de valor</p>
+            <%= link_to new_area_path, class: "button is-success" do %>
+                <span class="icon">
+                  <i class="mdi mdi-library-plus"></i>
+                </span>
+                <span><%= t('.new_area_link') %> </span>
+            <% end %>
+          </div>
+
+          <div class="shadow-cm padding-small-all">
+            <% @areas.each do |area| %>
+              <div class="columns ">
+                <div class="column is-8 has-background-primary has-text-white">
+                  <div class="has-text-weight-bold">
+                    <%= area.name %>
+                  </div>
+                </div>
+
+                <div class="column is-2 has-text-right has-background-primary has-text-white">
+                  <%= link_to edit_area_path(area), class: "button is-info tooltip", :data => {tooltip: t('.edit_area_link')} do %>
+                      <span class="icon">
+                        <i class="mdi mdi-update"></i>
+                      </span>
+                  <% end %>
+                  <%= link_to area, method: :delete, class: "button is-danger tooltip", data: {tooltip: t('.remove_area_link'), confirm: "¿Está seguro de eliminar el área?"} do %>
+                      <span class="icon">
+                        <i class="mdi mdi-close"></i>
+                      </span>
+                  <% end %>
+                </div>
+
+                <div class="column has-background-grey has-text-white">
+                  <%= link_to actividad_path(area), class: "button" do %>
+                    <span class="icon">
+                      <i class="mdi mdi-library-plus"></i>
+                    </span>
+                    <span><%= t('.new_link') %> </span>
+                  <% end %>
+                </div>
+              </div>
+
+
+              <div class="columns">
+                <% area.activities.each do |actividad| %>
+
+                  <div class="column is-10">
+                    <%= actividad.name %>
+                  </div>
+
+                  <div class="column">
+                    <%= link_to actividad_edit_path(actividad,area), class: "button is-info tooltip", :data => {tooltip: t('.edit_link')} do %>
+                      <span class="icon">
+                        <i class="mdi mdi-update"></i>
+                      </span>
+                    <% end %>
+                    <%= link_to activity_url(area), method: :delete,  class: "button is-danger tooltip", :data => {tooltip: t('.remove_link'), confirm: '¿Está seguro de eliminar la actividad?'} do %>
+                      <span class="icon">
+                        <i class="mdi mdi-close"></i>
+                      </span>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+
+          </div>
+
+          
+
+
+        </div>
+      </div>
+
+  </div>
+</div>
+
+

@@ -1,10 +1,8 @@
-<% @title = "Lista de valores" %>
-
 <nav class="breadcrumb" aria-label="breadcrumbs">
   <ul>
     <li> <%= link_to  "Dashboard", root_path %></li>
     <li class="is-active">      
-      <a href="#" aria-current="page">Valores</a>
+      <a href="#" aria-current="page">Cadena de valor</a>
     </li>
   </ul>
 </nav>
@@ -14,30 +12,30 @@
   <div class="column is-three-fifths is-offset-one-fifth">
       <div class="card margin-small shadow-cm">
         <div class="card-content">
-          <p class="title is-4 has-text-centered">Los valores</p>
-          <p class="subtitle is-6 has-text-centered">Los valores de la organización.</p>
+          <p class="title is-4 has-text-centered">Cadena de valor</p>
+          <p class="subtitle is-6 has-text-centered">Las áreas y actividades de la organización.</p>
                       
           <table class="table is-fullwidth">
             <thead>
               <tr>
-                <th>Título</th>
+                <th>Área</th>
                 <th colspan="2">Acciones</th>
               </tr>
             </thead>
 
             <tbody>
-              <% @values.each do |value| %>
+              <% @areas.each do |area| %>
                 <tr>
-                  <td><%= value.title %></td>                  
+                  <td><%= area.name %></td>                  
                   <td>
-                    <%= link_to(edit_value_path(value), html_options =  {class: "button is-info"}) do %>
+                    <%= link_to(edit_area_path(area), html_options =  {class: "button is-info"}) do %>
                       <span class="icon">
                         <i class="mdi mdi-square-edit-outline"></i>
                       </span>
                     <% end %>
                   </td>
                   <td>
-                    <%= link_to value, method: :delete, data: { confirm: 'Estás seguro de eliminar el registro?' }, class: "button is-danger" do %>
+                    <%= link_to area, method: :delete, data: { confirm: 'Estás seguro de eliminar el área?' }, class: "button is-danger" do %>
                       <span class="icon">
                         <i class="mdi mdi-delete"></i>
                       </span>
@@ -45,21 +43,21 @@
                   </td>
                 </tr>
               <% end %>
-              
             </tbody>
           </table>
 
-          
+         
 
-          <%= link_to new_value_path, class: "button is-success" do %>
+          <%= link_to new_area_path, class: "button is-success" do %>
               <span class="icon">
                 <i class="mdi mdi-library-plus"></i>
               </span>
-              <span> Agregar</span>
+              <span> <%= t('.new_link') %> </span>
           <% end %>
         </div>
-    </div>
-
+      </div>
   </div>
+  
 </div>
+
 

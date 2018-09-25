@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyText
+  alta: 1
+  media: 1
+  baja: 1
+  muy_bueno: 1
+  bueno: 1
+  deficiente: 1
+  muy_deficiente: 1
+  valor: 1
+
+two:
+  name: MyText
+  alta: 1
+  media: 1
+  baja: 1
+  muy_bueno: 1
+  bueno: 1
+  deficiente: 1
+  muy_deficiente: 1
+  valor: 1

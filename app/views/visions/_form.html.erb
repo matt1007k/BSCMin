@@ -1,7 +1,7 @@
 <%= form_with(model: vision, local: true) do |form| %>
   <% if vision.errors.any? %>
     <div class="message is-danger">
-      <h2 class="title is-5"><%= pluralize(vision.errors.count, "error") %> error impidió guardar la visión:</h2>
+      <h2 class="title is-5"><%= pluralize(vision.errors.count, "error") %> al realizar está operación:</h2>
       <div class="message-body">
         <ul>
           <% vision.errors.full_messages.each do |message| %>
