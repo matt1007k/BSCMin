@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  alta: 1
+  reference: 
+
+two:
+  title: MyString
+  alta: 1
+  reference: 

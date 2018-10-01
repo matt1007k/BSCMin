@@ -20,7 +20,7 @@ $white: #FFFFFF;
 
 // Import a Google Font
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
-@import url('https://cdn.materialdesignicons.com/2.7.94/css/materialdesignicons.min.css');
+@import './materialdesignicons.css';
 
 $family-sans-serif: "Roboto", sans-serif;
 $menu-item-hover-background-color: #3273dc;

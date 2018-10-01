@@ -9,7 +9,13 @@ es:
         remember_me: 'Recordarme'
         log_in: 'Ingresar'
       activity:
-        name: 'Actividad'
-        area: 'Área'
+        name: 'La actividad'
+        area: 'El área'
       area:
-        name: 'Área'
+        name: 'El área'
+      force:
+        name: 'La fuerza'
+      factor:
+        title: 'El factor'
+        force_id: 'La fuerza'
+

@@ -1,0 +1,63 @@
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li> <%= link_to  "Dashboard", root_path %></li>
+    <li class="is-active">      
+      <a href="#" aria-current="page">Fuerzas de Porter</a>
+    </li>
+  </ul>
+</nav>
+
+
+<div class="columns">
+  <div class="column is-three-fifths is-offset-one-fifth">
+      <div class="card margin-small shadow-cm">
+        <div class="card-content">
+          <p class="title is-4 has-text-centered">Fuerzas de Porter</p>
+          <p class="subtitle is-6 has-text-centered">Las fuerzas y factores que afectan a la organización.</p>
+                      
+          <table class="table is-fullwidth">
+            <thead>
+              <tr>
+                <th>Fuerza</th>
+                <th colspan="2">Acciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @forces.each do |force| %>
+                <tr>
+                  <td><%= force.name %></td>                  
+                  <td>
+                    <%= link_to(edit_force_path(force), html_options =  {class: "button is-info"}) do %>
+                      <span class="icon">
+                        <i class="mdi mdi-square-edit-outline"></i>
+                      </span>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= link_to force, method: :delete, data: { confirm: '¿Estás seguro de eliminar la fuerza?' }, class: "button is-danger" do %>
+                      <span class="icon">
+                        <i class="mdi mdi-delete"></i>
+                      </span>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+
+         
+
+          <%= link_to new_force_path, class: "button is-success" do %>
+              <span class="icon">
+                <i class="mdi mdi-library-plus"></i>
+              </span>
+              <span> <%= t('.new_link') %> </span>
+          <% end %>
+        </div>
+      </div>
+  </div>
+  
+</div>
+
+

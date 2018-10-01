@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_20_201643) do
+ActiveRecord::Schema.define(version: 2018_09_27_163943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,28 @@ ActiveRecord::Schema.define(version: 2018_09_20_201643) do
   end
 
   create_table "areas", force: :cascade do |t|
+    t.text "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "factors", force: :cascade do |t|
+    t.string "title"
+    t.integer "alta", default: 0
+    t.integer "media", default: 0
+    t.integer "baja", default: 0
+    t.integer "muy_positivo", default: 0
+    t.integer "positivo", default: 0
+    t.integer "negativo", default: 0
+    t.integer "muy_negativo", default: 0
+    t.integer "valor", default: 0
+    t.bigint "force_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["force_id"], name: "index_factors_on_force_id"
+  end
+
+  create_table "forces", force: :cascade do |t|
     t.text "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -68,4 +90,5 @@ ActiveRecord::Schema.define(version: 2018_09_20_201643) do
   end
 
   add_foreign_key "activities", "areas"
+  add_foreign_key "factors", "forces"
 end

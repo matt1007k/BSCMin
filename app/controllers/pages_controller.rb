@@ -23,5 +23,13 @@ class PagesController < ApplicationController
     @areas = Area.all
   end
 
+  def fuerzas
+    @forces = Force.all
+  end
+
+  def factor_interno
+    @areas = Area.all
+  end
+
   
 end

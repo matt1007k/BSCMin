@@ -2,7 +2,7 @@
   <ul>
     <li> <%= link_to  "Dashboard", root_path %></li>
     <li class="is-active">      
-      <a href="#" aria-current="page">Cadena de valor</a>
+      <a href="#" aria-current="page">Fuerza de Porter</a>
     </li>
   </ul>
 </nav>
@@ -12,33 +12,33 @@
   <div class="column">
       <div class="card margin-small shadow-cm">
         <div class="card-content">
-          <p class="subtitle has-text-centered">Las áreas y actividades de la organización.</p>
+          <p class="subtitle has-text-centered">Las fuerzas y factores que afectan a la organización.</p>
           <div class="is-between">
-            <p class="title is-4">Cadena de valor</p>
-            <%= link_to new_area_path, class: "button is-success" do %>
+            <p class="title is-4">Fuerza de Porter</p>
+            <%= link_to new_force_path, class: "button is-success" do %>
                 <span class="icon">
                   <i class="mdi mdi-library-plus"></i>
                 </span>
-                <span><%= t('.new_area_link') %> </span>
+                <span><%= t('.new_force_link') %> </span>
             <% end %>
           </div>
 
           <div class="shadow-cm padding-small-all">
-            <% @areas.each do |area| %>
+            <% @forces.each do |force| %>
               <div class="columns ">
                 <div class="column is-8 has-background-primary has-text-white">
                   <div class="has-text-weight-bold">
-                    <%= area.name %>
+                    <%= force.name %>
                   </div>
                 </div>
 
                 <div class="column is-2 has-text-right has-background-primary has-text-white">
-                  <%= link_to edit_area_path(area), class: "button is-info tooltip", :data => {tooltip: t('.edit_area_link')} do %>
+                  <%= link_to edit_force_path(force), class: "button is-info tooltip", :data => {tooltip: t('.edit_force_link')} do %>
                       <span class="icon">
                         <i class="mdi mdi-update"></i>
                       </span>
                   <% end %>
-                  <%= link_to area, method: :delete, class: "button is-danger tooltip", data: {tooltip: t('.remove_area_link'), confirm: "¿Está seguro de eliminar el área?"} do %>
+                  <%= link_to force, method: :delete, class: "button is-danger tooltip", data: {tooltip: t('.remove_force_link'), confirm: "¿Está seguro de eliminar el área?"} do %>
                       <span class="icon">
                         <i class="mdi mdi-close"></i>
                       </span>
@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="column has-background-grey has-text-white">
-                  <%= link_to actividad_path(area), class: "button" do %>
+                  <%= link_to factor_new_path(force), class: "button" do %>
                     <span class="icon">
                       <i class="mdi mdi-library-plus"></i>
                     </span>
@@ -55,26 +55,27 @@
                 </div>
               </div>
 
-
-              <% area.activities.each do |actividad| %>
+              <% force.factors.each do |factor| %>
                 <div class="columns">
 
+
                     <div class="column is-10">
-                      <%= actividad.name %>
+                      <%= factor.title %>
                     </div>
 
-                    <div class="column">
-                      <%= link_to actividad_edit_path(actividad,area), class: "button is-info tooltip", :data => {tooltip: t('.edit_link')} do %>
+                    <div class="column is-2">
+                      <%= link_to factor_edit_path(factor,force), class: "button is-info tooltip", :data => {tooltip: t('.edit_link')} do %>
                         <span class="icon">
                           <i class="mdi mdi-update"></i>
                         </span>
                       <% end %>
-                      <%= link_to activity_url(area), method: :delete,  class: "button is-danger tooltip", :data => {tooltip: t('.remove_link'), confirm: '¿Está seguro de eliminar la actividad?'} do %>
+                      <%= link_to factor_url(force), method: :delete,  class: "button is-danger tooltip", :data => {tooltip: t('.remove_link'), confirm: '¿Está seguro de eliminar el factor?'} do %>
                         <span class="icon">
                           <i class="mdi mdi-close"></i>
                         </span>
                       <% end %>
                     </div>
+
                 </div>
               <% end %>
             <% end %>

@@ -12,6 +12,14 @@ es:
       new_link: "Agregar actividad"
       edit_link: "Editar actividad"
       remove_link: "Eliminar actividad"
+  factors:
+    index:
+      new_force_link: "Agregar fuerza"
+      edit_force_link: "Editar fuerza"
+      remove_force_link: "Eliminar fuerza"
+      new_link: "Agregar factor"
+      edit_link: "Editar factor"
+      remove_link: "Eliminar factor"
   devise:
     sessions:
       new:
