@@ -51,6 +51,18 @@
                         Fuerzas de Porter
                       <% end %>
                     </li>
+                    <li>
+                      <%= link_to(evaluar_factor_interno_path, html_options = {class: "item #{ current_class?(evaluar_factor_interno_path) }"}) do %>
+                        <i class="mdi mdi-trending-up mdi-24px"></i>
+                        Evaluar Factores Internos
+                      <% end %>
+                    </li>
+                    <li>
+                      <%= link_to(evaluar_factor_externo_path, html_options = {class: "item #{ current_class?(evaluar_factor_externo_path) }"}) do %>
+                        <i class="mdi mdi-trending-up mdi-24px"></i>
+                        Evaluar Factores Externos
+                      <% end %>
+                    </li>
                 <% else %>
                     <li>
                         <%= link_to(mision_vision_path, html_options = {class: "item is-middle #{ current_class?(mision_vision_path) }"}) do %> 
@@ -86,6 +98,18 @@
                       <%= link_to(fuerzas_porter_path, html_options = {class: "item #{ current_class?(fuerzas_porter_path) }"}) do %>
                         <i class="mdi mdi-trending-up mdi-24px"></i>
                         Fuerzas de Porter
+                      <% end %>
+                    </li>
+                    <li>
+                      <%= link_to(factores_internos_path, html_options = {class: "item #{ current_class?(factores_internos_path) }"}) do %>
+                        <i class="mdi mdi-trending-up mdi-24px"></i>
+                        Factores Internos
+                      <% end %>
+                    </li>
+                    <li>
+                      <%= link_to(factores_externos_path, html_options = {class: "item #{ current_class?(factores_externos_path) }"}) do %>
+                        <i class="mdi mdi-trending-up mdi-24px"></i>
+                        Factores Externos
                       <% end %>
                     </li>
                     

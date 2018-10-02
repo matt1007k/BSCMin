@@ -148,8 +148,16 @@ html, body{
     background-size: cover;
 }
 
+.is-bordered{
+  border: 1px solid #000;
+}
+
+.is-center{
+  text-align: center !important;
+}
 .is-middle{
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 .is-between{

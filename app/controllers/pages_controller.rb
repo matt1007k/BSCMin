@@ -31,5 +31,9 @@ class PagesController < ApplicationController
     @areas = Area.all
   end
 
+  def factor_externo
+    @forces = Force.all
+  end
+
   
 end

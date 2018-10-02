@@ -67,6 +67,10 @@ class ActivitiesController < ApplicationController
         end
     end
 
+    def update_factor_interno
+
+    end
+
     private 
         def activity_params
             params.require(:activity).permit(:name, :area_id, :media, :baja, :muy_bueno, :bueno, :deficiente, :muy_deficiente, :valor)

@@ -67,6 +67,10 @@ class FactorsController < ApplicationController
     end
   end
 
+  def update_factor_externo
+
+  end
+
   private
   def factor_params
     params.require(:factor).permit(:title, :force_id, :alta, :media, :baja, :muy_positivo, :positivo, :negativo, :muy_negativo, :valor)

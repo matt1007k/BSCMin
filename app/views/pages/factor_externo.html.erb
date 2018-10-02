@@ -1,0 +1,139 @@
+<% @title = "Factores Internos" %>
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li> <%= link_to  "Inicio", root_path %></li>
+    <li class="is-active">      
+      <a href="#" aria-current="page">Factores Externos</a>
+    </li>
+  </ul>
+</nav>
+
+
+<div class="columns">
+  <div class="column">
+      <div class="card margin-small shadow-cm">
+        <div class="card-content">
+          <p class="title is-4 has-text-centered">Factores Externos</p>
+          <p class="subtitle is-6 has-text-centered">Evaluando Oportunidades y Amenazas que afectan a la organización.</p>
+
+          <div class="columns no-margin has-text-weight-bold" style="margin: 0 0 10px 0;">
+              <div class="column is-5 has-text-centered">
+                  <div class="has-background-link has-text-white "> Tabla de Evaluación </div>
+                  <div style="height: 100%;" class="is-middle"> Factores Externos </div>
+
+              </div>
+              <div class="column is-7 has-text-centered">
+                <div class="columns">
+                  <div class="column is-4">
+                      <div class="has-background-primary has-text-white ">Probabilidad de Ocurrencia</div>
+                      <div class="columns">
+                        <div class="column">Alta (3)</div>
+                        <div class="column">Media (2)</div>
+                        <div class="column">Baja (1)</div>
+                      </div>
+                  </div>
+                  <div class="column is-6">
+                    <div class="has-background-link has-text-white ">Impacto a nuestro negocio</div>
+                    <div class="columns is-gapless">
+                      <div class="column">Muy positivo (+2)</div>
+                      <div class="column">Positivo (+1)</div>
+                      <div class="column">Negativo (-1)</div>
+                      <div class="column">Muy Negativo (-2)</div>
+                    </div>
+                  </div>
+                  <div class="column  has-background-danger">
+                    <div class=" has-text-white">Valor ponderado del factor</div>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+          <% @forces.each do |force|%>
+            <div class="columns padding-small-all ">
+              <div class="column is-5 has-background-dark has-text-white">
+                <div > <%= force.name %> </div>
+              </div>
+              <div class="column has-background-dark  has-text-white">
+
+              </div>
+            </div>
+            <% force.factors.each do |factor| %>
+            <div class="columns padding-small-all">
+              <div class="column is-5 ">
+                <div > <%= factor.title %> </div>
+              </div>
+              <div class="column is-7 has-text-centered">
+
+                <div class="columns ">
+                  <div class="column is-4">
+
+                    <div class="columns">
+                      <div class="column ">
+                        <% if (factor.alta > 0) %>
+                          <%= factor.alta %>
+                        <% end %>
+                      </div>
+                      <div class="column ">
+                        <% if (factor.media > 0) %>
+                          <%= factor.media %>
+                        <% end %>
+                      </div>
+                      <div class="column ">
+                        <% if (factor.baja > 0) %>
+                          <%= factor.baja %>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="column is-6">
+                    <div class="columns">
+                      <div class="column ">
+                        <% if (factor.muy_positivo > 0) %>
+                          <%= factor.muy_positivo %>
+                        <% end %>
+                      </div>
+                      <div class="column ">
+                        <% if (factor.positivo > 0) %>
+                          <%= factor.positivo %>
+                        <% end %>
+                      </div>
+                      <div class="column ">
+                        <% if (factor.negativo > 0) %>
+                          <%= factor.negativo %>
+                        <% end %>
+                      </div>
+                      <div class="column ">
+                        <% if (factor.muy_negativo > 0) %>
+                          <%= factor.muy_negativo %>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="column is-2">
+                    <div class="has-text-weight-bold">
+                      <% if (factor.valor < 0) %>
+                        <p class="has-text-danger"><%= factor.valor %></p>
+                      <% else %>
+                        <p class="has-text-link"><%= factor.valor %></p>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% end %>
+          <% end %>
+
+          <div class="columns">
+            <div class="column is-6">
+              <h3 class="has-text-danger has-text-weight-bold">Debilidades: Valor Ponderado < 0</h3>
+            </div>
+            <div class="column is-6">
+              <h3 class="has-text-link has-text-weight-bold">Fortalezas: Valor Ponderado > 0</h3>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+  </div>
+</div>
