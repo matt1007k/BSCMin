@@ -1,0 +1,152 @@
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li> <%= link_to  "Evaluar Factores Externos", evaluar_factor_externo_path %></li>
+    <li class="is-active">      
+      <a href="#" aria-current="page">Evaluación de Factores Externos</a>
+    </li>
+  </ul>
+</nav>
+
+
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter">
+      <div class="card margin-small">
+        <div class="card-content">
+          <p class="title is-4 has-text-centered">Evaluación de Factor Externo</p>
+          <p class="subtitle is-6 has-text-centered">Modificar factor externo que afecta a la organización.</p>
+                      
+          <%= form_with( model: @factor, url: update_factor_externo_path(@factor), method: 'PUT') do |form| %>
+            <section class="modal-card-body">
+                <p class="has-text-info has-text-weight-bold has-text-centered">"<%= @factor.title %>"</p>
+                
+                <% if @factor.errors.any? %>
+                <div class="message is-danger">
+                    <h2 class="title is-5"><%= pluralize(@factor.errors.count, "error") %> al realizar la operación:</h2>
+                    <div class="message-body">
+                    <ul>
+                        <% @factor.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                        <% end %>
+                    </ul>
+                    </div>
+                </div>
+                <% end %>
+                <div class="title is-5">Probabilidad de Ocurrencia</div>
+                <div class="field is-horizontal">
+                <div class="field-label">
+                    <label class="label">Alta (3)</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                    <div class="control">
+                        <label class="checkbox">
+                        <%= form.check_box :alta, {}, "3", "0"%> 
+                        </label>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <div class="field is-horizontal">
+                <div class="field-label">
+                    <label class="label">Media (2)</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                    <div class="control">
+                        <label class="checkbox">
+                        <%= form.check_box :media, {}, "2", "0" %>
+                        </label>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="field is-horizontal">
+                <div class="field-label">
+                    <label class="label">Baja (1)</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                    <div class="control">
+                        <label class="checkbox">
+                        <%= form.check_box :baja, {}, "1", "0" %>
+                        </label>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="title is-5">Probabilidad de Ocurrencia</div>
+                <div class="field is-horizontal">
+                <div class="field-label">
+                    <label class="label">Muy Positivo (+2)</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                    <div class="control">
+                        <label class="checkbox">
+                        <%= form.check_box :muy_positivo, {}, "2", "0" %>
+                        </label>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <div class="field is-horizontal">
+                <div class="field-label">
+                    <label class="label">Positivo (+1)</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                    <div class="control">
+                        <label class="checkbox">
+                        <%= form.check_box :positivo, {}, "1", "0" %>
+                        </label>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <div class="field is-horizontal">
+                <div class="field-label">
+                    <label class="label">Negativo (-1)</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                    <div class="control">
+                        <label class="checkbox">
+                        <%= form.check_box :negativo, {}, "-1", "0" %>
+                        </label>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <div class="field is-horizontal">
+                <div class="field-label">
+                    <label class="label">Muy Negativo (-2)</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                    <div class="control">
+                        <label class="checkbox">
+                        <%= form.check_box :muy_negativo, {}, "-2", "0" %>
+                        </label>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </section>
+            <footer class="modal-card-foot">
+                <%= form.submit "Evaluar", class: "button is-success" %>               
+                <%= link_to 'Cancel', evaluar_factor_externo_path, class: 'button is-danger' %>
+            </footer>
+
+        <% end %> 
+        
+
+            
+        </div>
+      </div>
+
+  </div>
+</div>
+

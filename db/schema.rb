@@ -10,10 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_27_163943) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 2018_10_10_192644) do
 
   create_table "activities", force: :cascade do |t|
     t.text "name"
@@ -65,6 +62,59 @@ ActiveRecord::Schema.define(version: 2018_09_27_163943) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "objectives", force: :cascade do |t|
+    t.string "slug"
+    t.text "content"
+    t.integer "perspective_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["perspective_id"], name: "index_objectives_on_perspective_id"
+  end
+
+  create_table "opportunities", force: :cascade do |t|
+    t.string "slug"
+    t.text "content"
+    t.integer "factor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["factor_id"], name: "index_opportunities_on_factor_id"
+  end
+
+  create_table "perspectives", force: :cascade do |t|
+    t.string "slug"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "strategies", force: :cascade do |t|
+    t.string "foda"
+    t.string "type"
+    t.text "content"
+    t.integer "objective_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["objective_id"], name: "index_strategies_on_objective_id"
+  end
+
+  create_table "strengths", force: :cascade do |t|
+    t.string "slug"
+    t.text "content"
+    t.integer "activity_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_strengths_on_activity_id"
+  end
+
+  create_table "threats", force: :cascade do |t|
+    t.string "slug"
+    t.text "content"
+    t.integer "factor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["factor_id"], name: "index_threats_on_factor_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -89,6 +139,13 @@ ActiveRecord::Schema.define(version: 2018_09_27_163943) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "activities", "areas"
-  add_foreign_key "factors", "forces"
+  create_table "weaknesses", force: :cascade do |t|
+    t.string "slug"
+    t.text "content"
+    t.integer "activity_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_weaknesses_on_activity_id"
+  end
+
 end

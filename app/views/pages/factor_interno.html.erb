@@ -98,12 +98,12 @@
                         <% end %>
                       </div>
                       <div class="column ">
-                        <% if (activity.deficiente > 0) %>
+                        <% if (activity.deficiente < 0) %>
                           <%= activity.deficiente %>
                         <% end %>
                       </div>
                       <div class="column ">
-                        <% if (activity.muy_deficiente > 0) %>
+                        <% if (activity.muy_deficiente < 0) %>
                           <%= activity.muy_deficiente %>
                         <% end %>
                       </div>

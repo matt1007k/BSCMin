@@ -22,7 +22,7 @@
             <div style="height: 100%;" class="is-middle"> Factores Externos </div>
 
           </div>
-          <div class="column is-7 has-text-centered">
+          <div class="column is-6 has-text-centered">
             <div class="columns">
               <div class="column is-4">
                 <div class="has-background-primary has-text-white ">Probabilidad de Ocurrencia</div>
@@ -44,7 +44,10 @@
               <div class="column  has-background-danger">
                 <div class=" has-text-white">Valor ponderado del factor</div>
               </div>
-            </div>
+            </div>            
+          </div>
+          <div class="column has-background-success has-text-white">
+            <p style="transform: rotate(270deg);">Evaluar</p>
           </div>
         </div>
 
@@ -60,9 +63,9 @@
           <% force.factors.each do |factor| %>
             <div class="columns padding-small-all">
               <div class="column is-5 ">
-                <div > <%= factor.title %> </div>
+                <div> <%= factor.title %> </div>
               </div>
-              <div class="column is-7 has-text-centered">
+              <div class="column is-6 has-text-centered">
 
                 <div class="columns ">
                   <div class="column is-4">
@@ -98,12 +101,12 @@
                         <% end %>
                       </div>
                       <div class="column ">
-                        <% if (factor.negativo > 0) %>
+                        <% if (factor.negativo < 0) %>
                           <%= factor.negativo %>
                         <% end %>
                       </div>
                       <div class="column ">
-                        <% if (factor.muy_negativo > 0) %>
+                        <% if (factor.muy_negativo < 0) %>
                           <%= factor.muy_negativo %>
                         <% end %>
                       </div>
@@ -119,10 +122,23 @@
                     </div>
                   </div>
                 </div>
+                
               </div>
-            </div>
+              <div class="column">
+                <%= link_to edit_factor_externo_path(factor), class: "button is-info tooltip", :data => {tooltip: "Evaluar factor"} do %>
+                  <span class="icon">
+                    <i class="mdi mdi-format-list-checks"></i>  
+                  </span>
+                <% end %>
+                <!--<a href="#" class="button is-info tooltip" data-tooltip="Evaluar actividad" data-modal="<%=factor.id%>">
+                  <i class="mdi mdi-format-list-checks"></i>
+                </a>-->
+              </div>
+
+             </div>
           <% end %>
         <% end %>
+                  
 
         <div class="columns">
           <div class="column is-6">

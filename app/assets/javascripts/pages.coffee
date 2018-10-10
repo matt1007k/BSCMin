@@ -25,3 +25,12 @@ $(document).on "turbolinks:load", () ->
     
     $(".delete").on "click", ->
         $(this).parent().slideUp()
+
+    $(document).on "click", "a[data-modal]",(ev) ->
+        ev.preventDefault()
+        num = $(this).data("modal")
+        $('.modal-'+num).addClass "is-active"
+   
+    $('.close-modal').on "click", (ev) =>
+        ev.preventDefault()
+        $('.modal').removeClass "is-active"

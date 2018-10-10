@@ -1,6 +1,6 @@
 class FactorsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_factor, only: [:edit, :update, :show, :destroy, :edit_factor]
+  before_action :find_factor, only: [:edit, :update, :show, :destroy, :edit_factor, :update_factor_externo]
 
 
   def index
@@ -68,7 +68,25 @@ class FactorsController < ApplicationController
   end
 
   def update_factor_externo
+    @factor[:alta] = params[:factor][:alta]
+    @factor[:media] = params[:factor][:media]
+    @factor[:baja] = params[:factor][:baja]
+    @factor[:muy_positivo] = params[:factor][:muy_positivo]
+    @factor[:positivo] = params[:factor][:positivo]
+    @factor[:negativo] = params[:factor][:negativo]
+    @factor[:muy_negativo] = params[:factor][:muy_negativo]
+    @valor ||= (@factor[:alta] + @factor[:media] + @factor[:baja]) * (@factor[:muy_positivo] + @factor[:positivo] + @factor[:negativo] + @factor[:muy_negativo])
+    @factor[:valor] = @valor
 
+    respond_to do |format|
+        if @factor.save
+            format.html { redirect_to evaluar_factor_externo_url, notice: 'La evaluación se hizo con exitó.' }
+            format.json { redirect_to @factor, status: :ok, location: @factor }
+        else
+            format.html { render :edit }
+            format.json { render json: @factor.errors, status: :unprocessable_entity }
+        end
+    end
   end
 
   private

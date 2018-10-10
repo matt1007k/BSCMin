@@ -7,7 +7,7 @@
             <p class="menu-label padding-small-all">
                 Ministerio Público             
             </p>
-            <ul class="menu-list">
+            <ul class="menu-list is-scrolly has-type-1">
                 <%- if user_signed_in? %>
                     <li>
                         <%= link_to(missions_path, html_options = {class: "item #{ current_class?(missions_path) }"}) do %> 
@@ -53,14 +53,33 @@
                     </li>
                     <li>
                       <%= link_to(evaluar_factor_interno_path, html_options = {class: "item #{ current_class?(evaluar_factor_interno_path) }"}) do %>
-                        <i class="mdi mdi-trending-up mdi-24px"></i>
-                        Evaluar Factores Internos
-                      <% end %>
+                        <div class="columns">
+                            <div class="column is-2">
+                                <i class="mdi mdi-trending-up mdi-24px"></i>
+                            </div>
+                            <div class="column">
+                                Evaluar Factores Internos
+                            </div>
+                        </div>
+                      <% end %>                      
                     </li>
                     <li>
                       <%= link_to(evaluar_factor_externo_path, html_options = {class: "item #{ current_class?(evaluar_factor_externo_path) }"}) do %>
+                        <div class="columns">
+                            <div class="column is-2">
+                                <i class="mdi mdi-trending-up mdi-24px"></i>
+                            </div>
+                            <div class="column">
+                                Evaluar Factores Externos
+                            </div>
+                        </div>
+                      <% end %>
+                    </li>
+
+                    <li>
+                      <%= link_to(evaluar_factor_externo_path, html_options = {class: "item #{ current_class?(evaluar_factor_externo_path) }"}) do %>
                         <i class="mdi mdi-trending-up mdi-24px"></i>
-                        Evaluar Factores Externos
+                        Matriz Foda
                       <% end %>
                     </li>
                 <% else %>
@@ -108,11 +127,18 @@
                     </li>
                     <li>
                       <%= link_to(factores_externos_path, html_options = {class: "item #{ current_class?(factores_externos_path) }"}) do %>
-                        <i class="mdi mdi-trending-up mdi-24px"></i>
+                        <span class="icon">
+                            <i class="mdi mdi-trending-up mdi-24px"></i>
+                        </span>
                         Factores Externos
                       <% end %>
                     </li>
-                    
+                    <li>
+                      <%= link_to(matriz_foda_path, html_options = {class: "item #{ current_class?(evaluar_factor_externo_path) }"}) do %>
+                        <i class="mdi mdi-trending-up mdi-24px"></i>
+                        Matriz Foda
+                      <% end %>
+                    </li>
                 <% end %>
             </ul>
             

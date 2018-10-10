@@ -1,6 +1,6 @@
 class ActivitiesController < ApplicationController
     before_action :authenticate_user!
-    before_action :find_activity, only: [:edit, :update, :show, :destroy, :edit_actividad]
+    before_action :find_activity, only: [:edit, :update, :show, :destroy, :edit_actividad, :update_factor_interno]
 
     
     def index
@@ -68,12 +68,34 @@ class ActivitiesController < ApplicationController
     end
 
     def update_factor_interno
+        @activity[:alta] = params[:activity][:alta]
+        @activity[:media] = params[:activity][:media]
+        @activity[:baja] = params[:activity][:baja]
+        @activity[:muy_bueno] = params[:activity][:muy_bueno]
+        @activity[:bueno] = params[:activity][:bueno]
+        @activity[:deficiente] = params[:activity][:deficiente]
+        @activity[:muy_deficiente] = params[:activity][:muy_deficiente]
+        @valor ||= (@activity[:alta] + @activity[:media] + @activity[:baja]) * (@activity[:muy_bueno] + @activity[:bueno] + @activity[:deficiente] + @activity[:muy_deficiente])
+        @activity[:valor] = @valor
 
+        respond_to do |format|
+            if @activity.save
+                format.html { redirect_to evaluar_factor_interno_url, notice: 'La evaluación se hizo con exitó.' }
+                format.json { redirect_to @activity, status: :ok, location: @activity }
+            else
+                format.html { render :edit }
+                format.json { render json: @activity.errors, status: :unprocessable_entity }
+            end
+        end
+        #render json: params[:activity][:alta]
+        #@valor ||= (@activity[:alta] + @activity[:media] + @activity[:baja]) * (@activity[:muy_bueno] + @activity[:bueno] + @activity[:deficiente] + @activity[:muy_deficiente])
+        #render json: activity_params
+        
     end
 
     private 
         def activity_params
-            params.require(:activity).permit(:name, :area_id, :media, :baja, :muy_bueno, :bueno, :deficiente, :muy_deficiente, :valor)
+            params.require(:activity).permit(:name, :area_id, :alta, :media, :baja, :muy_bueno, :bueno, :deficiente, :muy_deficiente, :valor)
         end
 
         def find_activity

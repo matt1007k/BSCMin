@@ -15,7 +15,7 @@
           <p class="title is-4 has-text-centered">Editar Fuerza</p>
           <p class="subtitle is-6 has-text-centered">Modificar fuerza que afecta a la organización.</p>
                       
-          <%= render 'form', factor: @factor %>
+          <%= render 'form', factor: @factor, force_id: @force_id %>
 
             <%= link_to 'Regresar', factors_path %>
         </div>

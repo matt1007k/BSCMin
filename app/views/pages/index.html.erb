@@ -5,8 +5,189 @@
         <div class="card-content">
           <p class="title is-4 has-text-centered">BSC del Ministerio Público Fiscalia de la Nación</p>
           <p class="subtitle is-6 has-text-centered">Los componentes de la organización.</p>
-
+           
         </div>
       </div>
+      
   </div>
 </div>
+
+<%- if user_signed_in? %>
+<div class="title is-4">Dashdoard</div>
+<div class="columns has-text-weight-bold">
+  <div class="column">    
+      <div class="card shadow-cm is-hovered">
+        <div class="card-content">  
+          <%= link_to(missions_path, html_options = {class: "has-text-danger is-middle-column"}) do %> 
+              <i class="mdi mdi-note mdi-36px"></i>
+              Misión
+          <% end %>
+        </div>
+      </div>    
+  </div>
+  <div class="column">    
+      <div class="card shadow-cm is-hovered">
+        <div class="card-content ">  
+          <%= link_to visions_path, class: "is-middle-column has-text-danger" do %> 
+              <i class="mdi mdi-eye mdi-36px"></i>
+              Visión
+          <% end %>
+        </div>
+      </div>    
+  </div>
+  <div class="column">    
+      <div class="card shadow-cm is-hovered">
+        <div class="card-content">  
+          <%= link_to(values_path, html_options = {class: "is-middle-column has-text-danger"}) do %> 
+              <i class="mdi mdi-verified mdi-36px"></i>
+              Valores
+          <% end %>
+        </div>
+      </div>    
+  </div>
+  <div class="column">    
+      <div class="card shadow-cm is-hovered">
+        <div class="card-content">  
+          <%= link_to(missions_path, html_options = {class: "is-middle-column has-text-danger"}) do %> 
+              <i class="mdi mdi-domain mdi-36px"></i>
+              Organigrama
+          <% end %>
+        </div>
+      </div>    
+  </div>  
+</div>
+
+
+<div class="columns has-text-weight-bold">
+  <div class="column">
+    <div class="card shadow-cm is-hovered">
+      <div class="card-content">
+        <%= link_to(missions_path, html_options = {class: "is-middle-column has-text-danger"}) do %> 
+          <i class="mdi mdi-map mdi-36px"></i>
+          Macroproceso
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="card shadow-cm is-hovered">
+      <div class="card-content">
+        <%= link_to(activities_path, html_options = {class: "is-middle-column has-text-danger"}) do %>
+          <i class="mdi mdi-trending-up mdi-36px"></i>
+          Cadena de valor
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="card shadow-cm is-hovered">
+      <div class="card-content">
+        <%= link_to(factors_path, html_options = {class: "is-middle-column has-text-danger"}) do %>
+          <i class="mdi mdi-trending-up mdi-36px"></i>
+          Fuerzas de Porter
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="card shadow-cm is-hovered">
+      <div class="card-content">
+        <%= link_to(evaluar_factor_interno_path, html_options = {class: "is-middle-column has-text-danger"}) do %>
+          <i class="mdi mdi-trending-up mdi-36px"></i>
+          Evaluar Factores Internos
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<% else %>
+<div class="title is-4">Inicio</div>
+<div class="columns has-text-weight-bold">
+  <div class="column">
+    <div class="card shadow-cm is-hovered">
+      <div class="card-content">
+        <%= link_to mision_vision_path, class: "is-middle-column has-text-danger" do %> 
+          <i class="mdi mdi-eye mdi-36px"></i>
+          Misión y visión
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="column">    
+      <div class="card shadow-cm is-hovered">
+        <div class="card-content">  
+          <%= link_to(valores_path, html_options = {class: "is-middle-column has-text-danger"}) do %> 
+              <i class="mdi mdi-verified mdi-36px"></i>
+              Valores
+          <% end %>
+        </div>
+      </div>    
+  </div>  
+  <div class="column">
+    <div class="card shadow-cm is-hovered">
+      <div class="card-content">
+        <%= link_to(organigrama_path, html_options = {class: "is-middle-column has-text-danger"}) do %>
+          <i class="mdi mdi-domain mdi-36px"></i>
+          Organigrama
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="card shadow-cm is-hovered">
+      <div class="card-content">
+        <%= link_to(macroproceso_path, html_options = {class: "is-middle-column has-text-danger"}) do %>
+          <i class="mdi mdi-map mdi-36px"></i>
+          Macroproceso
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="columns has-text-weight-bold">
+  <div class="column">
+    <div class="card shadow-cm is-hovered">
+      <div class="card-content">
+        <%= link_to cadena_valor_path, class: "is-middle-column has-text-danger" do %> 
+          <i class="mdi mdi-trending-up mdi-24px"></i>
+          Cadena de valor
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="column">    
+    <div class="card shadow-cm is-hovered">
+      <div class="card-content">  
+        <%= link_to(fuerzas_porter_path, html_options = {class: "is-middle-column has-text-danger"}) do %> 
+          <i class="mdi mdi-trending-up mdi-24px"></i>
+          Fuerzas de Porter
+        <% end %>
+      </div>
+    </div>    
+  </div>  
+  <div class="column">
+    <div class="card shadow-cm is-hovered">
+      <div class="card-content">
+        <%= link_to(factores_internos_path, html_options = {class: "is-middle-column has-text-danger"}) do %>
+          <i class="mdi mdi-trending-up mdi-24px"></i>
+          Factores Internos
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="card shadow-cm is-hovered">
+      <div class="card-content">
+        <%= link_to(factores_externos_path, html_options = {class: "is-middle-column has-text-danger"}) do %>
+          <i class="mdi mdi-trending-up mdi-24px"></i>
+          Factores Externos
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

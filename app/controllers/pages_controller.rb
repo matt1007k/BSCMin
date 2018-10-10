@@ -35,5 +35,9 @@ class PagesController < ApplicationController
     @forces = Force.all
   end
 
+  def matriz_foda
+    
+  end
+
   
 end

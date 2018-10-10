@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  slug: MyString
+  content: MyText
+  perspective: one
+
+two:
+  slug: MyString
+  content: MyText
+  perspective: two

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  foda: MyString
+  type: 
+  content: MyText
+  objective: one
+
+two:
+  foda: MyString
+  type: 
+  content: MyText
+  objective: two
