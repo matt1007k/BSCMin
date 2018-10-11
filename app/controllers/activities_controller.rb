@@ -80,8 +80,25 @@ class ActivitiesController < ApplicationController
 
         respond_to do |format|
             if @activity.save
-                format.html { redirect_to evaluar_factor_interno_url, notice: 'La evaluación se hizo con exitó.' }
-                format.json { redirect_to @activity, status: :ok, location: @activity }
+                if @activity[:valor] > 0
+                    @total = Strength.count
+                    @fortaleza = Strength.new
+                    @fortaleza[:slug] = "F#{@total + 1}"
+                    @fortaleza[:content] = @activity[:name]
+                    @fortaleza.save
+
+                    format.html { redirect_to evaluar_factor_interno_url, notice: 'La evaluación se hizo con exitó.' }
+                    format.json { redirect_to @activity, status: :ok, location: @activity }
+                else
+                    @total = Weakness.count
+                    @debilidad = Weakness.new
+                    @debilidad[:slug] = "D#{@total + 1}"
+                    @debilidad[:content] = @activity[:name]
+                    @debilidad.save
+
+                    format.html { redirect_to evaluar_factor_interno_url, notice: 'La evaluación se hizo con exitó.' }
+                    format.json { redirect_to @activity, status: :ok, location: @activity }
+                end                
             else
                 format.html { render :edit }
                 format.json { render json: @activity.errors, status: :unprocessable_entity }

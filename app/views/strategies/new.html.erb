@@ -1,0 +1,27 @@
+<% @title = 'Agregar Estrategia' %>
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li> <%= link_to  "Estrategias", strategies_path %></li>
+    <li class="is-active">      
+      <a href="#" aria-current="page">Agregar Estrategia</a>
+    </li>
+  </ul>
+</nav>
+
+
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter">
+      <div class="card margin-small">
+        <div class="card-content">
+          <p class="title is-4 has-text-centered">Agregar Estrategia</p>
+          <p class="subtitle is-6 has-text-centered">Nueva Estrategia de la matriz foda.</p>
+                      
+          <%= render 'form', strategy: @strategy %>
+
+          <%= link_to 'Regresar', strategies_path %>
+      </div>
+  </div> 
+
+  </div>
+</div>
+

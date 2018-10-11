@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :missions, :visions, :values, :areas, :activities, :forces, :factors
+  resources :strategies, :objectives, :perspectives
+   
   get '/nueva-actividad/:area_id', to: "activities#new_actividad", as: 'actividad'
   get '/editar-actividad/:id/:area_id', to: 'activities#edit_actividad', as: 'actividad_edit'
   get '/nuevo-factor/:force_id', to: "factors#new_factor", as: 'factor_new'

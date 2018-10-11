@@ -18,4 +18,9 @@ es:
       factor:
         title: 'El factor'
         force_id: 'La fuerza'
+      strategy:
+        content: 'El contenido'
+        foda: 'La foda'
+        objective_id: 'El objetivo'
+
 

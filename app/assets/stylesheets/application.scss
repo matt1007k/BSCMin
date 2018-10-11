@@ -168,6 +168,12 @@ html{
     background: url(#{'./assets/img/hero.jpg'}) center center;
     background-size: cover;
 }
+.width-full{
+    width: 100%;
+}
+.height-full{
+    height: 100%;
+}
 
 .is-bordered{
   border: 1px solid #000;
@@ -192,6 +198,11 @@ html{
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+.is-flex-row-end{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 
@@ -228,4 +239,13 @@ html{
 }
 .shadow-cm:hover.is-hovered{
     box-shadow: -1px 10px 29px 0px rgba(0,0,0,0.8);
+}
+
+
+#tab_container .container_item {
+    display: none;
+}
+
+#tab_container .container_item.is-active {
+    display: block;
 }

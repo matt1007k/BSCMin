@@ -1,0 +1,32 @@
+<%= form_with(model: strategy, local: true) do |form| %>
+  <% if strategy.errors.any? %>
+    <div class="message is-danger">
+      <h2 class="title is-5"><%= pluralize(strategy.errors.count, "error") %> al realizar la operación:</h2>
+      <div class="message-body">
+        <ul>
+          <% strategy.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :foda, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.text_field :foda, class: "input is-info" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :content, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.text_area :content, class: "input is-info" %>
+    </div>
+  </div>
+
+  <div class="actifield is-grouped margin-small-topons">
+    <%= form.submit "Guardar", class: "button is-primary" %>
+  </div>
+<% end %>

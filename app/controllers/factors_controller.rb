@@ -80,8 +80,28 @@ class FactorsController < ApplicationController
 
     respond_to do |format|
         if @factor.save
+          if @factor[:valor] > 0
+            @total = Opportunity.count
+            @oportunidad = Opportunity.new
+            @oportunidad[:slug] = "O#{@total + 1}"
+            @oportunidad[:content] = @factor[:title]
+            @oportunidad.save
+
             format.html { redirect_to evaluar_factor_externo_url, notice: 'La evaluación se hizo con exitó.' }
             format.json { redirect_to @factor, status: :ok, location: @factor }
+        else
+            @total = Threat.count
+            @amenaza = Threat.new
+            @amenaza[:slug] = "A#{@total + 1}"
+            @amenaza[:content] = @factor[:title]
+            @amenaza.save
+
+            format.html { redirect_to evaluar_factor_externo_url, notice: 'La evaluación se hizo con exitó.' }
+            format.json { redirect_to @factor, status: :ok, location: @factor }
+        end 
+
+
+           
         else
             format.html { render :edit }
             format.json { render json: @factor.errors, status: :unprocessable_entity }
