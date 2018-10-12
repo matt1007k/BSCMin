@@ -149,56 +149,59 @@
                                 <div class="modal-background"></div>
                                 <div class="modal-card">
                                     <header class="modal-card-head">
-                                        <p class="modal-card-title">Nueva estrategía</p>
+                                        <p class="modal-card-title">Nueva estrategía FO</p>
                                         <button class="button is-danger close-modal">
                                             <span class="icon">
                                                 <div class="mdi mdi-close"></div>
                                             </span>
                                         </button>
                                     </header>
-                                    <section class="modal-card-body">
-                                        <%= form_with(model: @strategy, local: true) do |form| %>
-                                            <% if @strategy.errors.any? %>
-                                                <div class="message is-danger">
-                                                <h2 class="title is-5"><%= pluralize(@strategy.errors.count, "error") %> al realizar la operación:</h2>
-                                                <div class="message-body">
-                                                    <ul>
-                                                    <% @strategy.errors.full_messages.each do |message| %>
-                                                        <li><%= message %></li>
-                                                    <% end %>
-                                                    </ul>
-                                                </div>
-                                                </div>
-                                            <% end %>
-
+                                    <%= content_tag :div,
+                                            id: "add_form_estrategia_fo",
+                                            data: {
+                                                tipo: "FO",
+                                                estrategia: @strategy.to_json(except: [:created_at,:updated_at,:objective_id])
+                                            } do %>
+                                        <section class="modal-card-body">                                       
+                                       
                                             <div class="field">
-                                                <%= form.label :foda, class: "label is-normal" %>
-                                                <div class="control"> 
-                                                    <%= form.text_field :foda, class: "input is-info" %>
-                                                    
+                                                                                                                                          
+                                                <div class="control">                                                     
+                                                   
+                                                    <b-field label="Foda">
+                                                        <b-taginput
+                                                            type="is-dark"
+                                                            v-model="estrategia.foda">
+                                                        </b-taginput>
+                                                    </b-field>                                                   
                                                 </div>
                                             </div>
 
-                                            
+                                            <input type="hidden" v-model="estrategia.objective_is" value="1" />
 
                                             <div class="field">
-                                                <%= form.label :content, class: "label is-normal" %>
+                                                <label for="content" class="label is-normal">Estrategia </label>
+                                                
                                                 <div class="control"> 
-                                                    <%= form.text_area :content, class: "input is-info" %>
+                                                    <textarea class="textarea is-info" placeholder="Ingrese su estrategia" v-model="estrategia.content"></textarea>
+                                                    <div class="notification is-danger" v-if="errors.length > 0">                                                                                                        
+                                                        <p v-for="(error, index) in errors" :key="index">La estrategia {{error}}</p>                                                       
+                                                    </div>  
                                                 </div>
                                             </div>
 
                                             <div class="actifield is-grouped margin-small-topons">
-                                                <%= form.submit "Guardar", class: "button is-primary" %>
+                                                <%#= form.submit "Guardar", class: "button is-primary" %>
                                             </div>
-                                        <% end %>
-                                    </section>
-                                    <footer class="modal-card-foot">
-                                        <button class="button is-success">Guardar</button>
-                                        <button class="button is-danger close-modal">
-                                            Cancelar
-                                        </button>
-                                    </footer>
+                                       
+                                        </section>
+                                        <footer class="modal-card-foot">
+                                            <button class="button is-success" @click="saveEstrategia()">Guardar</button>
+                                            <button class="button is-danger" @click="closeModal()">
+                                                Cancelar
+                                            </button>
+                                        </footer>
+                                    <% end %>
                                 </div>
                             </div>
 
@@ -207,7 +210,7 @@
                         
                         <ul>
                             <%-if @estrategia.count > 0 %>
-                                <% @estrategia.strategies('FO').each do |estrategia_fo| %>
+                                <% @estrategia.estrategias("FO").each do |estrategia_fo| %>
                                 <li>
                                     <div class="card">
                                         <div class="card-content">
@@ -322,17 +325,73 @@
                                 <div class="title is-5  has-text-centered has-background-black has-text-white padding-small">Estrategias FA</div>
                             </div>
                             <div class="column is-1 is-flex-row-end">
-                                <%= link_to new_strategy_path, class: "button is-success tooltip", :data => {tooltip: "Agregar estrategia"} do  %>
+                                <a href="#" class="button is-success tooltip" data-modal="2" data-tooltip="Agregar estrategía">
                                     <span class="icon">
                                         <i class="mdi mdi-library-plus mdi-24px"></i>
                                     </span>
-                                <% end %>
+                                </a>                                
+                            </div>
+
+
+                            <div class="modal modal-2">
+                                <div class="modal-background"></div>
+                                <div class="modal-card">
+                                    <header class="modal-card-head">
+                                        <p class="modal-card-title">Nueva estrategía FA</p>
+                                        <button class="button is-danger close-modal">
+                                            <span class="icon">
+                                                <div class="mdi mdi-close"></div>
+                                            </span>
+                                        </button>
+                                    </header>
+                                    <%= content_tag :div,
+                                            id: "add_form_estrategia_fa",
+                                            data: {
+                                                tipo: "FA",
+                                                estrategia: @strategy.to_json(except: [:created_at,:updated_at,:objective_id])
+                                            } do %>
+                                        <section class="modal-card-body">                                       
+                                       
+                                            <div class="field">
+                                                                                                                                          
+                                                <div class="control">                                                     
+                                                   
+                                                    <b-field label="Foda">
+                                                        <b-taginput
+                                                            type="is-dark"
+                                                            v-model="estrategia.foda">
+                                                        </b-taginput>
+                                                    </b-field>                                                   
+                                                </div>
+                                            </div>
+                                            
+
+                                            <div class="field">
+                                                <label for="content" class="label is-normal">Estrategia </label>
+                                                
+                                                <div class="control"> 
+                                                    <textarea class="textarea is-info" placeholder="Ingrese su estrategia" v-model="estrategia.content"></textarea>
+                                                    <div class="notification is-danger" v-if="errors.length > 0">                                                                                                        
+                                                        <p v-for="(error, index) in errors" :key="index">La estrategia {{error}}</p>                                                       
+                                                    </div>  
+                                                </div>
+                                            </div>
+
+                                        </section>
+                                        <footer class="modal-card-foot">
+                                            <button class="button is-success" @click="saveEstrategia()">Guardar</button>
+                                            <button class="button is-danger" @click="closeModal()">
+                                                Cancelar
+                                            </button>
+                                        </footer>
+                                    <% end %>
+                                </div>
                             </div>
                         </div>
                         
                         <ul>
                             <%-if @estrategia.count > 0 %>
-                                <% @estrategia.strategies('FA').each do |estrategia_fa| %>
+                                <% @estrategia.estrategias('FA').each do |estrategia_fa| %>
                                 <li>
                                     <div class="card">
                                         <div class="card-content">
@@ -445,16 +504,72 @@
                                 <div class="title is-5  has-text-centered has-background-black has-text-white padding-small">Estrategias DO</div>
                             </div>
                             <div class="column is-1 is-flex-row-end">
-                                <%= link_to new_strategy_path, class: "button is-success tooltip", :data => {tooltip: "Agregar estrategia"} do  %>
+                                <a href="#" class="button is-success tooltip" data-modal="3" data-tooltip="Agregar estrategía">
                                     <span class="icon">
                                         <i class="mdi mdi-library-plus mdi-24px"></i>
                                     </span>
-                                <% end %>
+                                </a>                                
+                            </div>
+
+
+                            <div class="modal modal-3">
+                                <div class="modal-background"></div>
+                                <div class="modal-card">
+                                    <header class="modal-card-head">
+                                        <p class="modal-card-title">Nueva estrategía DO</p>
+                                        <button class="button is-danger close-modal">
+                                            <span class="icon">
+                                                <div class="mdi mdi-close"></div>
+                                            </span>
+                                        </button>
+                                    </header>
+                                    <%= content_tag :div,
+                                            id: "add_form_estrategia_do",
+                                            data: {
+                                                tipo: "DO",
+                                                estrategia: @strategy.to_json(except: [:created_at,:updated_at,:objective_id])
+                                            } do %>
+                                        <section class="modal-card-body">                                       
+                                       
+                                            <div class="field">
+                                                                                                                                          
+                                                <div class="control">                                                     
+                                                   
+                                                    <b-field label="Foda">
+                                                        <b-taginput
+                                                            type="is-dark"
+                                                            v-model="estrategia.foda">
+                                                        </b-taginput>
+                                                    </b-field>                                                   
+                                                </div>
+                                            </div>
+                                            
+
+                                            <div class="field">
+                                                <label for="content" class="label is-normal">Estrategia </label>
+                                                
+                                                <div class="control"> 
+                                                    <textarea class="textarea is-info" placeholder="Ingrese su estrategia" v-model="estrategia.content"></textarea>
+                                                    <div class="notification is-danger" v-if="errors.length > 0">                                                                                                        
+                                                        <p v-for="(error, index) in errors" :key="index">La estrategia {{error}}</p>                                                       
+                                                    </div>  
+                                                </div>
+                                            </div>
+
+                                        </section>
+                                        <footer class="modal-card-foot">
+                                            <button class="button is-success" @click="saveEstrategia()">Guardar</button>
+                                            <button class="button is-danger" @click="closeModal()">
+                                                Cancelar
+                                            </button>
+                                        </footer>
+                                    <% end %>
+                                </div>
                             </div>
                         </div>
                         <ul>
                             <%-if @estrategia.count > 0 %>
-                                <% @estrategia.strategies('DO').each do |estrategia_do| %>
+                                <% @estrategia.estrategias('DO').each do |estrategia_do| %>
                                 <li>
                                     <div class="card">
                                         <div class="card-content">
@@ -567,16 +682,72 @@
                                 <div class="title is-5  has-text-centered has-background-black has-text-white padding-small">Estrategias DA</div>
                             </div>
                             <div class="column is-1 is-flex-row-end">
-                                <%= link_to new_strategy_path, class: "button is-success tooltip", :data => {tooltip: "Agregar estrategia"} do  %>
+                                <a href="#" class="button is-success tooltip" data-modal="4" data-tooltip="Agregar estrategía">
                                     <span class="icon">
                                         <i class="mdi mdi-library-plus mdi-24px"></i>
                                     </span>
-                                <% end %>
+                                </a>                                
+                            </div>
+
+
+                            <div class="modal modal-4">
+                                <div class="modal-background"></div>
+                                <div class="modal-card">
+                                    <header class="modal-card-head">
+                                        <p class="modal-card-title">Nueva estrategía DA</p>
+                                        <button class="button is-danger close-modal">
+                                            <span class="icon">
+                                                <div class="mdi mdi-close"></div>
+                                            </span>
+                                        </button>
+                                    </header>
+                                    <%= content_tag :div,
+                                            id: "add_form_estrategia_da",
+                                            data: {
+                                                tipo: "DA",
+                                                estrategia: @strategy.to_json(except: [:created_at,:updated_at,:objective_id])
+                                            } do %>
+                                        <section class="modal-card-body">                                       
+                                       
+                                            <div class="field">
+                                                                                                                                          
+                                                <div class="control">                                                     
+                                                   
+                                                    <b-field label="Foda">
+                                                        <b-taginput
+                                                            type="is-dark"
+                                                            v-model="estrategia.foda">
+                                                        </b-taginput>
+                                                    </b-field>                                                   
+                                                </div>
+                                            </div>
+                                            
+
+                                            <div class="field">
+                                                <label for="content" class="label is-normal">Estrategia </label>
+                                                
+                                                <div class="control"> 
+                                                    <textarea class="textarea is-info" placeholder="Ingrese su estrategia" v-model="estrategia.content"></textarea>
+                                                    <div class="notification is-danger" v-if="errors.length > 0">                                                                                                        
+                                                        <p v-for="(error, index) in errors" :key="index">La estrategia {{error}}</p>                                                       
+                                                    </div>  
+                                                </div>
+                                            </div>
+
+                                        </section>
+                                        <footer class="modal-card-foot">
+                                            <button class="button is-success" @click="saveEstrategia()">Guardar</button>
+                                            <button class="button is-danger" @click="closeModal()">
+                                                Cancelar
+                                            </button>
+                                        </footer>
+                                    <% end %>
+                                </div>
                             </div>
                         </div>
                         <ul>
                             <%-if @estrategia.count > 0 %>
-                                <% @estrategia.strategies('DA').each do |estrategia_da| %>
+                                <% @estrategia.estrategias('DA').each do |estrategia_da| %>
                                 <li>
                                     <div class="card">
                                         <div class="card-content">

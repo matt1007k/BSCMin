@@ -1,0 +1,70 @@
+<% @title = "Misión" %>
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li> <%= link_to  "Dashboard", root_path %></li>
+    <li class="is-active">      
+      <a href="#" aria-current="page">Nosotros Somos</a>
+    </li>
+  </ul>
+</nav>
+
+
+<div class="columns">
+  <div class="column">
+      <div class="card margin-small shadow-cm">
+        <div class="card-content">
+          <p class="title is-4 has-text-centered">Información</p>
+          <p class="subtitle is-6 has-text-centered">Información de la organización.</p>
+                      
+          <table class="table is-fullwidth">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Misión</th>
+                <th>Visión</th>
+                <th>Macroproceso</th>
+                <th colspan="2">Acciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @infos.each do |info| %>
+                <tr>
+                  <td><%= info.title %></td>
+                  <td><%= info.mission %></td>    
+                  <td><%= info.vision %></td>    
+                  <td><%= info.macroproceso %></td>                      
+                  <td>
+                    <%= link_to(edit_about_us_path(info), html_options =  {class: "button is-info"}) do %>
+                      <span class="icon">
+                        <i class="mdi mdi-square-edit-outline"></i>
+                      </span>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= link_to about_us, method: :delete, data: { confirm: 'Are you sure?' }, class: "button is-danger" do %>
+                      <span class="icon">
+                        <i class="mdi mdi-delete"></i>
+                      </span>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+
+          
+
+          <%= link_to about_us_path, class: "button is-success" do %>
+              <span class="icon">
+                <i class="mdi mdi-library-plus"></i>
+              </span>
+              <span> <%= t('.new_link') %> </span>
+          <% end %>
+      </div>
+  </div> 
+
+  
+</div>
+
+

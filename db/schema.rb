@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_10_192644) do
+ActiveRecord::Schema.define(version: 2018_10_12_043009) do
 
-  create_table "activities", force: :cascade do |t|
+  create_table "about_us", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.text "mission"
+    t.text "vision"
+    t.string "macroproceso"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "activities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "name"
     t.integer "alta", default: 0
     t.integer "media", default: 0
@@ -28,13 +37,13 @@ ActiveRecord::Schema.define(version: 2018_10_10_192644) do
     t.index ["area_id"], name: "index_activities_on_area_id"
   end
 
-  create_table "areas", force: :cascade do |t|
+  create_table "areas", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "factors", force: :cascade do |t|
+  create_table "factors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.integer "alta", default: 0
     t.integer "media", default: 0
@@ -50,72 +59,80 @@ ActiveRecord::Schema.define(version: 2018_10_10_192644) do
     t.index ["force_id"], name: "index_factors_on_force_id"
   end
 
-  create_table "forces", force: :cascade do |t|
+  create_table "forces", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "missions", force: :cascade do |t|
-    t.text "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "objectives", force: :cascade do |t|
+  create_table "objectives", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "slug"
     t.text "content"
-    t.integer "perspective_id"
+    t.bigint "perspective_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["perspective_id"], name: "index_objectives_on_perspective_id"
   end
 
-  create_table "opportunities", force: :cascade do |t|
+  create_table "opportunities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "slug"
     t.text "content"
-    t.integer "factor_id"
+    t.bigint "factor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["factor_id"], name: "index_opportunities_on_factor_id"
   end
 
-  create_table "perspectives", force: :cascade do |t|
+  create_table "perspectives", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "slug"
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "strategies", force: :cascade do |t|
+  create_table "processings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "strategies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "foda"
-    t.string "type"
+    t.string "tipo"
     t.text "content"
-    t.integer "objective_id"
+    t.bigint "objective_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["objective_id"], name: "index_strategies_on_objective_id"
   end
 
-  create_table "strengths", force: :cascade do |t|
+  create_table "strengths", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "slug"
     t.text "content"
-    t.integer "activity_id"
+    t.bigint "activity_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["activity_id"], name: "index_strengths_on_activity_id"
   end
 
-  create_table "threats", force: :cascade do |t|
+  create_table "sub_processes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.bigint "processing_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["processing_id"], name: "index_sub_processes_on_processing_id"
+  end
+
+  create_table "threats", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "slug"
     t.text "content"
-    t.integer "factor_id"
+    t.bigint "factor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["factor_id"], name: "index_threats_on_factor_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -127,25 +144,28 @@ ActiveRecord::Schema.define(version: 2018_10_10_192644) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "values", force: :cascade do |t|
+  create_table "values", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "visions", force: :cascade do |t|
-    t.text "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "weaknesses", force: :cascade do |t|
+  create_table "weaknesses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "slug"
     t.text "content"
-    t.integer "activity_id"
+    t.bigint "activity_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["activity_id"], name: "index_weaknesses_on_activity_id"
   end
 
+  add_foreign_key "activities", "areas"
+  add_foreign_key "factors", "forces"
+  add_foreign_key "objectives", "perspectives"
+  add_foreign_key "opportunities", "factors"
+  add_foreign_key "strategies", "objectives"
+  add_foreign_key "strengths", "activities"
+  add_foreign_key "sub_processes", "processings"
+  add_foreign_key "threats", "factors"
+  add_foreign_key "weaknesses", "activities"
 end

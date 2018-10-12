@@ -28,8 +28,11 @@ class StrategiesController < ApplicationController
 
     
     def create
-        @strategy = Strategy.new(strategy_params)
-
+        @strategy = Strategy.new
+        @strategy[:foda] = params[:strategy][:foda]
+        @strategy[:tipo] = params[:strategy][:tipo]
+        @strategy[:content] = params[:strategy][:content]
+        @strategy[:objective_id] = params[:strategy][:objective]
         respond_to do |format|
         if @strategy.save
             format.html { redirect_to strategies_url, notice: 'La estrategía fue creada con exitó.' }
@@ -65,7 +68,7 @@ class StrategiesController < ApplicationController
 
     private 
         def strategy_params
-            params.require(:strategy).permit(:content, :type, :foda)
+            params.require(:strategy).permit(:content, :foda)
         end
 
         def find_strategy

@@ -10,17 +10,12 @@
             <ul class="menu-list is-scrolly has-type-1">
                 <%- if user_signed_in? %>
                     <li>
-                        <%= link_to(missions_path, html_options = {class: "item #{ current_class?(missions_path) }"}) do %> 
+                        <%= link_to(about_us_path, html_options = {class: "item #{ current_class?(about_us_path) }"}) do %> 
                             <i class="mdi mdi-note mdi-24px"></i>
-                            Misión
+                            Nosotros Somos
                         <% end %>
                     </li>
-                    <li>
-                        <%= link_to visions_path, class: "item #{ current_class?(visions_path) }" do %> 
-                            <i class="mdi mdi-eye mdi-24px"></i>
-                            Visión
-                        <% end %>
-                    </li>
+                    
                     <li>
                         <%= link_to(values_path, html_options = {class: "item #{ current_class?(values_path) }"}) do %> 
                             <i class="mdi mdi-verified mdi-24px"></i>
@@ -28,13 +23,13 @@
                         <% end %>
                     </li>
                     <li>
-                        <%= link_to(missions_path, html_options = {class: "item #{ current_class?(mision_vision_path) }"}) do %> 
+                        <%= link_to(about_us_path, html_options = {class: "item #{ current_class?(mision_vision_path) }"}) do %> 
                             <i class="mdi mdi-domain mdi-24px"></i>
                             Organigrama
                         <% end %>
                     </li>
                     <li>
-                        <%= link_to(missions_path, html_options = {class: "item #{ current_class?(missions_path) }"}) do %> 
+                        <%= link_to(about_us_path, html_options = {class: "item #{ current_class?(about_us_path) }"}) do %> 
                             <i class="mdi mdi-map mdi-24px"></i>
                             Macroproceso
                         <% end %>

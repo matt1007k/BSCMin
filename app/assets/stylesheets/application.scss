@@ -28,6 +28,7 @@ $menu-item-hover-color: $white;
 
 @import 'bulma';
 @import 'bulma-extensions';
+@import "buefy/src/scss/buefy";
 //@import '~font-awesome/scss/font-awesome';
 .is-bg-indigo{
     background: $indigo;

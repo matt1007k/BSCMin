@@ -5,6 +5,6 @@ class Strategy < ApplicationRecord
 
   belongs_to :objective
 
-  scope :strategies, -> (tipo) { where("type = ?", tipo) }
+  scope :estrategias, -> (type) { where("tipo = ?", type) }
   # Ex:- scope :active, -> {where(:active => true)}
 end
