@@ -18,23 +18,14 @@
   <div class="column">    
       <div class="card shadow-cm is-hovered">
         <div class="card-content">  
-          <%= link_to(missions_path, html_options = {class: "has-text-danger is-middle-column"}) do %> 
+          <%= link_to(informations_path, html_options = {class: "has-text-danger is-middle-column"}) do %> 
               <i class="mdi mdi-note mdi-36px"></i>
-              Misión
+              Nosotros Información
           <% end %>
         </div>
       </div>    
   </div>
-  <div class="column">    
-      <div class="card shadow-cm is-hovered">
-        <div class="card-content ">  
-          <%= link_to visions_path, class: "is-middle-column has-text-danger" do %> 
-              <i class="mdi mdi-eye mdi-36px"></i>
-              Visión
-          <% end %>
-        </div>
-      </div>    
-  </div>
+  
   <div class="column">    
       <div class="card shadow-cm is-hovered">
         <div class="card-content">  
@@ -48,7 +39,7 @@
   <div class="column">    
       <div class="card shadow-cm is-hovered">
         <div class="card-content">  
-          <%= link_to(missions_path, html_options = {class: "is-middle-column has-text-danger"}) do %> 
+          <%= link_to(informations_path, html_options = {class: "is-middle-column has-text-danger"}) do %> 
               <i class="mdi mdi-domain mdi-36px"></i>
               Organigrama
           <% end %>
@@ -62,7 +53,7 @@
   <div class="column">
     <div class="card shadow-cm is-hovered">
       <div class="card-content">
-        <%= link_to(missions_path, html_options = {class: "is-middle-column has-text-danger"}) do %> 
+        <%= link_to(values_path, html_options = {class: "is-middle-column has-text-danger"}) do %> 
           <i class="mdi mdi-map mdi-36px"></i>
           Macroproceso
         <% end %>

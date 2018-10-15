@@ -1,0 +1,27 @@
+<% @title = "Editar información" %>
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li> <%= link_to  "Información de la org.", informations_path %></li>
+    <li class="is-active">      
+      <a href="#" aria-current="page">Editar información</a>
+    </li>
+  </ul>
+</nav>
+
+
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter">
+      <div class="card margin-small">
+        <div class="card-content">
+          <p class="title is-4 has-text-centered">Editar información</p>
+          <p class="subtitle is-6 has-text-centered">Editar la información de la organización.</p>
+                      
+          <%= render 'form', information: @information %>
+
+            <%= link_to 'Regresar', informations_path %>
+      </div>
+  </div> 
+
+  
+</div>
+

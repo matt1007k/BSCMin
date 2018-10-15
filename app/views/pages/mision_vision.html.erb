@@ -18,18 +18,17 @@
           <p class="subtitle is-6 has-text-centered">La misión y visión de la organización.</p>
                       
           <div class="columns">
+              <% @informations.each do |information| %>
               <div class="column">
-                  <h2 class="title is-4">Misión</h2>
-                  <% @missions.each do |mission| %>
-                    <p>"<%= mission.title %>"</p>
-                  <% end %>
+                  <h2 class="title is-4">Misión</h2>                  
+                    <p>"<%= information.mission %>"</p>
               </div>
               <div class="column">
                   <h2 class="title is-4">Visión</h2>
-                  <% @visions.each do |vision| %>
-                    <p>"<%= vision.title %>"</p>
-                  <% end %>
+                    <p>"<%= information.vision %>"</p>
+                  
               </div>
+              <% end %>
           </div>
 
           

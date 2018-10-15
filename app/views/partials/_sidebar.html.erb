@@ -10,7 +10,7 @@
             <ul class="menu-list is-scrolly has-type-1">
                 <%- if user_signed_in? %>
                     <li>
-                        <%= link_to(about_us_path, html_options = {class: "item #{ current_class?(about_us_path) }"}) do %> 
+                        <%= link_to(informations_path, html_options = {class: "item #{ current_class?(informations_path) }"}) do %> 
                             <i class="mdi mdi-note mdi-24px"></i>
                             Nosotros Somos
                         <% end %>
@@ -23,13 +23,13 @@
                         <% end %>
                     </li>
                     <li>
-                        <%= link_to(about_us_path, html_options = {class: "item #{ current_class?(mision_vision_path) }"}) do %> 
+                        <%= link_to(informations_path, html_options = {class: "item #{ current_class?(mision_vision_path) }"}) do %> 
                             <i class="mdi mdi-domain mdi-24px"></i>
                             Organigrama
                         <% end %>
                     </li>
                     <li>
-                        <%= link_to(about_us_path, html_options = {class: "item #{ current_class?(about_us_path) }"}) do %> 
+                        <%= link_to(informations_path, html_options = {class: "item #{ current_class?(informations_path) }"}) do %> 
                             <i class="mdi mdi-map mdi-24px"></i>
                             Macroproceso
                         <% end %>

@@ -16,11 +16,35 @@
         <div class="card-content">
           <p class="title is-4 has-text-centered">El Macroproceso</p>
           <p class="subtitle is-6 has-text-centered">Los procesos de la organización.</p>
-                      
-          
 
-          
 
+          <div class="columns">
+            <div class="column  is-middle">
+                <div class="notification is-primary">
+                  <% @informations.each do |information| %>
+                      <strong> <%= information.macroproceso %> </strong>
+                  <% end %>            
+                </div>   
+            </div>
+          </div>      
+          <h3 class="title is-5">
+            Procesos <span class="icon"> <i class="mdi mdi-arrow-down"></i></span>
+          </h3> 
+          <div class="columns">
+            <div class="column">
+
+            </div>
+          </div>
+          
+          <div class="columns">
+            <div class="column">
+
+            </div>
+          </div>
+
+          <h3 class="title is-5">
+            Sub Procesos <span class="icon"> <i class="mdi mdi-arrow-up"></i></span>
+          </h3> 
         </div>
       </div>
   </div>  

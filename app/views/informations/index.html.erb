@@ -28,21 +28,21 @@
             </thead>
 
             <tbody>
-              <% @infos.each do |info| %>
+              <% @informations.each do |information| %>
                 <tr>
-                  <td><%= info.title %></td>
-                  <td><%= info.mission %></td>    
-                  <td><%= info.vision %></td>    
-                  <td><%= info.macroproceso %></td>                      
+                  <td><%= information.name %></td>
+                  <td><%= information.mission %></td>    
+                  <td><%= information.vision %></td>    
+                  <td><%= information.macroproceso %></td>                      
                   <td>
-                    <%= link_to(edit_about_us_path(info), html_options =  {class: "button is-info"}) do %>
+                    <%= link_to(edit_information_path(information), html_options =  {class: "button is-info"}) do %>
                       <span class="icon">
                         <i class="mdi mdi-square-edit-outline"></i>
                       </span>
                     <% end %>
                   </td>
                   <td>
-                    <%= link_to about_us, method: :delete, data: { confirm: 'Are you sure?' }, class: "button is-danger" do %>
+                    <%= link_to information, method: :delete, data: { confirm: '¿Estás seguro de eliminar el registro?' }, class: "button is-danger" do %>
                       <span class="icon">
                         <i class="mdi mdi-delete"></i>
                       </span>
@@ -55,7 +55,7 @@
 
           
 
-          <%= link_to about_us_path, class: "button is-success" do %>
+          <%= link_to new_information_path, class: "button is-success" do %>
               <span class="icon">
                 <i class="mdi mdi-library-plus"></i>
               </span>

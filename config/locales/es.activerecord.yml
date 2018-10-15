@@ -22,5 +22,10 @@ es:
         content: 'El contenido'
         foda: 'La foda'
         objective_id: 'El objetivo'
+      information:
+        name: 'El nombre'
+        mission: 'La misión'
+        vision: 'La visión'
+        macroproceso: 'El macroproceso'
 
 

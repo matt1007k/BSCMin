@@ -4,8 +4,7 @@ class PagesController < ApplicationController
   end
   
   def mision_vision    
-    @missions = Mission.all
-    @visions = Vision.all
+    @informations = Information.all
   end
 
   def valores
@@ -17,6 +16,7 @@ class PagesController < ApplicationController
   end
 
   def macroproceso    
+    @informations = Information.all
   end
 
   def cadena
