@@ -1,0 +1,51 @@
+<% @title = "Editar Proceso" %>
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li> <%= link_to  "Proceso", procesos_path %></li>
+    <li class="is-active">      
+      <a href="#" aria-current="page">Editar Proceso</a>
+    </li>
+  </ul>
+</nav>
+
+
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter">
+      <div class="card margin-small">
+        <div class="card-content">
+          <p class="title is-4 has-text-centered">Editar Proceso</p>
+          <p class="subtitle is-6 has-text-centered">Editar el proceso de la organización.</p>
+                      
+            <%= form_with(model: @processing, url: update_proceso_path(@processing), method: 'PUT', local: true) do |form| %>
+              <% if @processing.errors.any? %>
+                <div class="message is-danger">
+                  <h2 class="title is-5"><%= pluralize(@processing.errors.count, "error") %> al realizar la operación:</h2>
+                  <div class="message-body">
+                    <ul>
+                      <% @processing.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                </div>
+              <% end %>
+
+              <div class="field">
+                <%= form.label :title, class: "label is-normal" %>
+                <div class="control"> 
+                  <%= form.text_field :title, class: "input is-info" %>
+                </div>
+              </div>
+
+              <div class="actifield is-grouped margin-small-topons">
+                <%= form.submit "Guardar", class: "button is-primary" %>
+              </div>
+            <% end %>
+
+            <%= link_to 'Regresar', procesos_path %>
+        </div>
+      </div>
+
+  </div>
+</div>
+

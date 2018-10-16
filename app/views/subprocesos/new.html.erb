@@ -1,0 +1,52 @@
+<% @title = 'Agregar sub proceso' %>
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li> <%= link_to  "Procesos", procesos_path %></li>
+    <li class="is-active">      
+      <a href="#" aria-current="page">Agregar sub proceso</a>
+    </li>
+  </ul>
+</nav>
+
+
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter">
+      <div class="card margin-small">
+        <div class="card-content">
+          <p class="title is-4 has-text-centered">Agregar sub proceso</p>
+          <p class="subtitle is-6 has-text-centered">Nuevo sub proceso de la organización.</p>
+                      
+          <%= form_with(model: @subprocess, url: create_subproceso_path, local: true) do |form| %>
+            <% if @subprocess.errors.any? %>
+              <div class="message is-danger">
+                <h2 class="title is-5"><%= pluralize(@subprocess.errors.count, "error") %> al realizar la operación:</h2>
+                <div class="message-body">
+                  <ul>
+                    <% @subprocess.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+            <% end %>
+            <input type="hidden" name="sub_process[processing_id]" id="sub_process_processing_id" value="<%= @proceso_id %> " />
+            
+            <div class="field">
+              <%= form.label :title, class: "label is-normal" %>
+              <div class="control"> 
+                <%= form.text_field :title, class: "input is-info" %>
+              </div>
+            </div>
+
+            <div class="actifield is-grouped margin-small-topons">
+              <%= form.submit "Guardar", class: "button is-primary" %>
+            </div>
+          <% end %>
+
+          <%= link_to 'Regresar', procesos_path %>
+      </div>
+  </div> 
+
+  </div>
+</div>
+

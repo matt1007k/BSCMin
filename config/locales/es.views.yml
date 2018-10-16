@@ -20,6 +20,14 @@ es:
       new_link: "Agregar factor"
       edit_link: "Editar factor"
       remove_link: "Eliminar factor"
+  procesos:
+    index:
+      new_proceso_link: "Agregar proceso"
+      edit_proceso_link: "Editar proceso"
+      remove_proceso_link: "Eliminar proceso"
+      new_link: "Agregar subproceso"
+      edit_link: "Editar subproceso"
+      remove_link: "Eliminar subproceso"
   devise:
     sessions:
       new:

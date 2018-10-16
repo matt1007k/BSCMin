@@ -27,24 +27,48 @@
                 </div>   
             </div>
           </div>      
-          <h3 class="title is-5">
-            Procesos <span class="icon"> <i class="mdi mdi-arrow-down"></i></span>
-          </h3> 
+          
           <div class="columns">
-            <div class="column">
-
+            <div class="column is-2">
+              <h3 class="title is-5">Procesos </h3> 
+            </div>
+            <div class="column has-text-centered">
+              <span class="icon "> <i class="mdi mdi-arrow-down mdi-36px"></i></span>
             </div>
           </div>
           
+          <div class="columns is-multiline">
+            <% @processings.each do |proceso| %>            
+              <div class="column is-one-quarter">
+                <div class="notification no-margin is-info has-text-centered">
+                  <%= proceso.title %>
+                </div>
+                <div class="is-middle mdi mdi-arrow-down mdi-36px"></div>
+                  <% proceso.sub_processes.each do |sub_process| %>
+                    <div class="notification is-dark">
+                      <div class="columns">
+                        <div class="column is-1">
+                          <div class="is-middle mdi mdi-check"></div>
+                        </div>
+                        <div class="column">
+                          <%= sub_process.title %>.
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+              </div>
+            <% end %>
+          </div>
+          
+          
           <div class="columns">
             <div class="column">
-
+                <h3 class="title is-5">
+                  Sub Procesos <span class="icon"> <i class="mdi mdi-arrow-up"></i></span>
+                </h3>
             </div>
           </div>
-
-          <h3 class="title is-5">
-            Sub Procesos <span class="icon"> <i class="mdi mdi-arrow-up"></i></span>
-          </h3> 
+           
         </div>
       </div>
   </div>  

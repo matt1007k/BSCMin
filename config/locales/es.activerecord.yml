@@ -27,5 +27,9 @@ es:
         mission: 'La misión'
         vision: 'La visión'
         macroproceso: 'El macroproceso'
+      processing:
+        title: 'El proceso'
+      sub_process:
+        title: 'El subproceso'
 
 

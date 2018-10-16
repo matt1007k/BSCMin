@@ -13,8 +13,16 @@ Rails.application.routes.draw do
 
 
   devise_for :users
-  resources :informations, :values, :areas, :activities, :forces, :factors
+  resources :informations, :values, :areas, :activities, :forces, :factors, :expect => [:show] 
   resources :strategies, :objectives, :perspectives
+  resources :procesos, :expect => [:update, :show] 
+  put '/procesos/:id', to: 'procesos#update', as: 'update_proceso'
+
+  get '/subproceso/new/:proceso_id', to: 'subprocesos#new', as: 'new_subproceso'
+  get '/subproceso/:proceso_id/edit/:id', to: 'subprocesos#edit', as: 'edit_subproceso'
+  post '/subprocesos', to: 'subprocesos#create', as: 'create_subproceso'
+  put '/subprocesos/:id', to: 'subprocesos#update', as: 'update_subproceso'
+  delete '/subprocesos/:id', to: 'subprocesos#destroy', as: 'destroy_subproceso'
    
   get '/nueva-actividad/:area_id', to: "activities#new_actividad", as: 'actividad'
   get '/editar-actividad/:id/:area_id', to: 'activities#edit_actividad', as: 'actividad_edit'

@@ -1,0 +1,114 @@
+<% @title = "Macroproceso" %>
+
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li> <%= link_to  "Dashboard", root_path %></li>
+    <li class="is-active">      
+      <a href="#" aria-current="page">El Macroproceso</a>
+    </li>
+  </ul>
+</nav>
+
+
+<div class="columns">
+  <div class="column">
+      <div class="card margin-small shadow-cm">
+        <div class="card-content">
+
+          <div class="columns">
+            <div class="column is-4">
+              <p class="title is-4 has-text-centered">El Macroproceso</p>
+            </div>
+            <div class="column">
+                <div class="notification is-primary">
+                  <% @informations.each do |information| %>
+                      <strong>" <%= information.macroproceso %> "</strong>
+                  <% end %>            
+                </div>   
+            </div>
+          </div>  
+         
+          <div class="columns">
+            <div class="column">
+                <p class="subtitle is-6 has-text-left">Los procesos de la organización.</p>
+            </div>
+            <div class="column is-2 has-text-rigth">
+              <%= link_to  new_proceso_path, class: "button is-success"  do %>
+                  <span class="icon">
+                    <i class="mdi mdi-plus is-24px"></i>
+                  </span> 
+                  <%= ('.new_proceso_link') %>                
+              <% end %>
+            </div>
+          </div>
+
+
+              
+          <h3 class="title is-5">
+            Procesos <span class="icon"> <i class="mdi mdi-arrow-down"></i></span>
+          </h3> 
+          <div class="shadow-cm padding-small-all">
+            <% @processings.each do |proceso| %>
+              <div class="columns ">
+                <div class="column is-8 has-background-primary has-text-white">
+                  <div class="has-text-weight-bold">
+                    <%= proceso.title %>
+                  </div>
+                </div>
+
+                <div class="column is-2 has-text-right has-background-primary has-text-white">
+                  <%= link_to edit_proceso_path(proceso), class: "button is-info tooltip", :data => {tooltip: t('.edit_proceso_link')} do %>
+                      <span class="icon">
+                        <i class="mdi mdi-update"></i>
+                      </span>
+                  <% end %>
+                  <%= link_to procesos_path(proceso), method: :delete, class: "button is-danger tooltip", data: {tooltip: t('.remove_proceso_link'), confirm: "¿Está seguro de eliminar el proceso?"} do %>
+                      <span class="icon">
+                        <i class="mdi mdi-close"></i>
+                      </span>
+                  <% end %>
+                </div>
+
+                <div class="column has-background-grey has-text-white">
+                  <%= link_to new_subproceso_path(proceso.id), class: "button" do %>
+                    <span class="icon">
+                      <i class="mdi mdi-library-plus"></i>
+                    </span>
+                    <span><%= t('.new_link') %> </span>
+                  <% end %>
+                </div>
+              </div>
+
+
+              <% proceso.sub_processes.each do |subprocess| %>
+                <div class="columns">
+
+                    <div class="column is-10">
+                      <%= subprocess.title %>
+                    </div>
+
+                    <div class="column">
+                      <%= link_to edit_subproceso_path(proceso.id,subprocess), class: "button is-info tooltip", :data => {tooltip: t('.edit_link')} do %>
+                        <span class="icon">
+                          <i class="mdi mdi-update"></i>
+                        </span>
+                      <% end %>
+                      <%= link_to destroy_subproceso_path(subprocess), method: :delete,  class: "button is-danger tooltip", :data => {tooltip: t('.remove_link'), confirm: '¿Está seguro de eliminar el subproceso?'} do %>
+                        <span class="icon">
+                          <i class="mdi mdi-close"></i>
+                        </span>
+                      <% end %>
+                    </div>
+                </div>
+              <% end %>
+            <% end %>
+
+          </div>
+
+          <h3 class="title is-5">
+            Sub Procesos <span class="icon"> <i class="mdi mdi-arrow-up"></i></span>
+          </h3> 
+        </div>
+      </div>
+  </div>  
+</div>

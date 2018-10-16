@@ -17,6 +17,7 @@ class PagesController < ApplicationController
 
   def macroproceso    
     @informations = Information.all
+    @processings = Processing.all
   end
 
   def cadena
