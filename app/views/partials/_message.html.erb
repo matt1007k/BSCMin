@@ -1,0 +1,32 @@
+<% if flash[:notice] %>
+    <div class="notification is-success no-margin mensaje">
+    <button class="delete"></button>        
+    <div class="columns">
+        <div class="column is-1">
+        <span class="icon">
+            <i class="mdi mdi-check-circle mdi-24px"></i>
+        </span>
+        </div>
+        <div class="column">
+            <p class="notice"> <%= notice %></p>
+        </div>
+    </div>  	  	
+    </div>
+<% end %>
+
+
+<% if flash[:alert] %>
+    <div class="notification is-danger no-margin mensaje">
+    <button class="delete"></button>
+    <div class="columns">
+        <div class="column is-1">
+        <span class="icon">
+            <i class="mdi mdi-alert-circle mdi-24px"></i>
+        </span>
+        </div>
+        <div class="column">
+            <p class="alert"><%= alert %></p>
+        </div>
+    </div>          
+    </div>
+<% end %>

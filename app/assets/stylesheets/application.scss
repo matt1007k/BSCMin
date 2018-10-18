@@ -134,6 +134,14 @@ html{
     margin: 0;
 }
 
+
+.notification.mensaje{
+    top: 4em;
+    right: 1em;
+    position: absolute;
+    z-index: 1000;
+}
+
 .navbar-dash{
     display: flex;
     width: 100%;
@@ -206,6 +214,17 @@ html{
     justify-content: flex-end;
 }
 
+.no-margin{
+    margin: 0;
+}
+
+.no-padding{
+    padding: 0;
+}
+.no-padding-sides{
+    padding-right: 0;
+    padding-left: 0;
+}
 
 .margin-small-top{
     margin-top: 1.5em;

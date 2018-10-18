@@ -60,18 +60,14 @@
                             <%-if @fortalezas.count > 0 %>
                                 <% @fortalezas.each do |fortaleza| %>
                                 <li>
-                                    <div class="card">
-                                        <div class="card-content">
-                                            <div class="columns">
-                                                <div class="column is-1">
-                                                    <%= fortaleza.slug %>
-                                                </div>
-                                                <div class="column">
-                                                    <%= fortaleza.content %>
-                                                </div>
-                                            </div>
+                                    <div class="columns">
+                                        <div class="column is-1">
+                                            <%= fortaleza.slug %>
                                         </div>
-                                    </div>  
+                                        <div class="column">
+                                            <%= fortaleza.content %>
+                                        </div>
+                                    </div>   
                                 </li>
                                 <% end %>
                             <% else %>
@@ -96,18 +92,14 @@
                             <%-if @oportunidades.count > 0 %>
                                 <% @oportunidades.each do |oportunidad| %>
                                 <li>
-                                    <div class="card">
-                                        <div class="card-content">
-                                            <div class="columns">
-                                                <div class="column is-1">
-                                                    <%= oportunidad.slug %>
-                                                </div>
-                                                <div class="column">
-                                                    <%= oportunidad.content %>
-                                                </div>
-                                            </div>
+                                    <div class="columns">
+                                        <div class="column is-1">
+                                            <%= oportunidad.slug %>
                                         </div>
-                                    </div>  
+                                        <div class="column">
+                                            <%= oportunidad.content %>
+                                        </div>
+                                    </div> 
                                 </li>
                                 <% end %>
                             <% else %>
@@ -130,22 +122,15 @@
                                <div class="title is-5  has-text-centered has-background-black has-text-white padding-small">Estrategias FO</div>
                             </div>
                             <div class="column is-1 is-flex-row-end">
-                                <a href="#" class="button is-success tooltip" data-modal="1" data-tooltip="Agregar estrategía">
+                                <a href="#" class="button is-success tooltip" data-modal="add1" data-tooltip="Agregar estrategía">
                                     <span class="icon">
                                         <i class="mdi mdi-library-plus mdi-24px"></i>
                                     </span>
-                                </a>
-                                <%#= link_to new_strategy_path, class: "button is-success tooltip", :data => {tooltip: "Agregar estrategia"} do  %>
-                                    <!--
-                                    <span class="icon">
-                                        <i class="mdi mdi-library-plus mdi-24px"></i>
-                                    </span>
-                                    -->
-                                <%# end %>
+                                </a>                                
                             </div>
 
 
-                            <div class="modal modal-1">
+                            <div class="modal modal-add1">
                                 <div class="modal-background"></div>
                                 <div class="modal-card">
                                     <header class="modal-card-head">
@@ -159,6 +144,7 @@
                                     <%= content_tag :div,
                                             id: "add_form_estrategia_fo",
                                             data: {
+                                                id: "",
                                                 tipo: "FO",
                                                 estrategia: @strategy.to_json(except: [:created_at,:updated_at,:objective_id])
                                             } do %>
@@ -171,7 +157,8 @@
                                                     <b-field label="Foda">
                                                         <b-taginput
                                                             type="is-dark"
-                                                            v-model="estrategia.foda">
+                                                            v-model="estrategia.foda"
+                                                            attached>
                                                         </b-taginput>
                                                     </b-field>                                                   
                                                 </div>
@@ -209,21 +196,35 @@
                         </div>
                         
                         <ul>
-                            <%-if @estrategia.count > 0 %>
+                            <%-if @estrategia.estrategias('FO').count > 0 %>
                                 <% @estrategia.estrategias("FO").each do |estrategia_fo| %>
                                 <li>
-                                    <div class="card">
-                                        <div class="card-content">
-                                            <div class="columns">
-                                                <div class="column is-1">
-                                                    <%= estrategia_fo.foda %>
-                                                </div>
-                                                <div class="column">
-                                                    <%= estrategia_fo.content %>
-                                                </div>
+                                
+                                    <div class="columns">
+                                        <div class="column is-3">
+                                            <div class="tags">
+                                                <% estrategia_fo.foda.split(",").each do |value| %>
+                                                    <span class="tag is-warning"><%= value %> </span>
+                                                <% end %>
                                             </div>
                                         </div>
+                                        <div class="column is-8 no-padding-sides">
+                                            <%= estrategia_fo.content %>
+                                        </div>
+                                        <div class="column">
+                                            <%= link_to  edit_strategy_path(estrategia_fo), class: "button is-small is-info tooltip",  :data => {tooltip: "Editar estrategía"} do %>
+                                                <span class="icon">
+                                                    <i class="mdi mdi-update mdi-24px"></i>
+                                                </span>
+                                            <% end %>
+                                            <%= link_to strategy_url(estrategia_fo), method: :delete, class: "button is-small is-danger tooltip", :data => {tooltip: "Eliminar estrategía", confirm: "¿Esta seguro de eliminar la estrategia?"} do %>
+                                                <span class="icon">
+                                                    <i class="mdi mdi-delete-forever mdi-24px"></i>
+                                                </span>
+                                            <% end %>
+                                        </div>
                                     </div>  
+                                       
                                 </li>
                                 <% end %>
                             <% else %>
@@ -390,21 +391,33 @@
                         </div>
                         
                         <ul>
-                            <%-if @estrategia.count > 0 %>
+                            <%-if @estrategia.estrategias('FA').count > 0 %>
                                 <% @estrategia.estrategias('FA').each do |estrategia_fa| %>
                                 <li>
-                                    <div class="card">
-                                        <div class="card-content">
-                                            <div class="columns">
-                                                <div class="column is-1">
-                                                    <%= estrategia_fa.foda %>
-                                                </div>
-                                                <div class="column">
-                                                    <%= estrategia_fa.content %>
-                                                </div>
+                                    <div class="columns">
+                                        <div class="column is-3">
+                                            <div class="tags">
+                                                <% estrategia_fa.foda.split(",").each do |value| %>
+                                                    <span class="tag is-warning"><%= value %> </span>
+                                                <% end %>
                                             </div>
                                         </div>
-                                    </div>  
+                                        <div class="column is-8 no-padding-sides">
+                                            <%= estrategia_fa.content %>
+                                        </div>
+                                        <div class="column">
+                                            <%= link_to  edit_strategy_path(estrategia_fa), class: "button is-small is-info tooltip",  :data => {tooltip: "Editar estrategía"} do %>
+                                                <span class="icon">
+                                                    <i class="mdi mdi-update mdi-24px"></i>
+                                                </span>
+                                            <% end %>
+                                            <%= link_to strategy_url(estrategia_fa), method: :delete, class: "button is-small is-danger tooltip", :data => {tooltip: "Eliminar estrategía", confirm: "¿Esta seguro de eliminar la estrategia?"} do %>
+                                                <span class="icon">
+                                                    <i class="mdi mdi-delete-forever mdi-24px"></i>
+                                                </span>
+                                            <% end %>
+                                        </div>
+                                    </div> 
                                 </li>
                                 <% end %>
                             <% else %>
@@ -568,19 +581,31 @@
                             </div>
                         </div>
                         <ul>
-                            <%-if @estrategia.count > 0 %>
+                            <%-if @estrategia.estrategias('DO').count > 0 %>
                                 <% @estrategia.estrategias('DO').each do |estrategia_do| %>
                                 <li>
-                                    <div class="card">
-                                        <div class="card-content">
-                                            <div class="columns">
-                                                <div class="column is-1">
-                                                    <%= estrategia_do.foda %>
-                                                </div>
-                                                <div class="column">
-                                                    <%= estrategia_do.content %>
-                                                </div>
+                                    <div class="columns">
+                                        <div class="column is-3">
+                                            <div class="tags">
+                                                <% estrategia_do.foda.split(",").each do |value| %>
+                                                    <span class="tag is-warning"><%= value %> </span>
+                                                <% end %>
                                             </div>
+                                        </div>
+                                        <div class="column is-8 no-padding-sides">
+                                            <%= estrategia_do.content %>
+                                        </div>
+                                        <div class="column">
+                                            <%= link_to  edit_strategy_path(estrategia_do), class: "button is-small is-info tooltip",  :data => {tooltip: "Editar estrategía"} do %>
+                                                <span class="icon">
+                                                    <i class="mdi mdi-update mdi-24px"></i>
+                                                </span>
+                                            <% end %>
+                                            <%= link_to strategy_url(estrategia_do), method: :delete, class: "button is-small is-danger tooltip", :data => {tooltip: "Eliminar estrategía", confirm: "¿Esta seguro de eliminar la estrategia?"} do %>
+                                                <span class="icon">
+                                                    <i class="mdi mdi-delete-forever mdi-24px"></i>
+                                                </span>
+                                            <% end %>
                                         </div>
                                     </div>  
                                 </li>
@@ -746,21 +771,33 @@
                             </div>
                         </div>
                         <ul>
-                            <%-if @estrategia.count > 0 %>
+                            <%-if @estrategia.estrategias('DA').count > 0 %>
                                 <% @estrategia.estrategias('DA').each do |estrategia_da| %>
                                 <li>
-                                    <div class="card">
-                                        <div class="card-content">
-                                            <div class="columns">
-                                                <div class="column is-1">
-                                                    <%= estrategia_da.foda %>
-                                                </div>
-                                                <div class="column">
-                                                    <%= estrategia_da.content %>
-                                                </div>
+                                    <div class="columns">
+                                        <div class="column is-3">
+                                            <div class="tags">
+                                                <% estrategia_da.foda.split(",").each do |value| %>
+                                                    <span class="tag is-warning"><%= value %> </span>
+                                                <% end %>
                                             </div>
                                         </div>
-                                    </div>  
+                                        <div class="column is-8 no-padding-sides">
+                                            <%= estrategia_da.content %>
+                                        </div>
+                                        <div class="column">
+                                            <%= link_to  edit_strategy_path(estrategia_da), class: "button is-small is-info tooltip",  :data => {tooltip: "Editar estrategía"} do %>
+                                                <span class="icon">
+                                                    <i class="mdi mdi-update mdi-24px"></i>
+                                                </span>
+                                            <% end %>
+                                            <%= link_to strategy_url(estrategia_da), method: :delete, class: "button is-small is-danger tooltip", :data => {tooltip: "Eliminar estrategía", confirm: "¿Esta seguro de eliminar la estrategia?"} do %>
+                                                <span class="icon">
+                                                    <i class="mdi mdi-delete-forever mdi-24px"></i>
+                                                </span>
+                                            <% end %>
+                                        </div>
+                                    </div>   
                                 </li>
                                 <% end %>
                             <% else %>

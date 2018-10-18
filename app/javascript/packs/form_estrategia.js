@@ -4,11 +4,15 @@ import TurbolinksAdapter from 'vue-turbolinks'
 import Buefy from 'buefy'
 //import 'buefy/dist/buefy.css'
 //import AddFormEstrategia from './components/AddFormEstrategia'
+import { Snackbar } from 'buefy/dist/components/snackbar'
+
 
 Vue.use(Buefy)
 
 Vue.use(TurbolinksAdapter)
 Vue.use(VueResource)
+
+window.snackbar = Snackbar
 
 document.addEventListener('turbolinks:load', () => {
   Vue.http.headers.common['X-CSRF-Token'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
@@ -17,32 +21,27 @@ document.addEventListener('turbolinks:load', () => {
   if (element_fo != null) {
     var estrategia = JSON.parse(element_fo.dataset.estrategia); 
     var tipo = element_fo.dataset.tipo;
+    var id = element_fo.dataset.id;
     const app = new Vue({
       el: element_fo,
       data: {
         estrategia: estrategia,
+        id: id,
         tipo: tipo,
         errors: [],
-        tags: [
-          'Auckland',
-          'Wellington',
-          'Napier'
-        ]
       },
       methods: {
         closeModal(){
           var modal = document.querySelector(".modal");
-          modal.classList.remove('is-active')
-          console.log(this.estrategia.foda.toString())
-          console.log(this.estrategia.content)
+          modal.classList.remove('is-active');
         },
-        saveEstrategia(){
+        saveEstrategia(){          
           this.$http.post('/strategies', { strategy: {
-              foda: this.estrategia.foda.toString(),
-              content: this.estrategia.content,
-              objective: 1,
-              tipo: this.tipo
-            } 
+            foda: this.estrategia.foda.toString(),
+            content: this.estrategia.content,
+            objective: 1,
+            tipo: this.tipo
+          } 
           }).then(response => {
             Turbolinks.visit('/strategies');
           }, response => {
@@ -53,6 +52,60 @@ document.addEventListener('turbolinks:load', () => {
               console.log(this.errors)
             }
           })
+          
+        }
+      }
+
+      
+      //template: '<AddFormEstrategia :estrategia="estrategia" />',
+      //components: {AddFormEstrategia}
+    })
+  }
+
+  var element = document.getElementById("editar_form_estrategia");
+  if (element != null) {
+    var estrategia = JSON.parse(element.dataset.estrategia); 
+    var id = element.dataset.id;
+    const app = new Vue({
+      el: element,
+      data: {
+        estrategia: {
+            foda: estrategia.foda.split(","),
+            content: estrategia.content
+        },
+        id: id,
+        errors: [],
+      },
+      methods: {
+        closeModal(){
+          var modal = document.querySelector(".modal");
+          modal.classList.remove('is-active');
+        },
+        saveEstrategia(){
+          if(this.id != null){
+            this.$http.put(`/strategies/${this.id}`, { strategy: {
+              foda: this.estrategia.foda.toString(),
+              content: this.estrategia.content,
+            } 
+            }).then(response => {  
+              Snackbar.open({
+                duration: 3000,
+                message: 'La estrategia se modifico con exitó',
+                type: 'is-success',
+                position: 'is-top-right',
+                actionText: 'X'
+              })            
+              Turbolinks.visit('/strategies');
+              
+            }, response => {
+              console.log(response)
+              if (response.status = 422){
+                var json = JSON.parse(response.bodyText)
+                this.errors = json["content"]
+                console.log(this.errors)
+              }
+            })
+          }
         }
       }
 
@@ -73,18 +126,11 @@ document.addEventListener('turbolinks:load', () => {
         estrategia: estrategia,
         tipo: tipo,
         errors: [],
-        tags: [
-          'Auckland',
-          'Wellington',
-          'Napier'
-        ]
       },
       methods: {
         closeModal(){
           var modal = document.querySelector(".modal");
-          modal.classList.remove('is-active')
-          console.log(this.estrategia.foda.toString())
-          console.log(this.estrategia.content)
+          modal.classList.remove('is-active');
         },
         saveEstrategia(){
           this.$http.post('/strategies', { strategy: {
@@ -123,11 +169,6 @@ document.addEventListener('turbolinks:load', () => {
         estrategia: estrategia,
         tipo: tipo,
         errors: [],
-        tags: [
-          'Auckland',
-          'Wellington',
-          'Napier'
-        ]
       },
       methods: {
         closeModal(){
@@ -156,9 +197,6 @@ document.addEventListener('turbolinks:load', () => {
         }
       }
 
-      
-      //template: '<AddFormEstrategia :estrategia="estrategia" />',
-      //components: {AddFormEstrategia}
     })
   }
 
@@ -173,18 +211,11 @@ document.addEventListener('turbolinks:load', () => {
         estrategia: estrategia,
         tipo: tipo,
         errors: [],
-        tags: [
-          'Auckland',
-          'Wellington',
-          'Napier'
-        ]
       },
       methods: {
         closeModal(){
           var modal = document.querySelector(".modal");
-          modal.classList.remove('is-active')
-          console.log(this.estrategia.foda.toString())
-          console.log(this.estrategia.content)
+          modal.classList.remove('is-active');
         },
         saveEstrategia(){
           this.$http.post('/strategies', { strategy: {
@@ -206,9 +237,6 @@ document.addEventListener('turbolinks:load', () => {
         }
       }
 
-      
-      //template: '<AddFormEstrategia :estrategia="estrategia" />',
-      //components: {AddFormEstrategia}
     })
   }
 })

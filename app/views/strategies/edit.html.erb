@@ -1,9 +1,9 @@
-<% @title = "Editar Áreas" %>
+<% @title = "Editar Estrategia" %>
 <nav class="breadcrumb" aria-label="breadcrumbs">
   <ul>
-    <li> <%= link_to  "Áreas", activities_path %></li>
+    <li> <%= link_to  "Matriz foda", strategies_path %></li>
     <li class="is-active">      
-      <a href="#" aria-current="page">Editar Áreas</a>
+      <a href="#" aria-current="page">Editar Estrategia</a>
     </li>
   </ul>
 </nav>
@@ -13,12 +13,17 @@
   <div class="column is-half is-offset-one-quarter">
       <div class="card margin-small">
         <div class="card-content">
-          <p class="title is-4 has-text-centered">Editar Áreas</p>
-          <p class="subtitle is-6 has-text-centered">Editar la Áreas de la organización.</p>
-                      
-          <%= render 'form', area: @area %>
-
-            <%= link_to 'Regresar', activities_path %>
+          <p class="title is-4 has-text-centered">Editar Estrategia</p>
+          <p class="subtitle is-6 has-text-centered">Editar la estrategia de la matriz foda.</p>
+            <%= content_tag :div,
+                id: "editar_form_estrategia",
+                data: {
+                    id: @strategy.id,
+                    estrategia: @strategy.to_json(except: [:created_at,:updated_at,:objective_id])
+                } do %>           
+                <%= render 'form' %>
+            <% end %>
+          <%= link_to 'Regresar', strategies_path %>
         </div>
       </div>
 
