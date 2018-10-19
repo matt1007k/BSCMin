@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_15_171148) do
+ActiveRecord::Schema.define(version: 2018_10_19_050726) do
 
   create_table "activities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "name"
@@ -54,6 +54,15 @@ ActiveRecord::Schema.define(version: 2018_10_15_171148) do
     t.text "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "in_objectives", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "objective_id"
+    t.bigint "strategy_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["objective_id"], name: "index_in_objectives_on_objective_id"
+    t.index ["strategy_id"], name: "index_in_objectives_on_strategy_id"
   end
 
   create_table "information", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -100,10 +109,8 @@ ActiveRecord::Schema.define(version: 2018_10_15_171148) do
     t.string "foda"
     t.string "tipo"
     t.text "content"
-    t.bigint "objective_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["objective_id"], name: "index_strategies_on_objective_id"
   end
 
   create_table "strengths", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -161,9 +168,10 @@ ActiveRecord::Schema.define(version: 2018_10_15_171148) do
 
   add_foreign_key "activities", "areas"
   add_foreign_key "factors", "forces"
+  add_foreign_key "in_objectives", "objectives"
+  add_foreign_key "in_objectives", "strategies"
   add_foreign_key "objectives", "perspectives"
   add_foreign_key "opportunities", "factors"
-  add_foreign_key "strategies", "objectives"
   add_foreign_key "strengths", "activities"
   add_foreign_key "sub_processes", "processings"
   add_foreign_key "threats", "factors"

@@ -3,7 +3,8 @@ class Strategy < ApplicationRecord
   validates :foda, presence: true
   
 
-  belongs_to :objective
+  has_many :objectives, through: :in_objectives
+  has_many :in_objectives
 
   scope :estrategias, -> (type) { where("tipo = ?", type) }
   # Ex:- scope :active, -> {where(:active => true)}

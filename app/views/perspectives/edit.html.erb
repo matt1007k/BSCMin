@@ -1,0 +1,27 @@
+<% @title = "Editar Perspectiva" %>
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li> <%= link_to  "Objetivos", objectives_path %></li>
+    <li class="is-active">      
+      <a href="#" aria-current="page">Editar Perspectiva</a>
+    </li>
+  </ul>
+</nav>
+
+
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter">
+      <div class="card margin-small">
+        <div class="card-content">
+          <p class="title is-4 has-text-centered">Editar Perspectiva</p>
+          <p class="subtitle is-6 has-text-centered">Editar la perspectiva del mapa estrategico.</p>
+                      
+          <%= render 'form', perspective: @perspective %>
+
+            <%= link_to 'Regresar', objectives_path %>
+        </div>
+      </div>
+
+  </div>
+</div>
+

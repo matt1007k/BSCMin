@@ -21,7 +21,6 @@ es:
       strategy:
         content: 'El contenido'
         foda: 'La foda'
-        objective_id: 'El objetivo'
       information:
         name: 'El nombre'
         mission: 'La misión'
@@ -31,5 +30,10 @@ es:
         title: 'El proceso'
       sub_process:
         title: 'El subproceso'
+      perspective:
+        title: 'La perspectiva'
+      objective:
+        content: 'El objetivo'
+        perspective_id: 'La perspectiva'
 
 

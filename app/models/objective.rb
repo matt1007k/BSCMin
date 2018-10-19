@@ -1,5 +1,6 @@
-class Objective < ApplicationRecord
+class Objective < ApplicationRecord 
+  validates :content, presence: true, length: {minimum:10}
+  
   belongs_to :perspective
 
-  has_many :strategies
 end

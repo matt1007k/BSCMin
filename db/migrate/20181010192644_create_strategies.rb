@@ -4,7 +4,6 @@ class CreateStrategies < ActiveRecord::Migration[5.2]
       t.string :foda
       t.string :tipo
       t.text :content
-      t.references :objective, foreign_key: true
 
       t.timestamps
     end

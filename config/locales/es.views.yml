@@ -28,6 +28,20 @@ es:
       new_link: "Agregar subproceso"
       edit_link: "Editar subproceso"
       remove_link: "Eliminar subproceso"
+  informations:
+    index:      
+      new_link: "Agregar información"
+      edit_link: "Editar información"
+      remove_link: "Eliminar información"
+  objectives:
+    index:   
+      new_perspective_link: "Agregar perspectiva"
+      edit_perspective_link: "Editar perspectiva"
+      remove_perspective_link: "Eliminar perspectiva"   
+      new_link: "Agregar objectivo"
+      edit_link: "Editar objectivo"
+      remove_link: "Eliminar objectivo"
+      asign_strategy_link: "Asignar estrategías"
   devise:
     sessions:
       new:

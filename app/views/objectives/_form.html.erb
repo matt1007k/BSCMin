@@ -1,0 +1,27 @@
+<%= form_with(model: objective, local: true) do |form| %>
+  <% if objective.errors.any? %>
+    <div class="message is-danger">
+      <h2 class="title is-5 has-text-danger"><%= pluralize(objective.errors.count, "error") %> al realizar la operación:</h2>
+      <div class="message-body">
+        <ul>
+          <% objective.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :perspective_id, value: @perspective_id %>
+  <div class="field">
+    <%= form.label :content, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.text_area :content, class: "textarea is-info" %>
+    </div>
+  </div>
+
+  <div class="field is-grouped margin-small-topons">
+    <%= form.submit "Guardar", class: "button is-primary" %>
+  </div>
+<% end %>
+

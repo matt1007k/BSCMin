@@ -10,11 +10,14 @@ Rails.application.routes.draw do
   get '/factores-internos', to: "pages#factor_interno"
   get '/factores-externos', to: "pages#factor_externo"
   get '/matriz-foda', to: "pages#matriz_foda"
+  get '/mapa-estrategico', to: "pages#mapa_estrategico"
 
 
   devise_for :users
   resources :informations, :values, :areas, :activities, :forces, :factors, :expect => [:show] 
-  resources :strategies, :objectives, :perspectives
+  resources :strategies
+  resources :perspectives, only: [:edit, :update, :new, :create]
+  resources :objectives, :expect => [:show, :new, :edit]
   resources :procesos, :expect => [:update, :show] 
   put '/procesos/:id', to: 'procesos#update', as: 'update_proceso'
 
@@ -36,4 +39,6 @@ Rails.application.routes.draw do
   get '/edit-factor-externo/:id', to: "evaluations#edit_factor_externo", as: 'edit_factor_externo'
   put '/update-factor-externo/:id', to: 'factors#update_factor_externo', as: 'update_factor_externo'
 
+  get '/nuevo-objective/:perspective_id', to: "objectives#new", as: 'objective_new'
+  get '/editar-objective/:id/:perspective_id', to: 'objectives#edit', as: 'objective_edit'
 end

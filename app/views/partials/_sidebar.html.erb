@@ -77,6 +77,13 @@
                         Matriz Foda
                       <% end %>
                     </li>
+
+                    <li>
+                      <%= link_to(objectives_path, html_options = {class: "item #{ current_class?(objectives_path) }"}) do %>
+                        <i class="mdi mdi-trending-up mdi-24px"></i>
+                        Objectivos
+                      <% end %>
+                    </li>
                 <% else %>
                     <li>
                         <%= link_to(mision_vision_path, html_options = {class: "item is-middle #{ current_class?(mision_vision_path) }"}) do %> 
@@ -132,6 +139,13 @@
                       <%= link_to(matriz_foda_path, html_options = {class: "item #{ current_class?(evaluar_factor_externo_path) }"}) do %>
                         <i class="mdi mdi-trending-up mdi-24px"></i>
                         Matriz Foda
+                      <% end %>
+                    </li>
+
+                    <li>
+                      <%= link_to(mapa_estrategico_path, html_options = {class: "item #{ current_class?(mapa_estrategico_path) }"}) do %>
+                        <i class="mdi mdi-trending-up mdi-24px"></i>
+                        Mapa Estratégico
                       <% end %>
                     </li>
                 <% end %>

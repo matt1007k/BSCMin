@@ -37,6 +37,15 @@ class PagesController < ApplicationController
   end
 
   def matriz_foda
+    @fortalezas = Strength.all
+    @debilidades = Weakness.all
+    @oportunidades = Opportunity.all
+    @amenazas = Threat.all
+
+    @estrategia = Strategy.all
+  end
+
+  def mapa_estrategico
     
   end
 

@@ -32,11 +32,18 @@ class StrategiesController < ApplicationController
         @strategy[:foda] = params[:strategy][:foda]
         @strategy[:tipo] = params[:strategy][:tipo]
         @strategy[:content] = params[:strategy][:content]
-        @strategy[:objective_id] = params[:strategy][:objective]
+        
         respond_to do |format|
         if @strategy.save
-            format.html { redirect_to strategies_url, notice: 'La estrategía fue creada con exitó.' }
-            format.json { redirect_to @strategy, status: :created, location: @strategy }
+            @in_objective = InObjective.new
+            @in_objective[:objective_id] = params[:strategy][:objective]
+            @in_objective[:strategy_id] = @strategy[:id]
+            if @in_objective.save 
+                format.html { redirect_to strategies_url, notice: 'La estrategía fue creada con exitó.' }
+                format.json { redirect_to @strategy, status: :created, location: @strategy }
+            else
+                format.json { render json: @in_objective.errors, status: :unprocessable_entity }
+            end        
         else
             format.html { render :new }
             format.json { render json: @strategy.errors, status: :unprocessable_entity }
