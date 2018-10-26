@@ -16,57 +16,309 @@
           <p class="title is-4 has-text-centered">Matriz FODA</p>
           <p class="subtitle is-6 has-text-centered">La matriz foda de la organización.</p>
 
-          <div class="columns no-margin has-text-weight-bold" style="margin: 0 0 10px 0;">
-              <div class="column is-4 has-text-centered">
-                  <div class="has-background-link has-text-white "> Tabla de Evaluación </div>
-                  <div style="height: 100%;" class="is-middle"> Matriz FODA </div>
+          <div class="columns no-margin" style="margin: 0 0 10px 0;">
+              <div class="column is-4">
+                  <%= image_tag  "foda.png", class: "width-full height-full" %>
+              </div>
+              <div class="column is-4 ">
+                <div class="has-background-primary has-text-white has-text-centered has-text-weight-bold"> Fortalezas </div>
+                 <ul>                  
+                      <%-if @fortalezas.count > 0 %>
+                          <% @fortalezas.each do |fortaleza| %>
+                          <li>
+                              <div class="card">
+                                <div class="card-content">
+                                  <div class="columns">
+                                      <div class="column is-1">
+                                          <%= fortaleza.slug %>
+                                      </div>
+                                      <div class="column">
+                                          <%= fortaleza.content %>
+                                      </div>
+                                  </div>
+                                </div>
+                              </div>   
+                          </li>
+                          <% end %>
+                      <% else %>
+                          <li>
+                              <div class="card">
+                                  <div class="card-content">
+                                      No hay registros!
+                                  </div>
+                              </div>  
+                          </li>
+                          
+                      <% end %>
+                  </ul>
+              </div>
+              <div class="column is-4">
+                <div class="has-background-warning has-text-centered has-text-weight-bold"> Debilidades </div>
+                 <ul>
+                    <%-if @debilidades.count > 0 %>
+                        <% @debilidades.each do |debilidad| %>
+                        <li>
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="columns">
+                                        <div class="column is-1">
+                                            <%= debilidad.slug %>
+                                        </div>
+                                        <div class="column">
+                                            <%= debilidad.content %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>  
+                        </li>
+                        <% end %>
+                    <% else %>
+                        <li>
+                            <div class="card">
+                                <div class="card-content">
+                                    No hay registros!
+                                </div>
+                            </div>  
+                        </li>
+                        
+                    <% end %>
+                    
+                    
+                </ul>
+              </div>
+          </div>          
 
+          <div class="columns no-margin " style="margin: 0 0 10px 0;">
+              <div class="column is-4 ">                  
+                <div class="has-background-link has-text-white has-text-centered has-text-weight-bold"> Oportunidades </div>
+                <ul>
+                    <%-if @oportunidades.count > 0 %>
+                        <% @oportunidades.each do |oportunidad| %>
+                        <li>
+                            <div class="card">
+                              <div class="card-content">
+                                <div class="columns">
+                                    <div class="column is-1">
+                                        <%= oportunidad.slug %>
+                                    </div>
+                                    <div class="column">
+                                        <%= oportunidad.content %>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>  
+                        </li>
+                        <% end %>
+                    <% else %>
+                        <li>
+                            <div class="card">
+                                <div class="card-content">
+                                    No hay registros!
+                                </div>
+                            </div>  
+                        </li>
+                        
+                    <% end %>
+                    
+                    
+                </ul>
               </div>
-              <div class="column is-4 has-text-centered">
-                <div class="has-background-primary has-text-white"> Fortalezas </div>
+              <div class="column is-4 ">
+                <div class="has-background-primary has-text-white has-text-centered has-text-weight-bold"> Estrategias - FO </div>
+                <ul>
+                    <%-if @estrategia.estrategias('FO').count > 0 %>
+                        <% @estrategia.estrategias("FO").each do |estrategia_fo| %>
+                        <li>
+                            <div class="card">
+                              <div class="card-content">
+                                <div class="columns">
+                                    <div class="column is-3">
+                                        <div class="tags">
+                                            <% estrategia_fo.foda.split(",").each do |value| %>
+                                                <span class="tag is-warning"><%= value %> </span>
+                                            <% end %>
+                                        </div>
+                                    </div>
+                                    <div class="column no-padding-sides">
+                                        <%= estrategia_fo.content %>
+                                    </div>                                        
+                                </div>  
+                              </div>                                        
+                            </div>
+                        </li>
+                        <% end %>
+                    <% else %>
+                        <li>
+                            <div class="card">
+                                <div class="card-content">
+                                    No hay registros!
+                                </div>
+                            </div>  
+                        </li>
+                        
+                    <% end %>
+                    
+                    
+                </ul>
               </div>
-              <div class="column is-4 has-text-centered">
-                <div class="has-background-warning"> Debilidades </div>
-              </div>
-          </div>
-
-          <div class="columns no-margin has-text-weight-bold" style="margin: 0 0 10px 0;">
-              <div class="column is-4 has-text-centered">
+              <div class="column is-4 ">
+                <div class="has-background-warning has-text-centered has-text-weight-bold"> Estrategias - DO </div>
+                <ul>
+                  <%-if @estrategia.estrategias('DO').count > 0 %>
+                      <% @estrategia.estrategias('DO').each do |estrategia_do| %>
+                      <li>
+                          <div class="card">
+                            <div class="card-content">
+                              <div class="columns">
+                                  <div class="column is-3">
+                                      <div class="tags">
+                                          <% estrategia_do.foda.split(",").each do |value| %>
+                                              <span class="tag is-warning"><%= value %> </span>
+                                          <% end %>
+                                      </div>
+                                  </div>
+                                  <div class="column">
+                                      <%= estrategia_do.content %>
+                                  </div>                              
+                              </div>
+                            </div>                              
+                          </div>  
+                      </li>
+                      <% end %>
+                  <% else %>
+                      <li>
+                          <div class="card">
+                              <div class="card-content">
+                                  No hay registros!
+                              </div>
+                          </div>  
+                      </li>
+                      
+                  <% end %>
                   
-
-              </div>
-              <div class="column is-4 has-text-centered">
-                ...
-              </div>
-              <div class="column is-4 has-text-centered">
-                ...
+                  
+              </ul>
               </div>
           </div>
 
-          <div class="columns no-margin has-text-weight-bold" style="margin: 0 0 10px 0;">
+          <div class="columns no-margin " style="margin: 0 0 10px 0;">
               <div class="column is-4 has-text-centered">                  
-              <div class="has-background-link has-text-white"> Oportunidades </div>
+                <div class="has-background-danger has-text-white has-text-weight-bold"> Amenazas </div>
+                <ul>
+                  <%-if @amenazas.count > 0 %>
+                      <% @amenazas.each do |amenaza| %>
+                      <li>
+                          <div class="card">
+                              <div class="card-content">
+                                  <div class="columns">
+                                      <div class="column is-1">
+                                          <%= amenaza.slug %>
+                                      </div>
+                                      <div class="column">
+                                          <%= amenaza.content %>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>  
+                      </li>
+                      <% end %>
+                  <% else %>
+                      <li>
+                          <div class="card">
+                              <div class="card-content">
+                                  No hay registros!
+                              </div>
+                          </div>  
+                      </li>
+                      
+                  <% end %>
+                  
+                  
+              </ul>
               </div>
-              <div class="column is-4 has-text-centered">
-                <div class="has-background-primary has-text-white"> Estrategias - FO </div>
+              <div class="column is-4 ">
+                <div class="has-background-link has-text-white has-text-centered has-text-weight-bold"> Estrategias - FA </div>
+                <ul>
+                    <%-if @estrategia.estrategias('FA').count > 0 %>
+                        <% @estrategia.estrategias('FA').each do |estrategia_fa| %>
+                        <li>
+                            <div class="card">
+                              <div class="card-content">
+                                <div class="columns">
+                                    <div class="column is-3">
+                                        <div class="tags">
+                                            <% estrategia_fa.foda.split(",").each do |value| %>
+                                                <span class="tag is-warning"><%= value %> </span>
+                                            <% end %>
+                                        </div>
+                                    </div>
+                                    <div class="column no-padding-sides">
+                                        <%= estrategia_fa.content %>
+                                    </div>
+                                </div> 
+                              </div>
+                            </div> 
+                        </li>
+                        <% end %>
+                    <% else %>
+                        <li>
+                            <div class="card">
+                                <div class="card-content">
+                                    No hay registros!
+                                </div>
+                            </div>  
+                        </li>
+                        
+                    <% end %>
+                    
+                    
+                </ul>
               </div>
-              <div class="column is-4 has-text-centered">
-                <div class="has-background-warning"> Estrategias - DO </div>
-              </div>
-          </div>
-
-          <div class="columns no-margin has-text-weight-bold" style="margin: 0 0 10px 0;">
-              <div class="column is-4 has-text-centered">                  
-                <div class="has-background-danger has-text-white"> Amenazas </div>
-                ...
-              </div>
-              <div class="column is-4 has-text-centered">
-                <div class="has-background-link has-text-white"> Estrategias - FA </div>
-                ...
-              </div>
-              <div class="column is-4 has-text-centered">
-                <div class="has-background-warning"> Estrategias - DA </div>
-                ...
+              <div class="column is-4">
+                <div class="has-background-warning has-text-centered has-text-weight-bold"> Estrategias - DA </div>
+                <ul>
+                    <%-if @estrategia.estrategias('DA').count > 0 %>
+                        <% @estrategia.estrategias('DA').each do |estrategia_da| %>
+                        <li>
+                            <div class="columns">
+                                <div class="column is-3">
+                                    <div class="tags">
+                                        <% estrategia_da.foda.split(",").each do |value| %>
+                                            <span class="tag is-warning"><%= value %> </span>
+                                        <% end %>
+                                    </div>
+                                </div>
+                                <div class="column is-8 no-padding-sides">
+                                    <%= estrategia_da.content %>
+                                </div>
+                                <div class="column">
+                                    <%= link_to  edit_strategy_path(estrategia_da), class: "button is-small is-info tooltip",  :data => {tooltip: "Editar estrategía"} do %>
+                                        <span class="icon">
+                                            <i class="mdi mdi-update mdi-24px"></i>
+                                        </span>
+                                    <% end %>
+                                    <%= link_to strategy_url(estrategia_da), method: :delete, class: "button is-small is-danger tooltip", :data => {tooltip: "Eliminar estrategía", confirm: "¿Esta seguro de eliminar la estrategia?"} do %>
+                                        <span class="icon">
+                                            <i class="mdi mdi-delete-forever mdi-24px"></i>
+                                        </span>
+                                    <% end %>
+                                </div>
+                            </div>   
+                        </li>
+                        <% end %>
+                    <% else %>
+                        <li>
+                            <div class="card">
+                                <div class="card-content">
+                                    No hay registros!
+                                </div>
+                            </div>  
+                        </li>
+                        
+                    <% end %>
+                    
+                    
+                </ul>
               </div>
           </div>
 

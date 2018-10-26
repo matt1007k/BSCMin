@@ -41,4 +41,5 @@ $(document).on "turbolinks:load", () ->
         $(this).addClass 'is-active'
         $('#tab_container .container_item').removeClass 'is-active' 
         $('div[data-item="'+number+'"]').addClass 'is-active' 
-    
+    $('.dropdown').on "click", () ->
+        $(this).toggleClass('is-active')

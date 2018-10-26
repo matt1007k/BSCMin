@@ -1,0 +1,26 @@
+<% @title = "Agregar Indicador" %>
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li> <%= link_to  "Estrableciendo Indicadores", indicators_path %></li>
+    <li class="is-active">      
+      <a href="#" aria-current="page">Agregar Indicador</a>
+    </li>
+  </ul>
+</nav>
+
+
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter">
+      <div class="card margin-small">
+        <div class="card-content">
+          <p class="title is-4 has-text-centered">Agregar Indicador</p>
+          <p class="subtitle is-6 has-text-centered">Nuevo indicador del objetivo.</p>
+                      
+          <%= render 'form', indicator: @indicator, objective_id: @objective_id %>
+
+            <%= link_to 'Regresar', indicators_path %>
+      </div>
+  </div> 
+
+  
+</div>

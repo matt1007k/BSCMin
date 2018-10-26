@@ -14,14 +14,20 @@ class ObjectivesController < ApplicationController
 
     def new
         @perspective_id = params[:perspective_id]
+        @estrategias = Strategy.all
         @objective = Objective.new
     end
 
 
     def edit
         @perspective_id = params[:perspective_id]
+        @estrategias = Strategy.all
     end
 
+    def mapa
+        @perspectives = Perspective.all
+    end
+    
 
     def create
         @perspective = Perspective.find(params[:objective][:perspective_id])

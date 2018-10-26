@@ -1,0 +1,40 @@
+<%= form_with(model: indicator, local: true) do |form| %>
+  <% if indicator.errors.any? %>
+    <div class="message is-danger">
+      <h2 class="title is-5 has-text-danger"><%= pluralize(indicator.errors.count, "error") %> al realizar la operación:</h2>
+      <div class="message-body">
+        <ul>
+          <% indicator.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :objective_id, value: @objective_id %>
+  <div class="field">
+    <%= form.label :aclarar, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.text_area :aclarar, class: "textarea is-info" %>
+    </div>
+  </div>
+  
+  <div class="field">
+    <%= form.label :variable, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.text_area :variable, class: "textarea is-info" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :indicador, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.text_area :indicador, class: "textarea is-info" %>
+    </div>
+  </div>
+  
+  <div class="field is-grouped margin-small-topons">
+    <%= form.submit "Guardar", class: "button is-primary" %>
+  </div>
+<% end %>

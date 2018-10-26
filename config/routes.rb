@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  
   root 'pages#index'
   get '/mision-vision', to: "pages#mision_vision"
   get '/valores', to: "pages#valores"
@@ -19,6 +20,9 @@ Rails.application.routes.draw do
   resources :perspectives, only: [:edit, :update, :new, :create]
   resources :objectives, :expect => [:show, :new, :edit]
   resources :procesos, :expect => [:update, :show] 
+  resources :datos
+  resources :indicators, :expect => [:show, :new, :edit]
+  
   put '/procesos/:id', to: 'procesos#update', as: 'update_proceso'
 
   get '/subproceso/new/:proceso_id', to: 'subprocesos#new', as: 'new_subproceso'
@@ -41,4 +45,13 @@ Rails.application.routes.draw do
 
   get '/nuevo-objective/:perspective_id', to: "objectives#new", as: 'objective_new'
   get '/editar-objective/:id/:perspective_id', to: 'objectives#edit', as: 'objective_edit'
+
+  get '/mapa-estrategico-relaciones', to: "objectives#mapa", as: 'mapa_estrategico_relaciones'
+
+  get '/nuevo-indicador/:objective_id', to: "indicators#new", as: 'indicator_new'
+  get '/editar-indicador/:id/:objective_id', to: 'indicators#edit', as: 'indicator_edit'
+  
+  get '/nuevo-dato/:indicator_id', to: "datos#new", as: 'dato_new'
+  get '/editar-dato/:id/:indicator_id', to: 'datos#edit', as: 'dato_edit'
+
 end

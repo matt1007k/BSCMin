@@ -35,5 +35,8 @@ es:
       objective:
         content: 'El objetivo'
         perspective_id: 'La perspectiva'
+      dato:
+        anio: 'El año'
+        indicator_id: 'El indicador'
 
 

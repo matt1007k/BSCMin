@@ -11,6 +11,7 @@
       </div>
     </div>
   <% end %>
+  
 
   <%= form.hidden_field :perspective_id, value: @perspective_id %>
   <div class="field">
@@ -19,6 +20,19 @@
       <%= form.text_area :content, class: "textarea is-info" %>
     </div>
   </div>
+  <div class="title is-6">Asignar estrategias</div> 
+
+  <!--<%# @estrategias.each do |estrategia| %> 
+  <div class="field">    
+    <div class="control"> 
+      <%#= form.check_box "in_objectives", { multiple: true }, estrategia.id, nil %>
+      <%#= estrategia.content %>
+    </div>
+  </div>
+  <%# end %>
+
+  <%#= check_box_tag "objective[id]", objective.id  %>-->
+      
 
   <div class="field is-grouped margin-small-topons">
     <%= form.submit "Guardar", class: "button is-primary" %>

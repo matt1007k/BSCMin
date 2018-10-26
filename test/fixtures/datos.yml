@@ -1,0 +1,70 @@
+# == Schema Information
+#
+# Table name: datos
+#
+#  id           :bigint(8)        not null, primary key
+#  abril        :integer          default(0)
+#  agosto       :integer          default(0)
+#  anio         :integer
+#  diciembre    :integer          default(0)
+#  enero        :integer          default(0)
+#  febrero      :integer          default(0)
+#  julio        :integer          default(0)
+#  junio        :integer          default(0)
+#  marzo        :integer          default(0)
+#  mayo         :integer          default(0)
+#  noviembre    :integer          default(0)
+#  octubre      :integer          default(0)
+#  porcentaje   :integer          default(0)
+#  septiembre   :integer          default(0)
+#  total        :integer          default(0)
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  indicator_id :bigint(8)
+#
+# Indexes
+#
+#  index_datos_on_indicator_id  (indicator_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (indicator_id => indicators.id)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  indicator: one
+  anio: 1
+  enero: 1
+  febrero: 1
+  marzo: 1
+  abril: 1
+  mayo: 1
+  junio: 1
+  julio: 1
+  agosto: 1
+  septiembre: 1
+  octubre: 1
+  noviembre: 1
+  diciembre: 1
+  total: 1
+  porcetaje: 1
+
+two:
+  indicator: two
+  anio: 1
+  enero: 1
+  febrero: 1
+  marzo: 1
+  abril: 1
+  mayo: 1
+  junio: 1
+  julio: 1
+  agosto: 1
+  septiembre: 1
+  octubre: 1
+  noviembre: 1
+  diciembre: 1
+  total: 1
+  porcetaje: 1

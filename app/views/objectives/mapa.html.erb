@@ -1,0 +1,60 @@
+<% @title = "Objetivos Estratégicos" %>
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li> <%= link_to  "Dashboard", root_path %></li>
+    <li> <%= link_to  "Objetivos Estratégicos", objectives_path %></li>
+    <li class="is-active">      
+      <a href="#" aria-current="page">Mapa Estratégicos</a>
+    </li>
+  </ul>
+</nav>
+
+
+<div class="columns">
+  <div class="column">
+      <div class="card margin-small shadow-cm">
+        <div class="card-content">
+          <p class="title is-4 has-text-centered">Mapa Estratégicos.</p>           
+ 
+          <div class="margin-small-top">
+            <div class="columns">
+              <div class="column is-3">
+                <div class="title is-5">Perspectivas</div>
+              </div>
+              <div class="column">
+                <div class="title is-5">Objetivos Estratégicos</div>
+              </div>
+            </div>
+
+
+            <% @perspectives.each do |perspective| %>           
+            <div class="columns">
+              <div class="column is-3">
+                  <div class="notification is-primary">
+                      <%= perspective.title %>
+                  </div>
+              </div>
+
+              <div class="column">
+                  <div class="columns is-multiline">
+                    <% perspective.objectives.each do |objective| %>
+                    <div class="column is-4">
+                        <div class="notification is-success">
+                          <%= objective.slug %> - <%= objective.content %>
+                        </div>
+                    </div>
+                    <% end %>
+                  </div>                 
+              </div>
+            </div>
+              
+            <% end %>
+
+          </div>
+        </div>
+      </div>
+
+  </div>
+</div>
+
+

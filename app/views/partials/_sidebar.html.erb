@@ -42,7 +42,7 @@
                     </li>
                     <li>
                       <%= link_to(factors_path, html_options = {class: "item #{ current_class?(factors_path) }"}) do %>
-                        <i class="mdi mdi-trending-up mdi-24px"></i>
+                        <i class="mdi mdi-hammer mdi-24px"></i>
                         Fuerzas de Porter
                       <% end %>
                     </li>
@@ -84,6 +84,29 @@
                         Objectivos
                       <% end %>
                     </li>
+
+                    <li>
+                      <%= link_to(mapa_estrategico_relaciones_path, html_options = {class: "item #{ current_class?(mapa_estrategico_relaciones_path) }"}) do %>
+                        <i class="mdi mdi-trending-up mdi-24px"></i>
+                        Mapa Estratégico
+                      <% end %>
+                    </li>
+
+                    <li>
+                      <%= link_to(indicators_path, html_options = {class: "item #{ current_class?(indicators_path) }"}) do %>
+                        <i class="mdi mdi-ruler mdi-24px"></i>
+                        Indicatores
+                      <% end %>
+                    </li>
+
+                    <li>
+                      <%= link_to(datos_path, html_options = {class: "item #{ current_class?(datos_path) }"}) do %>
+                        <i class="mdi mdi-database mdi-24px"></i>
+                        Datos
+                      <% end %>
+                    </li>
+                    
+                   
                 <% else %>
                     <li>
                         <%= link_to(mision_vision_path, html_options = {class: "item is-middle #{ current_class?(mision_vision_path) }"}) do %> 
@@ -117,7 +140,7 @@
                     </li>
                     <li>
                       <%= link_to(fuerzas_porter_path, html_options = {class: "item #{ current_class?(fuerzas_porter_path) }"}) do %>
-                        <i class="mdi mdi-trending-up mdi-24px"></i>
+                        <i class="mdi mdi-hammer mdi-24px"></i>
                         Fuerzas de Porter
                       <% end %>
                     </li>
@@ -146,6 +169,20 @@
                       <%= link_to(mapa_estrategico_path, html_options = {class: "item #{ current_class?(mapa_estrategico_path) }"}) do %>
                         <i class="mdi mdi-trending-up mdi-24px"></i>
                         Mapa Estratégico
+                      <% end %>
+                    </li>
+
+                    <li>
+                      <%= link_to(mapa_estrategico_path, html_options = {class: "item #{ current_class?(mapa_estrategico_path) }"}) do %>
+                        <i class="mdi mdi-ruler mdi-24px"></i>
+                        Indicatores
+                      <% end %>
+                    </li>
+
+                    <li>
+                      <%= link_to(mapa_estrategico_path, html_options = {class: "item #{ current_class?(mapa_estrategico_path) }"}) do %>
+                        <i class="mdi mdi-database mdi-24px"></i>
+                        Datos
                       <% end %>
                     </li>
                 <% end %>

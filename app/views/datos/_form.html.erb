@@ -1,0 +1,132 @@
+<%= form_with(model: dato, local: true) do |form| %>
+  
+  <% if dato.errors.any? %>
+    <div class="message is-danger">
+      <h2 class="title is-5 has-text-danger"><%= pluralize(dato.errors.count, "error") %> al realizar la operación:</h2>
+      <div class="message-body">
+        <ul>
+          <% dato.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :indicator_id, value: @indicator_id %>
+  <div class="field">
+    <%= form.label :anio, class: "label is-normal" %>
+    <div class="control"> 
+      <div class="select is-info is-fullwidth">
+      <select name="dato[anio]" id="dato_anio">
+        <option value="2016">2016</option>
+        <option value="2017">2017</option>
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+        <option value="2020">2020</option>
+        <option value="2021">2021</option>
+      </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :enero, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.number_field :enero, class: "input is-info" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :febrero, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.number_field :febrero, class: "input is-info" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :marzo, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.number_field :marzo, class: "input is-info" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :abril, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.number_field :abril, class: "input is-info" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :mayo, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.number_field :mayo, class: "input is-info" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :junio, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.number_field :junio, class: "input is-info" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :julio, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.number_field :julio, class: "input is-info" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :agosto, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.number_field :agosto, class: "input is-info" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :septiembre, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.number_field :septiembre, class: "input is-info" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :octubre, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.number_field :octubre, class: "input is-info" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :noviembre, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.number_field :noviembre, class: "input is-info" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :diciembre, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.number_field :diciembre, class: "input is-info" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :total, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.text_field :total, class: "input is-info", disabled: true %>
+    </div>
+  </div>
+  <div class="field">
+    <%= form.label :porcentaje, class: "label is-normal" %>
+    <div class="control"> 
+      <span>%</span><%= form.text_field :porcentaje, class: "input is-info", disabled: true %>
+    </div>
+  </div>
+ <div class="field is-grouped margin-small-topons">
+    <%= form.submit "Guardar", class: "button is-primary" %>    
+  </div>
+<% end %>

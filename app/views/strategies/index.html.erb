@@ -60,12 +60,16 @@
                             <%-if @fortalezas.count > 0 %>
                                 <% @fortalezas.each do |fortaleza| %>
                                 <li>
-                                    <div class="columns">
-                                        <div class="column is-1">
-                                            <%= fortaleza.slug %>
-                                        </div>
-                                        <div class="column">
-                                            <%= fortaleza.content %>
+                                    <div class="card">
+                                        <div class="card-content">
+                                            <div class="columns">
+                                                <div class="column is-1">
+                                                    <%= fortaleza.slug %>
+                                                </div>
+                                                <div class="column">
+                                                    <%= fortaleza.content %>
+                                                </div>
+                                            </div> 
                                         </div>
                                     </div>   
                                 </li>
@@ -92,14 +96,18 @@
                             <%-if @oportunidades.count > 0 %>
                                 <% @oportunidades.each do |oportunidad| %>
                                 <li>
-                                    <div class="columns">
-                                        <div class="column is-1">
-                                            <%= oportunidad.slug %>
+                                    <div class="card">
+                                        <div class="card-content">
+                                            <div class="columns">
+                                                <div class="column is-1">
+                                                    <%= oportunidad.slug %>
+                                                </div>
+                                                <div class="column">
+                                                    <%= oportunidad.content %>
+                                                </div>
+                                            </div> 
                                         </div>
-                                        <div class="column">
-                                            <%= oportunidad.content %>
-                                        </div>
-                                    </div> 
+                                    </div>
                                 </li>
                                 <% end %>
                             <% else %>

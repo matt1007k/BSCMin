@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_19_050726) do
+ActiveRecord::Schema.define(version: 2018_10_26_134614) do
 
   create_table "activities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "name"
@@ -32,6 +32,28 @@ ActiveRecord::Schema.define(version: 2018_10_19_050726) do
     t.text "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "datos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "indicator_id"
+    t.integer "anio"
+    t.integer "enero", default: 0
+    t.integer "febrero", default: 0
+    t.integer "marzo", default: 0
+    t.integer "abril", default: 0
+    t.integer "mayo", default: 0
+    t.integer "junio", default: 0
+    t.integer "julio", default: 0
+    t.integer "agosto", default: 0
+    t.integer "septiembre", default: 0
+    t.integer "octubre", default: 0
+    t.integer "noviembre", default: 0
+    t.integer "diciembre", default: 0
+    t.integer "total", default: 0
+    t.integer "porcentaje", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["indicator_id"], name: "index_datos_on_indicator_id"
   end
 
   create_table "factors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -63,6 +85,16 @@ ActiveRecord::Schema.define(version: 2018_10_19_050726) do
     t.datetime "updated_at", null: false
     t.index ["objective_id"], name: "index_in_objectives_on_objective_id"
     t.index ["strategy_id"], name: "index_in_objectives_on_strategy_id"
+  end
+
+  create_table "indicators", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "objective_id"
+    t.string "aclarar"
+    t.string "variable"
+    t.string "indicador"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["objective_id"], name: "index_indicators_on_objective_id"
   end
 
   create_table "information", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -167,9 +199,11 @@ ActiveRecord::Schema.define(version: 2018_10_19_050726) do
   end
 
   add_foreign_key "activities", "areas"
+  add_foreign_key "datos", "indicators"
   add_foreign_key "factors", "forces"
   add_foreign_key "in_objectives", "objectives"
   add_foreign_key "in_objectives", "strategies"
+  add_foreign_key "indicators", "objectives"
   add_foreign_key "objectives", "perspectives"
   add_foreign_key "opportunities", "factors"
   add_foreign_key "strengths", "activities"
