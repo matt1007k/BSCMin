@@ -138,11 +138,13 @@
                 
               </div>
               <div class="column">
-                <%= link_to edit_factor_externo_path(factor), class: "button is-info tooltip", :data => {tooltip: "Evaluar factor"} do %>
-                  <span class="icon">
-                    <i class="mdi mdi-format-list-checks"></i>  
-                  </span>
-                <% end %>
+                <span data-label="<%= t('.evaluar_link') %>" class="is-black is-top is-medium tooltip">
+                  <%= link_to edit_factor_externo_path(factor), class: "button is-info" do %>
+                    <span class="icon">
+                      <i class="mdi mdi-format-list-checks"></i>  
+                    </span>
+                  <% end %>
+                </span>
                 <!--<a href="#" class="button is-info tooltip" data-tooltip="Evaluar actividad" data-modal="<%=factor.id%>">
                   <i class="mdi mdi-format-list-checks"></i>
                 </a>-->

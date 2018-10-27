@@ -1,9 +1,9 @@
 es: 
-  missions:
+  values:
     index:
-      new_link: "Agregar"
-      edit_link: "Editar"
-      remove_link: "Eliminar"
+      new_link: "Agregar valor"
+      edit_link: "Editar valor"
+      remove_link: "Eliminar valor"
   activities:
     index:
       new_area_link: "Agregar área"
@@ -33,6 +33,16 @@ es:
       new_link: "Agregar información"
       edit_link: "Editar información"
       remove_link: "Eliminar información"
+  evaluations:
+    evaluar_factor_interno:      
+      evaluar_link: "Evaluar factor"
+    evaluar_factor_externo:      
+      evaluar_link: "Evaluar factor"
+  strategies:
+    index:      
+      new_link: "Agregar estrategia"
+      edit_link: "Editar estrategia"
+      remove_link: "Eliminar estrategia"
   objectives:
     index:   
       new_perspective_link: "Agregar perspectiva"
@@ -49,7 +59,7 @@ es:
       remove_link: "Eliminar indicador"
   datos:
     index:     
-      new_link: "Agregar datos"
+      new_link: "Agregar año"
       edit_link: "Editar datos"
       remove_link: "Eliminar datos"
   devise:

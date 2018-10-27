@@ -15,14 +15,14 @@
       <div class="card margin-small shadow-cm">
         <div class="card-content">
 
-          <div class="columns">
+          <div class="columns is-middle">
             <div class="column is-4">
               <p class="title is-4 has-text-centered">El Macroproceso</p>
             </div>
             <div class="column">
-                <div class="notification is-primary">
+                <div class="notification is-primary has-text-centered">
                   <% @informations.each do |information| %>
-                      <strong>" <%= information.macroproceso %> "</strong>
+                      <strong class="subtitle is-5">" <%= information.macroproceso %> "</strong>
                   <% end %>            
                 </div>   
             </div>
@@ -57,16 +57,20 @@
                 </div>
 
                 <div class="column is-2 has-text-right has-background-primary has-text-white">
-                  <%= link_to edit_proceso_path(proceso), class: "button is-info tooltip", :data => {tooltip: t('.edit_proceso_link')} do %>
-                      <span class="icon">
-                        <i class="mdi mdi-update"></i>
-                      </span>
-                  <% end %>
-                  <%= link_to procesos_path(proceso), method: :delete, class: "button is-danger tooltip", data: {tooltip: t('.remove_proceso_link'), confirm: "¿Está seguro de eliminar el proceso?"} do %>
-                      <span class="icon">
-                        <i class="mdi mdi-close"></i>
-                      </span>
-                  <% end %>
+                  <span data-label="<%= t('.edit_proceso_link') %>" class="is-black is-top is-medium tooltip">
+                    <%= link_to edit_proceso_path(proceso), class: "button is-info" do %>
+                        <span class="icon">
+                          <i class="mdi mdi-update"></i>
+                        </span>
+                    <% end %>
+                  </span>
+                  <span data-label="<%= t('.remove_proceso_link') %>" class="is-black is-top is-medium tooltip">
+                    <%= link_to procesos_path(proceso), method: :delete, class: "button is-danger", data: {confirm: "¿Está seguro de eliminar el proceso?"} do %>
+                        <span class="icon">
+                          <i class="mdi mdi-close"></i>
+                        </span>
+                    <% end %>
+                  </span>
                 </div>
 
                 <div class="column has-background-grey has-text-white">
@@ -88,16 +92,20 @@
                     </div>
 
                     <div class="column">
-                      <%= link_to edit_subproceso_path(proceso.id,subprocess), class: "button is-info tooltip", :data => {tooltip: t('.edit_link')} do %>
-                        <span class="icon">
-                          <i class="mdi mdi-update"></i>
-                        </span>
-                      <% end %>
-                      <%= link_to destroy_subproceso_path(subprocess), method: :delete,  class: "button is-danger tooltip", :data => {tooltip: t('.remove_link'), confirm: '¿Está seguro de eliminar el subproceso?'} do %>
-                        <span class="icon">
-                          <i class="mdi mdi-close"></i>
-                        </span>
-                      <% end %>
+                      <span data-label="<%= t('.edit_link') %>" class="is-black is-top is-medium tooltip">
+                        <%= link_to edit_subproceso_path(proceso.id,subprocess), class: "button is-info" do %>
+                          <span class="icon">
+                            <i class="mdi mdi-update"></i>
+                          </span>
+                        <% end %>
+                      </span>
+                      <span data-label="<%= t('.remove_link') %>" class="is-black is-top is-medium tooltip">
+                        <%= link_to destroy_subproceso_path(subprocess), method: :delete,  class: "button is-danger", :data => {confirm: '¿Está seguro de eliminar el subproceso?'} do %>
+                          <span class="icon">
+                            <i class="mdi mdi-close"></i>
+                          </span>
+                        <% end %>
+                      </span>
                     </div>
                 </div>
               <% end %>

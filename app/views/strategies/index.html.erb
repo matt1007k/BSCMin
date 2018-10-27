@@ -130,11 +130,13 @@
                                <div class="title is-5  has-text-centered has-background-black has-text-white padding-small">Estrategias FO</div>
                             </div>
                             <div class="column is-1 is-flex-row-end">
-                                <a href="#" class="button is-success tooltip" data-modal="add1" data-tooltip="Agregar estrategía">
-                                    <span class="icon">
-                                        <i class="mdi mdi-library-plus mdi-24px"></i>
-                                    </span>
-                                </a>                                
+                                <span data-label="<%= t('.new_link') %>" class="is-black is-top is-medium tooltip">
+                                    <a href="#" class="button is-success" data-modal="add1">
+                                        <span class="icon">
+                                            <i class="mdi mdi-library-plus mdi-24px"></i>
+                                        </span>
+                                    </a> 
+                                </span>                               
                             </div>
 
 
@@ -220,16 +222,20 @@
                                             <%= estrategia_fo.content %>
                                         </div>
                                         <div class="column">
-                                            <%= link_to  edit_strategy_path(estrategia_fo), class: "button is-small is-info tooltip",  :data => {tooltip: "Editar estrategía"} do %>
-                                                <span class="icon">
-                                                    <i class="mdi mdi-update mdi-24px"></i>
-                                                </span>
-                                            <% end %>
-                                            <%= link_to strategy_url(estrategia_fo), method: :delete, class: "button is-small is-danger tooltip", :data => {tooltip: "Eliminar estrategía", confirm: "¿Esta seguro de eliminar la estrategia?"} do %>
-                                                <span class="icon">
-                                                    <i class="mdi mdi-delete-forever mdi-24px"></i>
-                                                </span>
-                                            <% end %>
+                                            <span data-label="<%= t('.edit_link') %>" class="is-black is-top is-medium tooltip">
+                                                <%= link_to  edit_strategy_path(estrategia_fo), class: "button is-small is-info" do %>
+                                                    <span class="icon">
+                                                        <i class="mdi mdi-update mdi-24px"></i>
+                                                    </span>
+                                                <% end %>
+                                            </span>
+                                            <span data-label="<%= t('.remove_link') %>" class="is-black is-top is-medium tooltip">
+                                                <%= link_to strategy_url(estrategia_fo), method: :delete, class: "button is-small is-danger", :data => {confirm: "¿Esta seguro de eliminar la estrategia?"} do %>
+                                                    <span class="icon">
+                                                        <i class="mdi mdi-delete-forever mdi-24px"></i>
+                                                    </span>
+                                                <% end %>
+                                            </span>
                                         </div>
                                     </div>  
                                        
@@ -334,11 +340,13 @@
                                 <div class="title is-5  has-text-centered has-background-black has-text-white padding-small">Estrategias FA</div>
                             </div>
                             <div class="column is-1 is-flex-row-end">
-                                <a href="#" class="button is-success tooltip" data-modal="2" data-tooltip="Agregar estrategía">
-                                    <span class="icon">
-                                        <i class="mdi mdi-library-plus mdi-24px"></i>
-                                    </span>
-                                </a>                                
+                                <span data-label="<%= t('.new_link') %>" class="is-black is-top is-medium tooltip">
+                                    <a href="#" class="button is-success" data-modal="2">
+                                        <span class="icon">
+                                            <i class="mdi mdi-library-plus mdi-24px"></i>
+                                        </span>
+                                    </a>     
+                                </span>                           
                             </div>
 
 
@@ -414,16 +422,20 @@
                                             <%= estrategia_fa.content %>
                                         </div>
                                         <div class="column">
-                                            <%= link_to  edit_strategy_path(estrategia_fa), class: "button is-small is-info tooltip",  :data => {tooltip: "Editar estrategía"} do %>
-                                                <span class="icon">
-                                                    <i class="mdi mdi-update mdi-24px"></i>
-                                                </span>
-                                            <% end %>
-                                            <%= link_to strategy_url(estrategia_fa), method: :delete, class: "button is-small is-danger tooltip", :data => {tooltip: "Eliminar estrategía", confirm: "¿Esta seguro de eliminar la estrategia?"} do %>
-                                                <span class="icon">
-                                                    <i class="mdi mdi-delete-forever mdi-24px"></i>
-                                                </span>
-                                            <% end %>
+                                            <span data-label="<%= t('.edit_link') %>" class="is-black is-top is-medium tooltip">
+                                                <%= link_to  edit_strategy_path(estrategia_fa), class: "button is-small is-info" do %>
+                                                    <span class="icon">
+                                                        <i class="mdi mdi-update mdi-24px"></i>
+                                                    </span>
+                                                <% end %>
+                                            </span>
+                                            <span data-label="<%= t('.remove_link') %>" class="is-black is-top is-medium tooltip">
+                                                <%= link_to strategy_url(estrategia_fa), method: :delete, class: "button is-small is-danger", :data => {confirm: "¿Esta seguro de eliminar la estrategia?"} do %>
+                                                    <span class="icon">
+                                                        <i class="mdi mdi-delete-forever mdi-24px"></i>
+                                                    </span>
+                                                <% end %>
+                                            </span>
                                         </div>
                                     </div> 
                                 </li>
@@ -525,11 +537,13 @@
                                 <div class="title is-5  has-text-centered has-background-black has-text-white padding-small">Estrategias DO</div>
                             </div>
                             <div class="column is-1 is-flex-row-end">
-                                <a href="#" class="button is-success tooltip" data-modal="3" data-tooltip="Agregar estrategía">
-                                    <span class="icon">
-                                        <i class="mdi mdi-library-plus mdi-24px"></i>
-                                    </span>
-                                </a>                                
+                                <span data-label="<%= t('.new_link') %>" class="is-black is-top is-medium tooltip">
+                                    <a href="#" class="button is-success" data-modal="3">
+                                        <span class="icon">
+                                            <i class="mdi mdi-library-plus mdi-24px"></i>
+                                        </span>
+                                    </a>  
+                                </span>                              
                             </div>
 
 
@@ -604,16 +618,20 @@
                                             <%= estrategia_do.content %>
                                         </div>
                                         <div class="column">
-                                            <%= link_to  edit_strategy_path(estrategia_do), class: "button is-small is-info tooltip",  :data => {tooltip: "Editar estrategía"} do %>
-                                                <span class="icon">
-                                                    <i class="mdi mdi-update mdi-24px"></i>
-                                                </span>
-                                            <% end %>
-                                            <%= link_to strategy_url(estrategia_do), method: :delete, class: "button is-small is-danger tooltip", :data => {tooltip: "Eliminar estrategía", confirm: "¿Esta seguro de eliminar la estrategia?"} do %>
-                                                <span class="icon">
-                                                    <i class="mdi mdi-delete-forever mdi-24px"></i>
-                                                </span>
-                                            <% end %>
+                                            <span data-label="<%= t('.edit_link') %>" class="is-black is-top is-medium tooltip">
+                                                <%= link_to  edit_strategy_path(estrategia_do), class: "button is-small is-info" do %>
+                                                    <span class="icon">
+                                                        <i class="mdi mdi-update mdi-24px"></i>
+                                                    </span>
+                                                <% end %>
+                                            </span>
+                                            <span data-label="<%= t('.remove_link') %>" class="is-black is-top is-medium tooltip">
+                                                <%= link_to strategy_url(estrategia_do), method: :delete, class: "button is-small is-danger", :data => {confirm: "¿Esta seguro de eliminar la estrategia?"} do %>
+                                                    <span class="icon">
+                                                        <i class="mdi mdi-delete-forever mdi-24px"></i>
+                                                    </span>
+                                                <% end %>
+                                            </span>
                                         </div>
                                     </div>  
                                 </li>
@@ -715,11 +733,13 @@
                                 <div class="title is-5  has-text-centered has-background-black has-text-white padding-small">Estrategias DA</div>
                             </div>
                             <div class="column is-1 is-flex-row-end">
-                                <a href="#" class="button is-success tooltip" data-modal="4" data-tooltip="Agregar estrategía">
-                                    <span class="icon">
-                                        <i class="mdi mdi-library-plus mdi-24px"></i>
-                                    </span>
-                                </a>                                
+                                <span data-label="<%= t('.new_link') %>" class="is-black is-top is-medium tooltip">
+                                    <a href="#" class="button is-success" data-modal="4">
+                                        <span class="icon">
+                                            <i class="mdi mdi-library-plus mdi-24px"></i>
+                                        </span>
+                                    </a>    
+                                </span>                            
                             </div>
 
 
@@ -794,16 +814,20 @@
                                             <%= estrategia_da.content %>
                                         </div>
                                         <div class="column">
-                                            <%= link_to  edit_strategy_path(estrategia_da), class: "button is-small is-info tooltip",  :data => {tooltip: "Editar estrategía"} do %>
-                                                <span class="icon">
-                                                    <i class="mdi mdi-update mdi-24px"></i>
-                                                </span>
-                                            <% end %>
-                                            <%= link_to strategy_url(estrategia_da), method: :delete, class: "button is-small is-danger tooltip", :data => {tooltip: "Eliminar estrategía", confirm: "¿Esta seguro de eliminar la estrategia?"} do %>
-                                                <span class="icon">
-                                                    <i class="mdi mdi-delete-forever mdi-24px"></i>
-                                                </span>
-                                            <% end %>
+                                            <span data-label="<%= t('.edit_link') %>" class="is-black is-top is-medium tooltip">
+                                                <%= link_to  edit_strategy_path(estrategia_da), class: "button is-small is-info" do %>
+                                                    <span class="icon">
+                                                        <i class="mdi mdi-update mdi-24px"></i>
+                                                    </span>
+                                                <% end %>
+                                            </span>
+                                            <span data-label="<%= t('.remove_link') %>" class="is-black is-top is-medium tooltip">
+                                                <%= link_to strategy_url(estrategia_da), method: :delete, class: "button is-small is-danger", :data => {confirm: "¿Esta seguro de eliminar la estrategia?"} do %>
+                                                    <span class="icon">
+                                                        <i class="mdi mdi-delete-forever mdi-24px"></i>
+                                                    </span>
+                                                <% end %>
+                                            </span>
                                         </div>
                                     </div>   
                                 </li>

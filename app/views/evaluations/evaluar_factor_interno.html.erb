@@ -140,11 +140,13 @@
                 </div>
               </div>
               <div class="column">
-                 <%= link_to edit_factor_interno_path(activity), class: "button is-info tooltip", :data => {tooltip: "Evaluar factor"} do %>
-                  <span class="icon">
-                    <i class="mdi mdi-format-list-checks"></i>  
-                  </span>
-                <% end %>
+                <span data-label="<%= t('.evaluar_link') %>" class="is-black is-top is-medium tooltip">
+                 <%= link_to edit_factor_interno_path(activity), class: "button is-info" do %>
+                    <span class="icon">
+                      <i class="mdi mdi-format-list-checks"></i>  
+                    </span>
+                  <% end %>
+                </span>
               </div>
             </div>
           <% end %>

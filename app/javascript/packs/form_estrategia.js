@@ -1,6 +1,7 @@
 import Vue from 'vue/dist/vue.esm'
 import VueResource from 'vue-resource'
 import TurbolinksAdapter from 'vue-turbolinks'
+
 import Buefy from 'buefy'
 //import 'buefy/dist/buefy.css'
 //import AddFormEstrategia from './components/AddFormEstrategia'

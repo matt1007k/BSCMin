@@ -5,6 +5,8 @@ class CreateIndicators < ActiveRecord::Migration[5.2]
       t.string :aclarar
       t.string :variable
       t.string :indicador
+      t.string :tipo, :null => true
+      #Ex:- :null => false
 
       t.timestamps
     end

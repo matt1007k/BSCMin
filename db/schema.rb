@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 2018_10_26_134614) do
     t.string "aclarar"
     t.string "variable"
     t.string "indicador"
+    t.string "tipo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["objective_id"], name: "index_indicators_on_objective_id"

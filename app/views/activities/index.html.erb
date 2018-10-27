@@ -34,16 +34,20 @@
                 </div>
 
                 <div class="column is-2 has-text-right has-background-primary has-text-white">
-                  <%= link_to edit_area_path(area), class: "button is-info tooltip", :data => {tooltip: t('.edit_area_link')} do %>
-                      <span class="icon">
-                        <i class="mdi mdi-update"></i>
-                      </span>
-                  <% end %>
-                  <%= link_to area, method: :delete, class: "button is-danger tooltip", data: {tooltip: t('.remove_area_link'), confirm: "¿Está seguro de eliminar el área?"} do %>
-                      <span class="icon">
-                        <i class="mdi mdi-close"></i>
-                      </span>
-                  <% end %>
+                  <span data-label="<%= t('.edit_area_link') %>" class="is-black is-top is-medium tooltip">
+                    <%= link_to edit_area_path(area), class: "button is-info" do %>
+                        <span class="icon">
+                          <i class="mdi mdi-update"></i>
+                        </span>
+                    <% end %>
+                  </span>
+                  <span data-label="<%= t('.remove_area_link') %>" class="is-black is-top is-medium tooltip">
+                    <%= link_to area, method: :delete, class: "button is-danger", data: {confirm: "¿Está seguro de eliminar el área?"} do %>
+                        <span class="icon">
+                          <i class="mdi mdi-close"></i>
+                        </span>
+                    <% end %>
+                  </span>
                 </div>
 
                 <div class="column has-background-grey has-text-white">
@@ -65,16 +69,20 @@
                     </div>
 
                     <div class="column">
-                      <%= link_to actividad_edit_path(actividad,area), class: "button is-info tooltip", :data => {tooltip: t('.edit_link')} do %>
-                        <span class="icon">
-                          <i class="mdi mdi-update"></i>
-                        </span>
-                      <% end %>
-                      <%= link_to activity_url(area), method: :delete,  class: "button is-danger tooltip", :data => {tooltip: t('.remove_link'), confirm: '¿Está seguro de eliminar la actividad?'} do %>
-                        <span class="icon">
-                          <i class="mdi mdi-close"></i>
-                        </span>
-                      <% end %>
+                      <span data-label="<%= t('.edit_link') %>" class="is-black is-top is-medium tooltip">
+                        <%= link_to actividad_edit_path(actividad,area), class: "button is-info" do %>
+                          <span class="icon">
+                            <i class="mdi mdi-update"></i>
+                          </span>
+                        <% end %>
+                      </span>
+                      <span data-label="<%= t('.remove_link') %>" class="is-black is-top is-medium tooltip">
+                        <%= link_to activity_url(area), method: :delete,  class: "button is-danger", :data => {confirm: '¿Está seguro de eliminar la actividad?'} do %>
+                          <span class="icon">
+                            <i class="mdi mdi-close"></i>
+                          </span>
+                        <% end %>
+                      </span>
                     </div>
                 </div>
               <% end %>
