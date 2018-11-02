@@ -19,6 +19,8 @@ class StrategiesController < ApplicationController
 
     
     def new
+        @tipo = params[:tipo]
+        
         @strategy = Strategy.new
     end
 
@@ -28,7 +30,9 @@ class StrategiesController < ApplicationController
 
     
     def create
+        @count = Strategy.count
         @strategy = Strategy.new
+        @strategy[:slug] = "E#{@count + 1}"
         @strategy[:foda] = params[:strategy][:foda]
         @strategy[:tipo] = params[:strategy][:tipo]
         @strategy[:content] = params[:strategy][:content]
@@ -53,6 +57,7 @@ class StrategiesController < ApplicationController
 
     
     def update
+        
         respond_to do |format|
         if @strategy.update(strategy_params)
             format.html { redirect_to strategies_url, notice: 'La estrategía fue editada con exitó.' }

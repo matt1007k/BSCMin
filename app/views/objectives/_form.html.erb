@@ -1,41 +1,14 @@
-<%= form_with(model: objective, local: true) do |form| %>
-  <% if objective.errors.any? %>
-    <div class="message is-danger">
-      <h2 class="title is-5 has-text-danger"><%= pluralize(objective.errors.count, "error") %> al realizar la operación:</h2>
-      <div class="message-body">
-        <ul>
-          <% objective.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  <% end %>
+<div class="field">
+  <label for="content" class="label is-normal">Objetivo</label>
   
-
-  <%= form.hidden_field :perspective_id, value: @perspective_id %>
-  <div class="field">
-    <%= form.label :content, class: "label is-normal" %>
-    <div class="control"> 
-      <%= form.text_area :content, class: "textarea is-info" %>
-    </div>
+  <div class="control">
+      <textarea id="content"  v-model="objective.content" cols="30" class="textarea is-info"></textarea>    
+  <div class=""></div>
   </div>
-  <div class="title is-6">Asignar estrategias</div> 
-
-  <!--<%# @estrategias.each do |estrategia| %> 
-  <div class="field">    
-    <div class="control"> 
-      <%#= form.check_box "in_objectives", { multiple: true }, estrategia.id, nil %>
-      <%#= estrategia.content %>
-    </div>
-  </div>
-  <%# end %>
-
-  <%#= check_box_tag "objective[id]", objective.id  %>-->
-      
-
-  <div class="field is-grouped margin-small-topons">
-    <%= form.submit "Guardar", class: "button is-primary" %>
-  </div>
-<% end %>
+</div>
+<div class="title is-6">Asignar estrategias</div>
+<div class="field is-grouped margin-small-topons">
+    <button type="submit" class="button is-success" v-if="edit">Editar</button>
+    <button type="submit" class="button is-success" v-else>Guardar</button>
+</div>
 

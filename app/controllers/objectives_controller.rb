@@ -20,7 +20,8 @@ class ObjectivesController < ApplicationController
 
 
     def edit
-        @perspective_id = params[:perspective_id]
+        @objective = Objective.find(params[:id])
+        @my_estrategies = InObjective::where(objective_id: @objective[:id])
         @estrategias = Strategy.all
     end
 
@@ -31,15 +32,30 @@ class ObjectivesController < ApplicationController
 
     def create
         @perspective = Perspective.find(params[:objective][:perspective_id])
-        @count = Objective.count
+        @count = Objective.where(perspective_id: params[:objective][:perspective_id]).count
         @objective = Objective.new
         @objective[:slug] = @perspective[:slug]<<"#{@count + 1}" 
         @objective[:content] = params[:objective][:content]
         @objective[:perspective_id] = params[:objective][:perspective_id]
+
+        @estrategias = params[:strategies]  
+           
         respond_to do |format|
         if @objective.save
-            format.html { redirect_to objectives_url, notice: 'El objetivo fue creada con exitó.' }
-            format.json { redirect_to @objective, status: :created, location: @objective }
+
+            @estrategias.each do |estrategia|
+                @in_objective = InObjective.new
+                @in_objective[:objective_id] = @objective[:id]
+                @in_objective[:strategy_id] = estrategia[:id]
+                if @in_objective.save
+                    format.html { redirect_to objectives_url, notice: 'El objetivo fue creada con exitó.' }
+                    format.json { redirect_to @objective, status: :created, location: @objective }
+                else
+                    format.json { render json: @in_objective.errors, status: :unprocessable_entity }
+                end
+                
+            end
+            
         else
             format.html { redirect_to objective_new_url(params[:objective][:perspective_id]), alert: 'Error al crear el objetivo.' }
             format.json { render json: @objective.errors, status: :unprocessable_entity }

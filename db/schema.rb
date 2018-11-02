@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(version: 2018_10_26_134614) do
   end
 
   create_table "strategies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "slug"
     t.string "foda"
     t.string "tipo"
     t.text "content"

@@ -15,14 +15,19 @@
         <div class="card-content">
           <p class="title is-4 has-text-centered">Editar Estrategia</p>
           <p class="subtitle is-6 has-text-centered">Editar la estrategia de la matriz foda.</p>
+            <!--<form-estrategia-edit
+              :id="<%#=  @strategy.id.to_json %>"
+              :strategy="<%#= @strategy.to_json(except: [:created_at, :updated_at]) %>"            
+              />-->
+
             <%= content_tag :div,
-                id: "editar_form_estrategia",
-                data: {
-                    id: @strategy.id,
-                    estrategia: @strategy.to_json(except: [:created_at,:updated_at,:objective_id])
-                } do %>           
-                <%= render 'form' %>
+              id: "editar_form_estrategia",
+              data: {
+                  id: @strategy.id,
+                  strategy: @strategy.to_json(except: [:created_at, :updated_at])
+              } do %>
             <% end %>
+
           <%= link_to 'Regresar', strategies_path %>
         </div>
       </div>

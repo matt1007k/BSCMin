@@ -16,8 +16,43 @@
           <p class="title is-4 has-text-centered">Agregar Estrategia</p>
           <p class="subtitle is-6 has-text-centered">Nueva Estrategia de la matriz foda.</p>
                       
-          <%= render 'form', strategy: @strategy %>
+          <!--<form-estrategia
+            :tipo="<%#=  @tipo.to_json %>"
+            :strategy="<%#= @strategy.to_json(except: [:created_at, :updated_at]) %>"            
+            />-->
 
+          <%= content_tag :div,
+                id: "add_form_estrategia",
+                data: {
+                    tipo: @tipo,
+                    estrategia: @strategy.to_json(except: [:created_at, :updated_at])
+                } do %>
+                <div class="field">                                                                                                                                                                
+                    <div class="control">
+                        <b-field label="Foda">
+                            <b-taginput
+                                type="is-dark"
+                                v-model="estrategia.foda"
+                                attached>
+                            </b-taginput>
+                        </b-field>                                                   
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="content" class="label is-normal">Estrategia </label>
+                    
+                    <div class="control"> 
+                        <textarea class="textarea is-info" placeholder="Ingrese su estrategia" v-model="estrategia.content"></textarea>
+                        <div class="notification is-danger" v-if="errors.length > 0">                                                                                                        
+                            <p v-for="(error, index) in errors" :key="index">La estrategia {{error}}</p>                                                       
+                        </div>  
+                    </div>
+                </div>
+                <div class="actifield is-grouped margin-small-topons">            
+                    <button class="button is-success" @click="saveEstrategia()">Guardar</button>
+                </div>
+              <% end %>
           <%= link_to 'Regresar', strategies_path %>
       </div>
   </div> 

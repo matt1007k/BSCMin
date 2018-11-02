@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :informations, :values, :areas, :activities, :forces, :factors, :expect => [:show] 
-  resources :strategies
+  resources :strategies, :expect => [:create]
   resources :perspectives, only: [:edit, :update, :new, :create]
   resources :objectives, :expect => [:show, :new, :edit]
   resources :procesos, :expect => [:update, :show] 
@@ -42,6 +42,8 @@ Rails.application.routes.draw do
   get '/evaluar-factor-externo', to: "evaluations#evaluar_factor_externo", as: 'evaluar_factor_externo'
   get '/edit-factor-externo/:id', to: "evaluations#edit_factor_externo", as: 'edit_factor_externo'
   put '/update-factor-externo/:id', to: 'factors#update_factor_externo', as: 'update_factor_externo'
+
+  get '/strategies/new/:tipo', to: 'strategies#new', as: 'strategy_new'
 
   get '/nuevo-objective/:perspective_id', to: "objectives#new", as: 'objective_new'
   get '/editar-objective/:id/:perspective_id', to: 'objectives#edit', as: 'objective_edit'

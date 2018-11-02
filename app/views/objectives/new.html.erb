@@ -15,9 +15,53 @@
         <div class="card-content">
           <p class="title is-4 has-text-centered">Agregar objetivo</p>
           <p class="subtitle is-6 has-text-centered">Nueva objetivo del mapa estrategico.</p>
-                      
-          <%= render 'form', objective: @objective, perspective_id: @perspective_id %>
+            <!--<form-objective 
+              :editar="false" 
+              :perspective_id="<%#=  @perspective_id.to_json %>"
+              :id="<%#=  @objective.id.to_json %>"
+              :estrategias="<%#= @estrategias.to_json(except: [:created_at, :updated_at]) %>"
+              :objectivo="<%#= @objective.to_json(except: [:created_at, :updated_at, :perspective_id]) %>" 
+               /> -->
 
+            <%= content_tag :div,
+                id: "add_form_objectivo",
+                data: {
+                    perspective: @perspective_id,
+                    estrategias: @estrategias.to_json(except: [:created_at, :updated_at]),
+                    objectivo: @objective.to_json(except: [:created_at, :updated_at, :perspective_id])
+                } do %>
+
+                <form @submit.prevent="submit">
+                  <div class="field">
+                      <label for="content" class="label is-normal">Objetivo</label>
+                      
+                      <div class="control">
+                          <textarea id="content" v-model="objective.content" cols="10" rows="5" class="textarea is-info"></textarea>    
+                          <div class="notification is-danger" v-if="errors.length > 0">                                                                                                        
+                              <p v-for="(error, index) in errors" :key="index">El objetivo {{error}}</p>                                                       
+                          </div> 
+                      </div>
+                  </div>
+                  <b-field label="Asignar estrategias">
+                      <b-taginput
+                          v-model="strategies"
+                          :data="filteredTags"
+                          autocomplete
+                          field="slug"
+                          icon="label"
+                          placeholder="Agregar Estrategia"
+                          @typing="getFilteredTags">
+                      </b-taginput>
+                  </b-field>
+                  <pre>{{strategies}}</pre>
+                  <div class="field is-grouped margin-small-topons">
+                      <button type="submit" class="button is-success">Guardar</button>            
+                  </div>
+                  <!--<a href="#" class="link link-info" @click.prevent="back()">Regresar</a>-->
+                </form>
+
+              <% end %>
+           
             <%= link_to 'Regresar', objectives_path %>
       </div>
   </div> 

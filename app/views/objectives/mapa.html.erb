@@ -40,7 +40,14 @@
                     <% perspective.objectives.each do |objective| %>
                     <div class="column is-4">
                         <div class="notification is-success">
-                          <%= objective.slug %> - <%= objective.content %>
+                          <div class="columns">
+                            <div class="column is-2">
+                              <%= objective.slug %>
+                            </div>
+                            <div class="column">
+                              <%= objective.content %>
+                            </div>
+                          </div>
                         </div>
                     </div>
                     <% end %>
