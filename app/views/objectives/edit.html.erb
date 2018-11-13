@@ -16,15 +16,7 @@
           <p class="title is-4 has-text-centered">Editar Objetivo</p>
           <p class="subtitle is-6 has-text-centered">Editar el objetivo del mapa estrategico.</p>
                       
-          <%= content_tag :div,
-                id: "editar_form_objetivo",
-                data: {
-                    id: @objective.id,
-                    my_estrategies: @my_estrategies.to_json(except: [:created_at, :updated_at]),
-                    estrategias: @estrategias.to_json(except: [:created_at, :updated_at]),
-                    objectivo: @objective.to_json(except: [:created_at, :updated_at])
-                } do %>
-          <% end %>
+          <%= render 'form', objective: @objective, estrategias: @my_estrategies %>
 
           <%= link_to 'Regresar', objectives_path %>
       </div>

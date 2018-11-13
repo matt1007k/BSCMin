@@ -23,7 +23,7 @@ class Objective < ApplicationRecord
   
   belongs_to :perspective
 
-  has_many :indicators
+  has_many :indicators, dependent: :destroy
 
   scope :perspectiva, -> (perspective_id) { where perspective_id: perspective_id }
 end

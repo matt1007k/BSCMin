@@ -1,14 +1,31 @@
-<div class="field">
-  <label for="content" class="label is-normal">Objetivo</label>
-  
-  <div class="control">
-      <textarea id="content"  v-model="objective.content" cols="30" class="textarea is-info"></textarea>    
-  <div class=""></div>
-  </div>
-</div>
-<div class="title is-6">Asignar estrategias</div>
-<div class="field is-grouped margin-small-topons">
-    <button type="submit" class="button is-success" v-if="edit">Editar</button>
-    <button type="submit" class="button is-success" v-else>Guardar</button>
-</div>
+<%= form_with(model: objective, local: true) do |form| %>
+  <% if objective.errors.any? %>
+    <div class="message is-danger">
+      <h2 class="title is-5"><%= pluralize(objective.errors.count, "error") %> al realizar la operación:</h2>
+      <div class="message-body">
+        <ul>
+          <% objective.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
 
+  <div class="field">
+    <%= form.label :content, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.text_field :content, class: "input is-info" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :estrategias, class: "label is-normal" %>
+    <div class="control"> 
+      <input class="input is-info" value="<%= estrategias.map{ |estrategia| estrategia.strategy.slug }.join(",") %>" type="text" name="objective[estrategias]" id="objective_estrategias">
+    </div>
+  </div>
+  <div class="actifield is-grouped margin-small-topons">
+    <%= form.submit "Editar", class: "button is-primary" %>
+  </div>
+<% end %>

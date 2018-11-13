@@ -20,6 +20,6 @@
 #
 
 class InObjective < ApplicationRecord
-  belongs_to :objective
+  belongs_to :objective, dependent: :destroy
   belongs_to :strategy
 end

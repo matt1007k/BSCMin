@@ -33,6 +33,13 @@
       <%= form.text_area :indicador, class: "textarea is-info" %>
     </div>
   </div>
+
+  <div class="field">
+    <%= form.label :tipo, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.text_field :tipo, class: "input is-info" %>
+    </div>
+  </div>
   
   <div class="field is-grouped margin-small-topons">
     <%= form.submit "Guardar", class: "button is-primary" %>

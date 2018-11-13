@@ -1,84 +1,26 @@
-<p id="notice"><%= notice %></p>
+<% @title = "Ver gráfica del Dato" %>
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li> <%= link_to  "Datos de Indicadores", datos_path %></li>
+    <li class="is-active">      
+      <a href="#" aria-current="page">Ver gráfica del dato</a>
+    </li>
+  </ul>
+</nav>
 
-<p>
-  <strong>Indicator:</strong>
-  <%= @dato.indicator %>
-</p>
 
-<p>
-  <strong>Anio:</strong>
-  <%= @dato.anio %>
-</p>
+<div class="columns">
+  <div class="column">
+      <div class="card margin-small">
+        <div class="card-content">
+          <p class="title is-4 has-text-centered">Ver gráfica de dato</p>
+          <p class="subtitle is-6 has-text-centered">Datos del indicadores. sd</p>
+                      
+          <%= column_chart @dato, legend: true %>
 
-<p>
-  <strong>Enero:</strong>
-  <%= @dato.enero %>
-</p>
+          <%= link_to 'Regresar', datos_path %>
+      </div>
+  </div> 
 
-<p>
-  <strong>Febrero:</strong>
-  <%= @dato.febrero %>
-</p>
-
-<p>
-  <strong>Marzo:</strong>
-  <%= @dato.marzo %>
-</p>
-
-<p>
-  <strong>Abril:</strong>
-  <%= @dato.abril %>
-</p>
-
-<p>
-  <strong>Mayo:</strong>
-  <%= @dato.mayo %>
-</p>
-
-<p>
-  <strong>Junio:</strong>
-  <%= @dato.junio %>
-</p>
-
-<p>
-  <strong>Julio:</strong>
-  <%= @dato.julio %>
-</p>
-
-<p>
-  <strong>Agosto:</strong>
-  <%= @dato.agosto %>
-</p>
-
-<p>
-  <strong>Septiembre:</strong>
-  <%= @dato.septiembre %>
-</p>
-
-<p>
-  <strong>Octubre:</strong>
-  <%= @dato.octubre %>
-</p>
-
-<p>
-  <strong>Noviembre:</strong>
-  <%= @dato.noviembre %>
-</p>
-
-<p>
-  <strong>Diciembre:</strong>
-  <%= @dato.diciembre %>
-</p>
-
-<p>
-  <strong>Total:</strong>
-  <%= @dato.total %>
-</p>
-
-<p>
-  <strong>Porcetaje:</strong>
-  <%= @dato.porcetaje %>
-</p>
-
-<%= link_to 'Edit', edit_dato_path(@dato) %> |
-<%= link_to 'Back', datos_path %>
+  
+</div>

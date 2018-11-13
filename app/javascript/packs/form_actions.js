@@ -79,22 +79,22 @@ document.addEventListener('turbolinks:load', () => {
 
     var element = document.getElementById("editar_form_objetivo");
     if (element != null) {
-        var objectivo = JSON.parse(element_new.dataset.objectivo); 
-        var estrategias = JSON.parse(element_new.dataset.estrategias); 
-        var my_estrategies = JSON.parse(element_new.dataset.my_estrategies); 
+        var objectivo = JSON.parse(element.dataset.objectivo); 
+        var estrategias = JSON.parse(element.dataset.estrategias); 
+        var my_estrategies = JSON.parse(element.dataset.myestrategies); 
         var id = element.dataset.id;
-        const app = new Vue({
-        el: element,
-        data: {
-            id: id,
-            objective: objectivo,
-            strategies: estrategias,
-            my_estrategies: my_estrategies
-        },
 
-        
-        template: '<FormObjectiveEdit :objectivo="objective" :my_estrategies="my_estrategies" :id="id" :estrategias="strategies" />',
-        components: {FormObjectiveEdit}
+        const app = new Vue({
+            el: element,
+            data: {
+                id: id,
+                objective: objectivo,
+                strategies: estrategias,
+                my_estrategies: my_estrategies
+            },
+
+            template: '<FormObjectiveEdit :objectivo="objective" :my_estrategies="my_estrategies" :id="id" :estrategias="strategies" />',
+            components: {FormObjectiveEdit}
         })
     }
 

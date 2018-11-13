@@ -21,7 +21,10 @@ gem 'bulma-rails', '~> 0.7.1'
 gem 'bulma-extensions-rails'
 gem 'devise'
 gem 'jquery-rails', '~> 4.1', '>= 4.1.1'
-
+# Gráficas con chart js
+gem "chartkick"
+# Group date
+gem 'groupdate'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby

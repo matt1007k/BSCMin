@@ -20,9 +20,9 @@ class ObjectivesController < ApplicationController
 
 
     def edit
+        @estrategia = []
         @objective = Objective.find(params[:id])
         @my_estrategies = InObjective::where(objective_id: @objective[:id])
-        @estrategias = Strategy.all
     end
 
     def mapa
@@ -65,8 +65,20 @@ class ObjectivesController < ApplicationController
 
 
     def update
+        @objective[:content] = params[:objective][:content]
+        @estrategias =  params[:objective][:estrategias]  
         respond_to do |format|
-        if @objective.update(objective_params)
+        if @objective.save
+
+            @in_objective = InObjective.new
+            
+            @estrategias.split(",").each do |slug|
+                @in_objective[:objective_id] = @objective[:id]
+                @estrategia = Strategy.where(slug: slug).first
+                @in_objective[:strategy_id] = @estrategia[:id]
+                @in_objective.save
+            end            
+
             format.html { redirect_to objectives_url, notice: 'El objetivo fue editada con exitó.' }
             format.json { redirect_to @objective, status: :ok, location: @objective }
         else

@@ -54,14 +54,19 @@
                   <!-- Finaciera --> 
                   <div class="container_item is-active" data-item="financiera-1">
                     <%-if  @objectivos.perspectiva(1).count > 0 %>
-                        <% @objectivos.perspectiva(1).count do |objetivo| %>
+                        <% @objectivos.perspectiva(1).each do |objetivo| %>
                         <div class="columns">
                           <div class="column">
-                              
+                            <% if objetivo.indicators.count > 0 %> 
+                                <div class="columns">
+                                  <div class="column">
+                                      <div class="title is-5">Objetivo:  <%= objetivo.content %></div>   
+                                  </div>
+                                </div>
                               <% objetivo.indicators.objetivo(objetivo.id).each do |indicator| %>
                                 <div class="columns">
                                   <div class="column">
-                                    <div class="title is-5">Indicador:  <%= indicator.indicador %></div>   
+                                    <div class="title is-6">Indicador:  <%= indicator.indicador %></div>   
                                   </div>
                                   <div class="column is-2">                                  
                                     <%= link_to dato_new_path(indicator), class: "button is-success"   do %>
@@ -69,7 +74,14 @@
                                         <i class="mdi mdi-plus"></i>
                                       </span>   
                                       <%= t('.new_link') %>                                   
-                                    <% end %>
+                                    <% end %>                                    
+                                    <span data-label="Ver gráfica" class="is-black is-top is-medium tooltip">
+                                      <%= link_to indicator_url(indicator), class: "button is-link" do %>
+                                          <span class="icon">
+                                            <i class="mdi mdi-chart-bar"></i>
+                                          </span>
+                                      <% end %>
+                                    </span>
                                   </div>
                                 </div> 
 
@@ -118,6 +130,7 @@
                                                         <i class="mdi mdi-update"></i>
                                                       </span>
                                                   <% end %>
+                                                  
                                                 </span>
                                             </td>
                                           </tr>
@@ -154,11 +167,21 @@
                                   </table>
                                   <hr>
                                 <% end %>
+                              <% end %>  
 
-                              <% end %>                              
+                            <% else %>
+                              <div class="columns">
+                                <div class="column">
+                                    <div class="title is-5">Objetivo:  <%= objetivo.content %></div>   
+                                </div>
+                              </div>
+                              <div class="notification is-warning is-fullwidth"> No hay registros indicador!!!</div>
+                            <% end %>                             
                           </div>
                         </div>
-                        <% end %>
+                      <% end %>
+                    <% else %>
+                      <div class="notification is-warning is-fullwidth"> No hay registros de objetivo!!!</div>
                     <% end %>
                    
                   </div>
@@ -168,10 +191,16 @@
                   <!-- Cliente -->
                   <div class="container_item" data-item="cliente-1">
                     <%-if  @objectivos.perspectiva(2).count > 0 %>
-                      <% @objectivos.perspectiva(2).count do |objetivo| %>
+                      <% @objectivos.perspectiva(2).each do |objetivo| %>
                       <div class="columns">
                         <div class="column">
-                            
+                          <%if objetivo.indicators.objetivo(objetivo.id).count > 0 %>
+                            <div class="columns">
+                              <div class="column">
+                                  <div class="title is-5">Objetivo:  <%= objetivo.content %></div>   
+                              </div>
+                            </div>
+
                             <% objetivo.indicators.objetivo(objetivo.id).each do |indicator| %>
                               <div class="columns">
                                 <div class="column">
@@ -183,7 +212,14 @@
                                       <i class="mdi mdi-plus"></i>
                                     </span>   
                                     <%= t('.new_link') %>                                   
-                                  <% end %>
+                                  <% end %>                                                                    
+                                  <span data-label="Ver gráfica" class="is-black is-top is-medium tooltip">
+                                    <%= link_to indicator_url(indicator), class: "button is-link" do %>
+                                        <span class="icon">
+                                          <i class="mdi mdi-chart-bar"></i>
+                                        </span>
+                                    <% end %>
+                                  </span>
                                 </div>
                               </div> 
 
@@ -267,12 +303,21 @@
                                   
                                 </table>
                                 <hr>
-                              <% end %>
-
-                            <% end %>                              
+                              <% end %>                            
+                            <% end %> 
+                          <% else %>
+                              <div class="columns">
+                                <div class="column">
+                                    <div class="title is-5">Objetivo:  <%= objetivo.content %></div>   
+                                </div>
+                              </div>
+                              <div class="notification is-warning is-fullwidth"> No hay registros indicador!!!</div>
+                          <% end %>                              
                         </div>
                       </div>
                       <% end %>
+                    <% else %>
+                      <div class="notification is-warning is-fullwidth"> No hay registros de objetivo!!!</div>
                     <% end %>
                   </div>
                   <!-- end cliente -->
@@ -281,10 +326,16 @@
                   <!-- Procesos -->
                   <div class="container_item" data-item="procesos-1">
                     <%-if  @objectivos.perspectiva(3).count > 0 %>
-                      <% @objectivos.perspectiva(3).count do |objetivo| %>
+                      <% @objectivos.perspectiva(3).each do |objetivo| %>
                       <div class="columns">
                         <div class="column">
-                            
+                          <%if objetivo.indicators.objetivo(objetivo.id).count > 0 %>
+                            <div class="columns">
+                              <div class="column">
+                                  <div class="title is-5">Objetivo:  <%= objetivo.content %></div>   
+                              </div>
+                            </div>  
+
                             <% objetivo.indicators.objetivo(objetivo.id).each do |indicator| %>
                               <div class="columns">
                                 <div class="column">
@@ -297,6 +348,13 @@
                                     </span>   
                                     <%= t('.new_link') %>                                   
                                   <% end %>
+                                  <span data-label="Ver gráfica" class="is-black is-top is-medium tooltip">
+                                    <%= link_to indicator_url(indicator), class: "button is-link" do %>
+                                        <span class="icon">
+                                          <i class="mdi mdi-chart-bar"></i>
+                                        </span>
+                                    <% end %>
+                                  </span>
                                 </div>
                               </div> 
 
@@ -381,11 +439,21 @@
                                 </table>
                                 <hr>
                               <% end %>
-
-                            <% end %>                              
+                            <% end %>   
+                            
+                          <% else %>
+                            <div class="columns">
+                              <div class="column">
+                                  <div class="title is-5">Objetivo:  <%= objetivo.content %></div>   
+                              </div>
+                            </div>
+                            <div class="notification is-warning is-fullwidth"> No hay registros indicador!!!</div>                           
+                          <% end %>
                         </div>
                       </div>
                       <% end %>
+                    <% else %>
+                      <div class="notification is-warning is-fullwidth"> No hay registros de objetivo!!!</div>
                     <% end %>
                   </div>
                   <!-- end Procesos -->
@@ -396,7 +464,13 @@
                         <% @objectivos.perspectiva(4).count do |objetivo| %>
                         <div class="columns">
                           <div class="column">
-                              
+                            <%if objetivo.indicators.objetivo(objetivo.id).count > 0 %> 
+                              <div class="columns">
+                                <div class="column">
+                                    <div class="title is-5">Objetivo:  <%= objetivo.content %></div>   
+                                </div>
+                              </div>   
+
                               <% objetivo.indicators.objetivo(objetivo.id).each do |indicator| %>
                                 <div class="columns">
                                   <div class="column">
@@ -409,6 +483,13 @@
                                       </span>   
                                       <%= t('.new_link') %>                                   
                                     <% end %>
+                                    <span data-label="Ver gráfica" class="is-black is-top is-medium tooltip">
+                                      <%= link_to indicator_url(indicator), class: "button is-link" do %>
+                                          <span class="icon">
+                                            <i class="mdi mdi-chart-bar"></i>
+                                          </span>
+                                      <% end %>
+                                    </span>
                                   </div>
                                 </div> 
 
@@ -461,7 +542,9 @@
                                               </td>
                                           </tr>
                                         <% end %>
-                                        
+                                          <tr>
+                                            asd
+                                          </tr>
                                       </tbody>
                                     </table>
                                     <hr>
@@ -493,11 +576,21 @@
                                   </table>
                                   <hr>
                                 <% end %>
+                              <% end %>  
 
-                              <% end %>                              
+                            <% else %>
+                              <div class="columns">
+                                <div class="column">
+                                    <div class="title is-5">Objetivo:  <%= objetivo.content %></div>   
+                                </div>
+                              </div>
+                              <div class="notification is-warning is-fullwidth"> No hay registros indicador!!!</div>
+                            <% end %>                           
                           </div>
                         </div>
                         <% end %>
+                    <% else %>
+                      <div class="notification is-warning is-fullwidth"> No hay registros de objetivo!!!</div>
                     <% end %>
                   </div>
                   <!-- end Crecimiento -->  

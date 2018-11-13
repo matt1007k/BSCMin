@@ -21,6 +21,7 @@
             </b-taginput>
         </b-field>
         <pre>{{strategies}}</pre>
+        <div>{{id}}</div>
         <div class="field is-grouped margin-small-topons">
             <button type="submit" class="button is-success">Guardar</button>            
         </div>
@@ -34,7 +35,6 @@ export default {
     data(){
         return{
             filteredTags: [],
-            edit: false,
             objective: {},
             strategies: [],
             my_estrategies: [],
@@ -43,8 +43,8 @@ export default {
     },
     methods: {
         getFilteredTags(text) {
-            this.filteredTags = this.my_estrategies.filter((option) => {
-                return option.objective_id
+            this.filteredTags = this.estrategias.filter((option) => {
+                return option.slug
                     .toString()
                     .toLowerCase()
                     .indexOf(text.toLowerCase()) >= 0
@@ -73,7 +73,7 @@ export default {
     mounted(){
         this.objective = this.objectivo;
         this.filteredTags = this.estrategias;
-        console.log(this.estrategias)
+        console.log(this.my_estrategies)
     }
 }
 </script>

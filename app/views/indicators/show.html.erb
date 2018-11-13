@@ -1,24 +1,29 @@
-<p id="notice"><%= notice %></p>
+<% @title = "Ver gráfica del indicator #{@indicator.indicador}" %>
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li> <%= link_to  "Datos de Indicadores", datos_path %></li>
+    <li class="is-active">      
+      <a href="#" aria-current="page">Ver gráfica del indicador</a>
+    </li>
+  </ul>
+</nav>
 
-<p>
-  <strong>Objective:</strong>
-  <%= @indicator.objective %>
-</p>
 
-<p>
-  <strong>Aclarar:</strong>
-  <%= @indicator.aclarar %>
-</p>
+<div class="columns">
+  <div class="column">
+      <div class="card margin-small">
+        <div class="card-content">
+          <p class="title is-4 has-text-centered">Ver gráfica del indicador</p>
+          <p class="subtitle is-6 has-text-centered">Datos del indicador: <%= @indicator.indicador %></p>
+                      
+          <%= column_chart @indicator.datos.map { |dato|
+            {name: dato.anio, data: dato }
+          }, xtitle: "Meses", ytitle: "Datos" %>
 
-<p>
-  <strong>Variable:</strong>
-  <%= @indicator.variable %>
-</p>
+          <%= column_chart @indicator.datos.group(:anio).count, xtitle: "Meses", ytitle: "Datos", colors: ["#b00", "#666"] %>
+          <%= link_to 'Regresar', datos_path %>
+      </div>
+  </div> 
 
-<p>
-  <strong>Indicador:</strong>
-  <%= @indicator.indicador %>
-</p>
-
-<%= link_to 'Edit', edit_indicator_path(@indicator) %> |
-<%= link_to 'Back', indicators_path %>
+  
+</div>

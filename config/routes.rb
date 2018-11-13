@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   resources :objectives, :expect => [:show, :new, :edit]
   resources :procesos, :expect => [:update, :show] 
   resources :datos
-  resources :indicators, :expect => [:show, :new, :edit]
+  resources :indicators, :expect => [:new, :edit]
   
   put '/procesos/:id', to: 'procesos#update', as: 'update_proceso'
 
