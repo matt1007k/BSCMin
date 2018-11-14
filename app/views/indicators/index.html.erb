@@ -12,7 +12,14 @@
   </div>
 
   <div class="column is-flex-row-end">
-    <%= link_to datos_path, class: "button is-info" do %>
+    <%= link_to fichas_path, class: "button is-info" do %>
+      <p> Ingresar las fichas </p>
+      <span class="icon">
+        <i class="mdi mdi-arrow-right"></i>
+      </span>
+    <% end %>
+
+    <%= link_to datos_path, class: "ml-10 button is-info" do %>
       <p> Ingresar los datos </p>
       <span class="icon">
         <i class="mdi mdi-arrow-right"></i>

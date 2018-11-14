@@ -36,4 +36,7 @@ class Dato < ApplicationRecord
   validates :anio, presence: true
   validates_uniqueness_of :anio, :scope => :indicator_id,  message: "%{value} ya existe"
   belongs_to :indicator
+
+
+  scope :anio, -> (anio) { where("anio = ?", anio) }
 end

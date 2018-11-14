@@ -46,8 +46,29 @@ class PagesController < ApplicationController
   end
 
   def mapa_estrategico
-    
+    @perspectives = Perspective.all
   end
 
+  def indicador_datos
+    @objectivos = Objective.all
+    @indicators = Indicator.all
+  end
+  
+  def indicador_maestro
+      @objectivos = Objective.all
+
+      @ano_anterior = '2016'
+      @ano_actual = '2017'
+      @semaforo = '2017'
+
+      @ano_anterior = params[:anterior] if params[:anterior].present?
+      @ano_actual = params[:actual] if params[:actual].present?
+      @semaforo = params[:semaforo] if params[:semaforo].present?
+  end
+
+  def indicador_resumen
+      @objectivos = Objective.all
+  end
+  
   
 end

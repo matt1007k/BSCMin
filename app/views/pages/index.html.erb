@@ -46,20 +46,20 @@
         </div>
       </div>    
   </div>  
-</div>
-
-
-<div class="columns has-text-weight-bold">
   <div class="column">
     <div class="card shadow-cm is-hovered">
       <div class="card-content">
         <%= link_to(values_path, html_options = {class: "is-middle-column has-text-danger"}) do %> 
-          <i class="mdi mdi-map mdi-36px"></i>
+          <i class="mdi mdi-sitemap mdi-36px"></i>
           Macroproceso
         <% end %>
       </div>
     </div>
   </div>
+</div>
+
+
+<div class="columns is-multiline is-mobile has-text-weight-bold">  
   <div class="column">
     <div class="card shadow-cm is-hovered">
       <div class="card-content">
@@ -74,7 +74,7 @@
     <div class="card shadow-cm is-hovered">
       <div class="card-content">
         <%= link_to(factors_path, html_options = {class: "is-middle-column has-text-danger"}) do %>
-          <i class="mdi mdi-trending-up mdi-36px"></i>
+          <i class="mdi mdi-hammer mdi-36px"></i>
           Fuerzas de Porter
         <% end %>
       </div>
@@ -84,14 +84,115 @@
     <div class="card shadow-cm is-hovered">
       <div class="card-content">
         <%= link_to(evaluar_factor_interno_path, html_options = {class: "is-middle-column has-text-danger"}) do %>
-          <i class="mdi mdi-trending-up mdi-36px"></i>
+          <i class="mdi mdi-comment-arrow-right-outline mdi-36px"></i>
           Evaluar Factores Internos
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card shadow-cm is-hovered">
+      <div class="card-content">
+        <%= link_to(evaluar_factor_externo_path, html_options = {class: "is-middle-column has-text-danger"}) do %>
+          <i class="mdi mdi-comment-arrow-left-outline mdi-36px"></i>
+          Evaluar Factores Externos
+        <% end %>
+      </div>
+    </div>
+  </div>  
+</div>
+<div class="columns has-text-weight-bold">
+  <div class="column">
+    <div class="card shadow-cm is-hovered">
+      <div class="card-content">
+        <%= link_to(strategies_path, html_options = {class: "is-middle-column has-text-danger"}) do %>
+          <i class="mdi mdi-matrix mdi-36px"></i>
+          Matriz Foda
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card shadow-cm is-hovered">
+      <div class="card-content">
+        <%= link_to(objectives_path, html_options = {class: "is-middle-column has-text-danger"}) do %>
+          <i class="mdi mdi-greater-than mdi-36px"></i>
+          Objectivos
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card shadow-cm is-hovered">
+      <div class="card-content">
+        <%= link_to(mapa_estrategico_relaciones_path, html_options = {class: "is-middle-column has-text-danger"}) do %>
+          <i class="mdi mdi-map mdi-36px"></i>
+          Mapa Estratégico
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card shadow-cm is-hovered">
+      <div class="card-content">
+        <%= link_to(indicators_path, html_options = {class: "is-middle-column has-text-danger"}) do %>
+          <i class="mdi mdi-matrix mdi-36px"></i>
+         Indicatores
         <% end %>
       </div>
     </div>
   </div>
 </div>
 
+<div class="columns has-text-weight-bold">
+  <div class="column">
+    <div class="card shadow-cm is-hovered">
+      <div class="card-content">
+        <%= link_to(fichas_path, html_options = {class: "is-middle-column has-text-danger"}) do %>
+          <i class="mdi mdi-wunderlist mdi-36px"></i>
+          Ficha de indicadores
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card shadow-cm is-hovered">
+      <div class="card-content">
+        <%= link_to(datos_path, html_options = {class: "is-middle-column has-text-danger"}) do %>
+          <i class="mdi mdi-database mdi-36px"></i>
+          Datos
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card shadow-cm is-hovered">
+      <div class="card-content">
+        <%= link_to(maestro_path, html_options = {class: "is-middle-column has-text-danger"}) do %>
+          <i class="mdi mdi-chart-areaspline mdi-36px"></i>
+          Maestro
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card shadow-cm is-hovered">
+      <div class="card-content">
+        <%= link_to(resumen_path, html_options = {class: "is-middle-column has-text-danger"}) do %>
+          <i class="mdi mdi-library-books mdi-36px"></i>
+          Resumen
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <% else %>
@@ -131,7 +232,7 @@
     <div class="card shadow-cm is-hovered">
       <div class="card-content">
         <%= link_to(macroproceso_path, html_options = {class: "is-middle-column has-text-danger"}) do %>
-          <i class="mdi mdi-map mdi-36px"></i>
+          <i class="mdi mdi-sitemap mdi-36px"></i>
           Macroproceso
         <% end %>
       </div>
@@ -154,7 +255,7 @@
     <div class="card shadow-cm is-hovered">
       <div class="card-content">  
         <%= link_to(fuerzas_porter_path, html_options = {class: "is-middle-column has-text-danger"}) do %> 
-          <i class="mdi mdi-trending-up mdi-24px"></i>
+          <i class="mdi mdi-hammer mdi-24px"></i>
           Fuerzas de Porter
         <% end %>
       </div>
@@ -164,7 +265,7 @@
     <div class="card shadow-cm is-hovered">
       <div class="card-content">
         <%= link_to(factores_internos_path, html_options = {class: "is-middle-column has-text-danger"}) do %>
-          <i class="mdi mdi-trending-up mdi-24px"></i>
+          <i class="mdi mdi-comment-arrow-right-outline mdi-24px"></i>
           Factores Internos
         <% end %>
       </div>
@@ -174,8 +275,66 @@
     <div class="card shadow-cm is-hovered">
       <div class="card-content">
         <%= link_to(factores_externos_path, html_options = {class: "is-middle-column has-text-danger"}) do %>
-          <i class="mdi mdi-trending-up mdi-24px"></i>
+          <i class="mdi mdi-comment-arrow-left-outline mdi-24px"></i>
           Factores Externos
+        <% end %>
+      </div>
+    </div>
+  </div>
+  
+
+  
+</div>
+<div class="columns has-text-weight-bold">
+  <div class="column">
+    <div class="card shadow-cm is-hovered">
+      <div class="card-content">
+        <%= link_to(matriz_foda_path, html_options = {class: "is-middle-column has-text-danger"}) do %>
+          <i class="mdi mdi-matrix mdi-24px"></i>
+          Matriz Foda
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+   <div class="column">
+    <div class="card shadow-cm is-hovered">
+      <div class="card-content">
+        <%= link_to(mapa_estrategico_path, html_options = {class: "is-middle-column has-text-danger"}) do %>
+          <i class="mdi mdi-map mdi-24px"></i>
+          Mapa Estratégico
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+   <div class="column">
+    <div class="card shadow-cm is-hovered">
+      <div class="card-content">
+        <%= link_to(indicador_datos_path, html_options = {class: "is-middle-column has-text-danger"}) do %>
+          <i class="mdi mdi-database mdi-24px"></i>
+          Datos
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card shadow-cm is-hovered">
+      <div class="card-content">
+        <%= link_to(indicador_maestro_path, html_options = {class: "is-middle-column has-text-danger"}) do %>
+          <i class="mdi mdi-chart-areaspline mdi-24px"></i>
+          Maestro
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="card shadow-cm is-hovered">
+      <div class="card-content">
+        <%= link_to(indicador_resumen_path, html_options = {class: "is-middle-column has-text-danger"}) do %>
+          <i class="mdi mdi-library-books mdi-24px"></i>
+          Resumen
         <% end %>
       </div>
     </div>

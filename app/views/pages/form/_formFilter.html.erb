@@ -1,0 +1,74 @@
+<div class="modal modal-filtro">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <%= form_tag '/indicador-maestro', method: :get do %>    
+        <header class="modal-card-head">
+        <p class="modal-card-title">Comparar los años</p>
+        <button class="button is-danger close-modal">X</button>
+        </header>
+        <section class="modal-card-body">
+            <div class="title is-5">Elegir los años: </div>
+
+            <div class="field">
+                <label class="label is-normal" id="anterior" >Valor anterior</label>
+                <div class="control"> 
+                    <div class="select is-info is-fullwidth">
+                        <select name="anterior" id="anterior">
+                            <option value="">Seleccionar el año</option>
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label is-normal" id="actual" >Valor actual</label>
+                <div class="control"> 
+                    <div class="select is-info is-fullwidth">
+                        <select name="actual" id="actual">
+                            <option value="">Seleccionar el año</option>
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label is-normal" id="semaforo" >Valor del semáforo</label>
+                <div class="control"> 
+                    <div class="select is-info is-fullwidth">
+                        <select name="semaforo" id="semaforo">
+                            <option value="">Seleccionar el año</option>
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <footer class="modal-card-foot">
+        <button type="submit" class="button is-success">Comparar</button>
+        <button class="button" class="close-modal">Cancelar</button>
+        </footer>
+   
+    <% end %>
+  </div>
+</div>

@@ -12,7 +12,13 @@
     </nav>
   </div>
   <div class="column is-flex-row-end">
-    <%= link_to maestro_path, class: "button is-info" do %>
+    <%= link_to indicators_path, class: "button is-info" do %>
+      <span class="icon">
+        <i class="mdi mdi-arrow-left"></i>
+      </span>
+      <p> Ver indicadores </p>      
+    <% end %>
+    <%= link_to maestro_path, class: "ml-10 button is-info" do %>
       <p> Ver maestro </p>
       <span class="icon">
         <i class="mdi mdi-arrow-right"></i>

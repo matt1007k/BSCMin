@@ -30,6 +30,8 @@ class Indicator < ApplicationRecord
   belongs_to :objective
 
   has_many :datos
+  has_many :fichas
 
   scope :objetivo, -> (objective_id) { where objective_id: objective_id }
+
 end

@@ -1,0 +1,426 @@
+<% @title = "Ficha de Indicadores" %>
+<div class="columns">
+  <div class="column">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li> <%= link_to  "Dashboard", root_path %></li>
+        <li class="is-active">      
+          <a href="#" aria-current="page">Ficha de Indicadores</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="column is-flex-row-end">
+    <%= link_to maestro_path, class: "button is-info" do %>
+      <p> Ver el maestro </p>
+      <span class="icon">
+        <i class="mdi mdi-arrow-right"></i>
+      </span>
+    <% end %>
+  </div>
+</div>
+
+
+<div class="columns">
+  <div class="column">
+      <div class="card margin-small shadow-cm">
+        <div class="card-content">
+          <p class="title is-4 has-text-centered">Ficha de Indicadores</p>
+          <p class="subtitle is-6 has-text-centered">Fecha para cada indicador.</p>
+
+          <div class="title is-4"> Perspectivas </div>
+          <div class="columns">
+            <div class="column">
+                <div class="tabs is-centered is-boxed"  id="tab_header">
+                  <ul>
+                      <li class="item is-active" data-option="financiera-1">
+                          <a>
+                              <span class="icon is-small"><i class="mdi mdi-cash mdi-24px" aria-hidden="true"></i></span>
+                              <span>Financiera</span>
+                          </a>
+                      </li>
+                      <li class="item" data-option="cliente-1">
+                          <a>
+                              <span class="icon is-small"><i class="mdi mdi-account-group mdi-24px" aria-hidden="true"></i></span>
+                              <span>Cliente</span>
+                          </a>
+                      </li>
+                      <li class="item" data-option="procesos-1">
+                          <a>
+                              <span class="icon is-small"><i class="mdi mdi-message-processing mdi-24px" aria-hidden="true"></i></span>
+                              <span>Procesos Internos</span>
+                          </a>
+                      </li>
+                      <li class="item" data-option="aprendizaje-1">
+                          <a>
+                              <span class="icon is-small"><i class="mdi mdi-school mdi-24px" aria-hidden="true"></i></span>
+                              <span>Aprendizaje y Crecimiento</span>
+                          </a>
+                      </li>
+                  </ul>
+                </div>
+
+
+                <div class="box" id="tab_container">
+                <!-- Finaciera -->
+                  
+                
+                    <div class="container_item is-active" data-item="financiera-1">
+                      <%-if  @objectivos.perspectiva(1).count > 0 %>
+                        <table class="table is-fullwidth">
+                          <thead>
+                            <tr>
+                              <th></th>
+                              <th>Indicador</th>
+                              <th>Unidad</th>
+                              <th>Tiempo</th>
+                              <th>Meta</th>
+                              <th>Verde</th>
+                              <th>Amarillo</th>
+                              <th>Rojo</th>
+                              <th>Acciones</th>
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                            <% @objectivos.perspectiva(1).each do |objectivo| %>
+                                 
+                              <% objectivo.indicators.each do |indicator| %>
+                              <tr> 
+                                <% if indicator.fichas.count > 0 %>
+                                  <td></td>
+                                <% else %>
+                                  <td>
+                                    <span data-label="<%= t('.new_link') %>" class="is-black is-top is-medium tooltip">
+                                      <%= link_to ficha_new_path(indicator), class: "button is-success" do %>
+                                        <span class="icon">
+                                          <i class="mdi mdi-library-plus"></i>
+                                        </span>                                    
+                                      <% end %>
+                                    </span>
+                                  </td>
+                                <% end %>
+                                  <td><%= indicator.indicador %></td>
+
+                                <% if indicator.fichas.count > 0 %>
+                                  <% indicator.fichas.each do |ficha| %>
+                                    <td class="has-text-centered"><%= ficha.unidad %></td>
+                                    <td class="has-text-centered"><%= ficha.tiempo %></td>
+                                    <td class="has-text-centered"><%= ficha.meta %></td>   
+                                    <td class="has-text-centered has-background-black has-text-success"><%= ficha.verde %></td> 
+                                    <td class="has-text-centered has-background-black has-text-warning"><%= ficha.amarillo %></td> 
+                                    <td class="has-text-centered has-background-black has-text-danger"><%= ficha.rojo %></td> 
+                                                      
+                                    <td>
+                                      <span data-label="<%= t('.edit_link') %>" class="is-black is-top is-medium tooltip">
+                                        <%= link_to ficha_edit_path(ficha, indicator), class: "button is-info is-small" do %>
+                                            <span class="icon">
+                                              <i class="mdi mdi-update"></i>
+                                            </span>
+                                        <% end %>
+                                      </span>
+                                      <span data-label="<%= t('.remove_link') %>" class="is-black is-top is-medium tooltip">
+                                        <%= link_to ficha_url(ficha), method: :delete, class: "button is-danger is-small", data: {confirm: "¿Está seguro de eliminar la ficha?"} do %>
+                                            <span class="icon">
+                                              <i class="mdi mdi-close"></i>
+                                            </span>
+                                        <% end %> 
+                                      </span>                                 
+                                    </td>
+                                  <% end %>
+                                <% else %>
+                                  <td colspan="7">
+                                    <h4 class="title is-4">
+                                        <span class="tag is-warning is-full-width">El indicador no tiene una ficha..!</span>
+                                    </h4>  
+                                  </td>
+                                <% end %>    
+                                 
+                              </tr>
+                              <% end %>
+                                
+                             
+
+                            <% end %>
+                          </tbody>
+                        </table>
+                      <% else %>
+                        <div class="notification is-warning is-fullwidth"> No hay registros ingresados!!!</div>
+                      <% end %>
+                    </div>
+               
+                <!-- end Finaciera -->
+
+
+                <!-- Cliente -->
+                  <div class="container_item" data-item="cliente-1">
+                    <%-if  @objectivos.perspectiva(2).count > 0 %>
+                      <table class="table is-fullwidth">
+                        <thead>
+                          <tr>
+                            <th>Nuevo</th>
+                            <th>Indicador</th>
+                            <th>Unidad</th>
+                            <th>Tiempo</th>
+                            <th>Meta</th>
+                            <th>Verde</th>
+                            <th>Amarillo</th>
+                            <th>Rojo</th>
+                            <th>Acciones</th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <% @objectivos.perspectiva(2).each do |objectivo| %>
+                            <% objectivo.indicators.each do |indicator| %>
+                              <tr> 
+                                <% if indicator.fichas.count > 0 %>
+                                  <td></td>
+                                <% else %>
+                                  <td>
+                                    <span data-label="<%= t('.new_link') %>" class="is-black is-top is-medium tooltip">
+                                      <%= link_to ficha_new_path(indicator), class: "button is-success" do %>
+                                        <span class="icon">
+                                          <i class="mdi mdi-library-plus"></i>
+                                        </span>                                    
+                                      <% end %>
+                                    </span>
+                                  </td>
+                                <% end %>
+                                  <td><%= indicator.indicador %></td>
+
+                                <% if indicator.fichas.count > 0 %>
+                                  <% indicator.fichas.each do |ficha| %>
+                                    <td class="has-text-centered"><%= ficha.unidad %></td>
+                                    <td class="has-text-centered"><%= ficha.tiempo %></td>
+                                    <td class="has-text-centered"><%= ficha.meta %></td>   
+                                    <td class="has-text-centered has-background-black has-text-success"><%= ficha.verde %></td> 
+                                    <td class="has-text-centered has-background-black has-text-warning"><%= ficha.amarillo %></td> 
+                                    <td class="has-text-centered has-background-black has-text-danger"><%= ficha.rojo %></td> 
+                                                      
+                                    <td>
+                                      <span data-label="<%= t('.edit_link') %>" class="is-black is-top is-medium tooltip">
+                                        <%= link_to ficha_edit_path(ficha, indicator), class: "button is-info is-small" do %>
+                                            <span class="icon">
+                                              <i class="mdi mdi-update"></i>
+                                            </span>
+                                        <% end %>
+                                      </span>
+                                      <span data-label="<%= t('.remove_link') %>" class="is-black is-top is-medium tooltip">
+                                        <%= link_to ficha_url(ficha), method: :delete, class: "button is-danger is-small", data: {confirm: "¿Está seguro de eliminar la ficha?"} do %>
+                                            <span class="icon">
+                                              <i class="mdi mdi-close"></i>
+                                            </span>
+                                        <% end %> 
+                                      </span>                                 
+                                    </td>
+                                  <% end %>
+                                <% else %>
+                                  <td colspan="7">
+                                    <h4 class="title is-4">
+                                        <span class="tag is-warning is-full-width">El indicador no tiene una ficha..!</span>
+                                    </h4>  
+                                  </td>
+                                <% end %>    
+                                 
+                              </tr>
+                              <% end %>
+
+                            <% end %>
+                          </tbody>
+                        </table>
+                      <% else %>
+                        <div class="notification  is-warning is-fullwidth"> No hay registros ingresados!!!</div>
+                      <% end %>
+                  </div>
+               
+                <!-- end cliente -->
+
+
+                <!-- Procesos -->
+                
+                
+                    <div class="container_item" data-item="procesos-1">
+                      <%-if  @objectivos.perspectiva(3).count > 0 %>
+                        <table class="table is-fullwidth">
+                          <thead>
+                            <tr>
+                              <th>Nuevo</th>
+                              <th>Indicador</th>
+                              <th>Unidad</th>
+                              <th>Tiempo</th>
+                              <th>Meta</th>
+                              <th>Verde</th>
+                              <th>Amarillo</th>
+                              <th>Rojo</th>
+                              <th>Acciones</th>
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                            <% @objectivos.perspectiva(3).each do |objectivo| %>
+                              <% objectivo.indicators.each do |indicator| %>
+                              <tr> 
+                                <% if indicator.fichas.count > 0 %>
+                                  <td></td>
+                                <% else %>
+                                  <td>
+                                    <span data-label="<%= t('.new_link') %>" class="is-black is-top is-medium tooltip">
+                                      <%= link_to ficha_new_path(indicator), class: "button is-success" do %>
+                                        <span class="icon">
+                                          <i class="mdi mdi-library-plus"></i>
+                                        </span>                                    
+                                      <% end %>
+                                    </span>
+                                  </td>
+                                <% end %>
+                                  <td><%= indicator.indicador %></td>
+
+                                <% if indicator.fichas.count > 0 %>
+                                  <% indicator.fichas.each do |ficha| %>
+                                    <td class="has-text-centered"><%= ficha.unidad %></td>
+                                    <td class="has-text-centered"><%= ficha.tiempo %></td>
+                                    <td class="has-text-centered"><%= ficha.meta %></td>   
+                                    <td class="has-text-centered has-background-black has-text-success"><%= ficha.verde %></td> 
+                                    <td class="has-text-centered has-background-black has-text-warning"><%= ficha.amarillo %></td> 
+                                    <td class="has-text-centered has-background-black has-text-danger"><%= ficha.rojo %></td> 
+                                                      
+                                    <td>
+                                      <span data-label="<%= t('.edit_link') %>" class="is-black is-top is-medium tooltip">
+                                        <%= link_to ficha_edit_path(ficha, indicator), class: "button is-info is-small" do %>
+                                            <span class="icon">
+                                              <i class="mdi mdi-update"></i>
+                                            </span>
+                                        <% end %>
+                                      </span>
+                                      <span data-label="<%= t('.remove_link') %>" class="is-black is-top is-medium tooltip">
+                                        <%= link_to ficha_url(ficha), method: :delete, class: "button is-danger is-small", data: {confirm: "¿Está seguro de eliminar la ficha?"} do %>
+                                            <span class="icon">
+                                              <i class="mdi mdi-close"></i>
+                                            </span>
+                                        <% end %> 
+                                      </span>                                 
+                                    </td>
+                                  <% end %>
+                                <% else %>
+                                  <td colspan="7">
+                                    <h4 class="title is-4">
+                                        <span class="tag is-warning is-full-width">El indicador no tiene una ficha..!</span>
+                                    </h4>  
+                                  </td>
+                                <% end %>    
+                                 
+                              </tr>
+                              <% end %>
+
+                            <% end %>
+                          </tbody>
+                        </table>
+                      <% else %>
+                        <div class="notification is-warning is-fullwidth"> No hay registros ingresados!!!</div>
+                      <% end %>
+                    </div>
+                <!-- end Procesos -->
+
+                <!-- Crecimiento -->
+               
+               
+                <div class="container_item" data-item="aprendizaje-1">
+                  <%-if  @objectivos.perspectiva(4).count > 0 %>
+                    <table class="table is-fullwidth">
+                      <thead>
+                        <tr>
+                          <th>Nuevo</th>
+                          <th>Indicador</th>
+                          <th>Unidad</th>
+                          <th>Tiempo</th>
+                          <th>Meta</th>
+                          <th>Verde</th>
+                          <th>Amarillo</th>
+                          <th>Rojo</th>
+                          <th>Acciones</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        <% @objectivos.perspectiva(4).each do |objectivo| %>
+                          <% objectivo.indicators.each do |indicator| %>
+                            <tr> 
+                              <% if indicator.fichas.count > 0 %>
+                                <td></td>
+                              <% else %>
+                                <td>
+                                  <span data-label="<%= t('.new_link') %>" class="is-black is-top is-medium tooltip">
+                                    <%= link_to ficha_new_path(indicator), class: "button is-success" do %>
+                                      <span class="icon">
+                                        <i class="mdi mdi-library-plus"></i>
+                                      </span>                                    
+                                    <% end %>
+                                  </span>
+                                </td>
+                              <% end %>
+                                <td><%= indicator.indicador %></td>
+
+                              <% if indicator.fichas.count > 0 %>
+                                <% indicator.fichas.each do |ficha| %>
+                                  <td class="has-text-centered"><%= ficha.unidad %></td>
+                                  <td class="has-text-centered"><%= ficha.tiempo %></td>
+                                  <td class="has-text-centered"><%= ficha.meta %></td>   
+                                  <td class="has-text-centered has-background-black has-text-success"><%= ficha.verde %></td> 
+                                  <td class="has-text-centered has-background-black has-text-warning"><%= ficha.amarillo %></td> 
+                                  <td class="has-text-centered has-background-black has-text-danger"><%= ficha.rojo %></td> 
+                                                    
+                                  <td>
+                                    <span data-label="<%= t('.edit_link') %>" class="is-black is-top is-medium tooltip">
+                                      <%= link_to ficha_edit_path(ficha, indicator), class: "button is-info is-small" do %>
+                                          <span class="icon">
+                                            <i class="mdi mdi-update"></i>
+                                          </span>
+                                      <% end %>
+                                    </span>
+                                    <span data-label="<%= t('.remove_link') %>" class="is-black is-top is-medium tooltip">
+                                      <%= link_to ficha_url(ficha), method: :delete, class: "button is-danger is-small", data: {confirm: "¿Está seguro de eliminar la ficha?"} do %>
+                                          <span class="icon">
+                                            <i class="mdi mdi-close"></i>
+                                          </span>
+                                      <% end %> 
+                                    </span>                                 
+                                  </td>
+                                <% end %>
+                              <% else %>
+                                <td colspan="7">
+                                  <h4 class="title is-4">
+                                      <span class="tag is-warning is-full-width">El indicador no tiene una ficha..!</span>
+                                  </h4>  
+                                </td>
+                              <% end %>    
+                                 
+                              </tr>
+                            <% end %>
+
+                          <% end %>
+                        </tbody>
+                      </table>
+                    <% else %>
+                      <div class="notification is-warning is-fullwidth"> No hay registros ingresados!!!</div>
+                    <% end %>
+                </div>
+                
+                <!-- end Crecimiento -->  
+              </div>
+
+
+
+            </div>
+          </div>          
+
+          
+      </div>
+  </div> 
+
+  
+</div>
+
+ 
+

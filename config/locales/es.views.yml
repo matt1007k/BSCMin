@@ -57,6 +57,11 @@ es:
       new_link: "Agregar indicador"
       edit_link: "Editar indicador"
       remove_link: "Eliminar indicador"
+  fichas:
+    index:     
+      new_link: "Agregar ficha"
+      edit_link: "Editar ficha"
+      remove_link: "Eliminar ficha"
   datos:
     index:     
       new_link: "Agregar año"

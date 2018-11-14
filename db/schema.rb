@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_26_134614) do
+ActiveRecord::Schema.define(version: 2018_11_14_042124) do
 
   create_table "activities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "name"
@@ -71,6 +71,19 @@ ActiveRecord::Schema.define(version: 2018_10_26_134614) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["force_id"], name: "index_factors_on_force_id"
+  end
+
+  create_table "fichas", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "unidad"
+    t.string "tiempo"
+    t.integer "meta"
+    t.string "verde"
+    t.string "amarillo"
+    t.string "rojo"
+    t.bigint "indicator_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["indicator_id"], name: "index_fichas_on_indicator_id"
   end
 
   create_table "forces", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -204,6 +217,7 @@ ActiveRecord::Schema.define(version: 2018_10_26_134614) do
   add_foreign_key "activities", "areas"
   add_foreign_key "datos", "indicators"
   add_foreign_key "factors", "forces"
+  add_foreign_key "fichas", "indicators"
   add_foreign_key "in_objectives", "objectives"
   add_foreign_key "in_objectives", "strategies"
   add_foreign_key "indicators", "objectives"

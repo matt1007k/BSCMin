@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   get '/factores-externos', to: "pages#factor_externo"
   get '/matriz-foda', to: "pages#matriz_foda"
   get '/mapa-estrategico', to: "pages#mapa_estrategico"
+  get '/indicador-datos', to: "pages#indicador_datos"
+  get '/indicador-maestro', to: "pages#indicador_maestro"
+  get '/indicador-resumen', to: "pages#indicador_resumen"
 
 
   devise_for :users
@@ -20,9 +23,11 @@ Rails.application.routes.draw do
   resources :perspectives, only: [:edit, :update, :new, :create]
   resources :objectives, :expect => [:show, :new, :edit]
   resources :procesos, :expect => [:update, :show] 
-  resources :datos, :fichas
-  resources :indicators, :expect => [:new, :edit]
+  resources :datos 
+  resources :indicators, :fichas, :expect => [:new, :edit]
   
+  get '/organigrama-empresa', to: 'informations#organigrama', as: 'organigrama_empresa'
+
   put '/procesos/:id', to: 'procesos#update', as: 'update_proceso'
 
   get '/subproceso/new/:proceso_id', to: 'subprocesos#new', as: 'new_subproceso'
@@ -55,7 +60,11 @@ Rails.application.routes.draw do
   
   get '/nuevo-dato/:indicator_id', to: "datos#new", as: 'dato_new'
   get '/editar-dato/:id/:indicator_id', to: 'datos#edit', as: 'dato_edit'
+
+  get '/nuevo-ficha/:indicator_id', to: "fichas#new", as: 'ficha_new'
+  get '/editar-ficha/:id/:indicator_id', to: 'fichas#edit', as: 'ficha_edit'
   
-  get '/maestro', to: 'maestro#maestro', as: 'maestro'
+  get '/maestro', to: 'maestro#index', as: 'maestro'
+  get '/resumen', to: 'maestro#resumen', as: 'resumen'
 
 end

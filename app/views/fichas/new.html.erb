@@ -1,0 +1,26 @@
+<% @title = "Agregar Ficha" %>
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li> <%= link_to  "Estrableciendo Fichas", fichas_path %></li>
+    <li class="is-active">      
+      <a href="#" aria-current="page">Agregar Ficha</a>
+    </li>
+  </ul>
+</nav>
+
+
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter">
+      <div class="card margin-small">
+        <div class="card-content">
+          <p class="title is-4 has-text-centered">Agregar Ficha</p>
+          <p class="subtitle is-6 has-text-centered">Nuevo Ficha del Indicador.</p>
+                      
+          <%= render 'form', ficha: @ficha, indicator_id: @indicator_id %>
+
+            <%= link_to 'Regresar', fichas_path %>
+      </div>
+  </div> 
+
+  
+</div>

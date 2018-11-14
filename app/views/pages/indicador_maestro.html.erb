@@ -1,0 +1,645 @@
+<% @title = "Maestro" %>
+
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
+    <li> <%= link_to  "Dashboard", root_path %></li>
+    <li class="is-active">      
+      <a href="#" aria-current="page">Maestro</a>
+    </li>
+  </ul>
+</nav>
+  
+<div class="columns">
+  <div class="column is-flex-row-start">
+    <%= link_to datos_path, class: "button is-info" do %>
+      <span class="icon">
+        <i class="mdi mdi-arrow-left"></i>
+      </span>
+      <p> Ver datos </p>      
+    <% end %>
+  </div>
+
+  <div class="column is-flex-row-end">
+    <%= link_to resumen_path, class: "button is-info" do %>
+      <p> Ver resumen del maestro </p>
+      <span class="icon">
+        <i class="mdi mdi-arrow-right"></i>
+      </span>
+    <% end %>
+  </div>
+</div>
+
+
+<div class="columns">
+  <div class="column">
+      <div class="card margin-small shadow-cm">
+        <div class="card-content">
+          <p class="title is-4 has-text-centered">Maestro</p>
+          <p class="subtitle is-6 has-text-centered">Maestro para cada indicador.</p>
+
+          <div class="title is-4"> Perspectivas </div>
+
+          <%= render 'pages/form/formFilter' %>
+          <div class="columns">
+            <div class="column">
+                <div class="tabs is-centered is-boxed"  id="tab_header">
+                  <ul>
+                      <li class="item is-active" data-option="financiera-1">
+                          <a>
+                              <span class="icon is-small"><i class="mdi mdi-cash mdi-24px" aria-hidden="true"></i></span>
+                              <span>Financiera</span>
+                          </a>
+                      </li>
+                      <li class="item" data-option="cliente-1">
+                          <a>
+                              <span class="icon is-small"><i class="mdi mdi-account-group mdi-24px" aria-hidden="true"></i></span>
+                              <span>Cliente</span>
+                          </a>
+                      </li>
+                      <li class="item" data-option="procesos-1">
+                          <a>
+                              <span class="icon is-small"><i class="mdi mdi-message-processing mdi-24px" aria-hidden="true"></i></span>
+                              <span>Procesos Internos</span>
+                          </a>
+                      </li>
+                      <li class="item" data-option="aprendizaje-1">
+                          <a>
+                              <span class="icon is-small"><i class="mdi mdi-school mdi-24px" aria-hidden="true"></i></span>
+                              <span>Aprendizaje y Crecimiento</span>
+                          </a>
+                      </li>
+                  </ul>
+                </div>
+
+
+                <div class="box" id="tab_container">
+                <!-- Finaciera -->
+                  
+                
+                    <div class="container_item is-active" data-item="financiera-1">
+                      <%-if  @objectivos.perspectiva(1).count > 0 %>
+                        <table class="table is-fullwidth">
+                          <thead>
+                            <tr>
+                              <th>Objectivos</th>
+                              <th>Indicadores</th>
+                              <th>Unidad</th>
+                              <th>Tiempo</th>
+                              <th>Meta</th>
+                              <th>Valor anterior</th>
+                              <th>Valor actual</th>
+                              <th>Semáforo</th>
+                              <th class="has-background-success has-text-white">Verde</th>
+                              <th class="has-background-warning has-text-white">Amarillo</th>
+                              <th class="has-background-danger has-text-white">Rojo</th>
+                              <th>
+                                <span data-label="Comparar años" class="is-black is-top is-medium tooltip">
+                                  <a href="#" data-modal="filtro" class="button is-info">                                  
+                                    <span class="icon">
+                                      <i class="mdi mdi-filter-variant"></i>
+                                    </span> 
+                                  </a>
+                                </span>
+                              </th>
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                            <% @objectivos.perspectiva(1).each do |objectivo| %>
+                            <tr> 
+                              <td><%= objectivo.content %></td>
+                              <% objectivo.indicators.each do |indicator| %>
+                              <tr> 
+                                <td></td>                                
+                                <td><%= indicator.indicador %></td>
+
+                                <% if indicator.fichas.count > 0 %>
+                                  <% indicator.fichas.each do |ficha| %>
+                                    <td class="has-text-centered"><%= ficha.unidad %></td>
+                                    <td class="has-text-centered"><%= ficha.tiempo %></td>
+                                    <td class="has-text-centered"><%= ficha.meta %></td>
+
+                                    <% if indicator.datos.anio(@ano_anterior).count > 0 %>
+                                      <% indicator.datos.anio(@ano_anterior).each do |dato| %>
+                                          <td class="has-text-centered">
+                                            <% if indicator.tipo == "numero" %>
+                                              <%= dato.total %>
+                                            <% else %>
+                                              <%= dato.porcentaje %>%
+                                            <% end %>
+                                          </td>                                        
+                                      <% end %>
+                                    <% else %>
+                                      <td class="has-text-danger">No exite el año</td> 
+                                    <% end %>
+                                    <% if indicator.datos.anio(@ano_actual).count > 0 %>
+                                      <% indicator.datos.anio(@ano_actual).each do |dato| %>
+                                        <td class="has-text-centered">
+                                          <% if indicator.tipo == "numero" %>
+                                            <%= dato.total %>
+                                          <% else %>
+                                            <%= dato.porcentaje %>%
+                                          <% end %>
+                                        </td>
+                                      <% end %>
+                                    <% else %>
+                                      <td class="has-text-danger">No exite el año</td> 
+                                    <% end %>
+                                    <%#= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                    <% if indicator.datos.anio(@semaforo).count > 0 %>
+                                      <% indicator.datos.anio(@semaforo).each do |dato| %>
+                                          <td class="has-text-centered">
+                                            <% if indicator.tipo == "numero" %>
+                                              <% if dato.total >= ficha.meta %>
+                                                <p class="has-text-success"><%= dato.total %></p>
+                                              <% elsif dato.total < ficha.meta && dato.total >= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-warning"><%= dato.total %></p>
+                                              <% elsif dato.total < (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-danger"><%= dato.total %></p>
+                                              <% end %>
+                                            <% elsif indicator.tipo == "reducir" %>
+
+                                              <% if dato.porcentaje <= ficha.meta %>
+                                                <p class="has-text-success"><%= dato.porcentaje %>%</p>
+                                              <% elsif dato.porcentaje > ficha.meta && dato.porcentaje <= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-warning"><%= dato.porcentaje %>%</p>
+                                              <% elsif dato.porcentaje > (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-danger"><%= dato.porcentaje %>%</p>
+                                              <% end %>
+
+                                            <% else %>
+                                              <% if dato.porcentaje >= ficha.meta %>
+                                                <p class="has-text-success"><%= dato.porcentaje %>%</p>
+                                              <% elsif dato.porcentaje < ficha.meta && dato.porcentaje >= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-warning"><%= dato.porcentaje %>%</p>
+                                              <% elsif dato.porcentaje < (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-danger"><%= dato.porcentaje %>%</p>
+                                              <% end %>
+                                            <% end %>
+                                          </td>
+                                      <% end %>                                      
+                                    <% else %>
+                                      <td class="has-text-danger">No exite el año</td> 
+                                    <% end %>
+                                    <td class="has-text-centered has-text-success"><%= ficha.verde %></td> 
+                                    <td class="has-text-centered has-text-warning"><%= ficha.amarillo %></td> 
+                                    <td class="has-text-centered has-text-danger"><%= ficha.rojo %></td> 
+                                                      
+                                    <td>
+                                      
+                                    </td>
+                                  <% end %>
+                                <% else %>
+                                  <td colspan="7">
+                                    <h4 class="title is-4">
+                                        <span class="tag is-warning is-full-width">El indicador no tiene una ficha..!</span>
+                                    </h4>  
+                                  </td>
+                                <% end %>    
+                                 
+                              </tr>
+                              <% end %>
+                                
+                             
+                            </tr>
+                            <% end %>
+                          </tbody>
+                        </table>
+                      <% else %>
+                        <div class="notification is-warning is-fullwidth"> No hay registros ingresados!!!</div>
+                      <% end %>
+                    </div>
+               
+                <!-- end Finaciera -->
+
+
+                <!-- Cliente -->
+                  <div class="container_item" data-item="cliente-1">
+                    <%-if  @objectivos.perspectiva(2).count > 0 %>
+                      <table class="table is-fullwidth">
+                          <thead>
+                            <tr>
+                              <th>Objectivos</th>
+                              <th>Indicadores</th>
+                              <th>Unidad</th>
+                              <th>Tiempo</th>
+                              <th>Meta</th>
+                              <th>Valor anterior</th>
+                              <th>Valor actual</th>
+                              <th>Semáforo</th>
+                              <th class="has-background-success has-text-white">Verde</th>
+                              <th class="has-background-warning has-text-white">Amarillo</th>
+                              <th class="has-background-danger has-text-white">Rojo</th>
+                              <th>
+                                <span data-label="Comparar años" class="is-black is-top is-medium tooltip">
+                                  <a href="#" data-modal="filtro" class="button is-info">                                  
+                                    <span class="icon">
+                                      <i class="mdi mdi-filter-variant"></i>
+                                    </span> 
+                                  </a>
+                                </span>
+                              </th>
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                            <% @objectivos.perspectiva(2).each do |objectivo| %>
+                            <tr> 
+                              <td><%= objectivo.content %></td>
+                              <% objectivo.indicators.each do |indicator| %>
+                              <tr> 
+                                <td></td>                                
+                                <td><%= indicator.indicador %></td>
+
+                                <% if indicator.fichas.count > 0 %>
+                                  <% indicator.fichas.each do |ficha| %>
+                                    <td class="has-text-centered"><%= ficha.unidad %></td>
+                                    <td class="has-text-centered"><%= ficha.tiempo %></td>
+                                    <td class="has-text-centered"><%= ficha.meta %></td>
+
+                                    <% if indicator.datos.anio(@ano_anterior).count > 0 %>
+                                      <% indicator.datos.anio(@ano_anterior).each do |dato| %>
+                                          <td class="has-text-centered">
+                                            <% if indicator.tipo == "numero" %>
+                                              <%= dato.total %>
+                                            <% else %>
+                                              <%= dato.porcentaje %>%
+                                            <% end %>
+                                          </td>                                        
+                                      <% end %>
+                                    <% else %>
+                                      <td class="has-text-danger">No exite el año</td> 
+                                    <% end %>
+                                    <% if indicator.datos.anio(@ano_actual).count > 0 %>
+                                      <% indicator.datos.anio(@ano_actual).each do |dato| %>
+                                        <td class="has-text-centered">
+                                          <% if indicator.tipo == "numero" %>
+                                            <%= dato.total %>
+                                          <% else %>
+                                            <%= dato.porcentaje %>%
+                                          <% end %>
+                                        </td>
+                                      <% end %>
+                                    <% else %>
+                                      <td class="has-text-danger">No exite el año</td> 
+                                    <% end %>
+                                    <%#= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                    <% if indicator.datos.anio(@semaforo).count > 0 %>
+                                      <% indicator.datos.anio(@semaforo).each do |dato| %>
+                                          <td class="has-text-centered">
+                                            <% if indicator.tipo == "numero" %>
+                                              <% if dato.total >= ficha.meta %>
+                                                <p class="has-text-success"><%= dato.total %></p>
+                                              <% elsif dato.total < ficha.meta && dato.total >= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-warning"><%= dato.total %></p>
+                                              <% elsif dato.total < (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-danger"><%= dato.total %></p>
+                                              <% end %>
+                                            <% elsif indicator.tipo == "reducir" %>
+
+                                              <% if dato.porcentaje <= ficha.meta %>
+                                                <p class="has-text-success"><%= dato.porcentaje %>%</p>
+                                              <% elsif dato.porcentaje > ficha.meta && dato.porcentaje <= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-warning"><%= dato.porcentaje %>%</p>
+                                              <% elsif dato.porcentaje > (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-danger"><%= dato.porcentaje %>%</p>
+                                              <% end %>
+
+                                            <% else %>
+                                              <% if dato.porcentaje >= ficha.meta %>
+                                                <p class="has-text-success"><%= dato.porcentaje %>%</p>
+                                              <% elsif dato.porcentaje < ficha.meta && dato.porcentaje >= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-warning"><%= dato.porcentaje %>%</p>
+                                              <% elsif dato.porcentaje < (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-danger"><%= dato.porcentaje %>%</p>
+                                              <% end %>
+                                            <% end %>
+                                          </td>
+                                      <% end %>                                      
+                                    <% else %>
+                                      <td class="has-text-danger">No exite el año</td> 
+                                    <% end %>
+                                    <td class="has-text-centered has-text-success"><%= ficha.verde %></td> 
+                                    <td class="has-text-centered has-text-warning"><%= ficha.amarillo %></td> 
+                                    <td class="has-text-centered has-text-danger"><%= ficha.rojo %></td> 
+                                                      
+                                    <td>
+                                      
+                                    </td>
+                                  <% end %>
+                                <% else %>
+                                  <td colspan="7">
+                                    <h4 class="title is-4">
+                                        <span class="tag is-warning is-full-width">El indicador no tiene una ficha..!</span>
+                                    </h4>  
+                                  </td>
+                                <% end %>    
+                                 
+                              </tr>
+                              <% end %>
+                                
+                             
+                            </tr>
+                            <% end %>
+                          </tbody>
+                        </table>
+                      <% else %>
+                        <div class="notification  is-warning is-fullwidth"> No hay registros ingresados!!!</div>
+                      <% end %>
+                  </div>
+               
+                <!-- end cliente -->
+
+
+                <!-- Procesos -->
+                
+                
+                    <div class="container_item" data-item="procesos-1">
+                      <%-if  @objectivos.perspectiva(3).count > 0 %>
+                        <table class="table is-fullwidth">
+                          <thead>
+                            <tr>
+                              <th>Objectivos</th>
+                              <th>Indicadores</th>
+                              <th>Unidad</th>
+                              <th>Tiempo</th>
+                              <th>Meta</th>
+                              <th>Valor anterior</th>
+                              <th>Valor actual</th>
+                              <th>Semáforo</th>
+                              <th class="has-background-success has-text-white">Verde</th>
+                              <th class="has-background-warning has-text-white">Amarillo</th>
+                              <th class="has-background-danger has-text-white">Rojo</th>
+                              <th>
+                                <span data-label="Comparar años" class="is-black is-top is-medium tooltip">
+                                  <a href="#" data-modal="filtro" class="button is-info">                                  
+                                    <span class="icon">
+                                      <i class="mdi mdi-filter-variant"></i>
+                                    </span> 
+                                  </a>
+                                </span>
+                              </th>
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                            <% @objectivos.perspectiva(3).each do |objectivo| %>
+                            <tr> 
+                              <td><%= objectivo.content %></td>
+                              <% objectivo.indicators.each do |indicator| %>
+                              <tr> 
+                                <td></td>                                
+                                <td><%= indicator.indicador %></td>
+
+                                <% if indicator.fichas.count > 0 %>
+                                  <% indicator.fichas.each do |ficha| %>
+                                    <td class="has-text-centered"><%= ficha.unidad %></td>
+                                    <td class="has-text-centered"><%= ficha.tiempo %></td>
+                                    <td class="has-text-centered"><%= ficha.meta %></td>
+
+                                    <% if indicator.datos.anio(@ano_anterior).count > 0 %>
+                                      <% indicator.datos.anio(@ano_anterior).each do |dato| %>
+                                          <td class="has-text-centered">
+                                            <% if indicator.tipo == "numero" %>
+                                              <%= dato.total %>
+                                            <% else %>
+                                              <%= dato.porcentaje %>%
+                                            <% end %>
+                                          </td>                                        
+                                      <% end %>
+                                    <% else %>
+                                      <td class="has-text-danger">No exite el año</td> 
+                                    <% end %>
+                                    <% if indicator.datos.anio(@ano_actual).count > 0 %>
+                                      <% indicator.datos.anio(@ano_actual).each do |dato| %>
+                                        <td class="has-text-centered">
+                                          <% if indicator.tipo == "numero" %>
+                                            <%= dato.total %>
+                                          <% else %>
+                                            <%= dato.porcentaje %>%
+                                          <% end %>
+                                        </td>
+                                      <% end %>
+                                    <% else %>
+                                      <td class="has-text-danger">No exite el año</td> 
+                                    <% end %>
+                                    <%#= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                    <% if indicator.datos.anio(@semaforo).count > 0 %>
+                                      <% indicator.datos.anio(@semaforo).each do |dato| %>
+                                          <td class="has-text-centered">
+                                            <% if indicator.tipo == "numero" %>
+                                              <% if dato.total >= ficha.meta %>
+                                                <p class="has-text-success"><%= dato.total %></p>
+                                              <% elsif dato.total < ficha.meta && dato.total >= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-warning"><%= dato.total %></p>
+                                              <% elsif dato.total < (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-danger"><%= dato.total %></p>
+                                              <% end %>
+                                            <% elsif indicator.tipo == "reducir" %>
+
+                                              <% if dato.porcentaje <= ficha.meta %>
+                                                <p class="has-text-success"><%= dato.porcentaje %>%</p>
+                                              <% elsif dato.porcentaje > ficha.meta && dato.porcentaje <= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-warning"><%= dato.porcentaje %>%</p>
+                                              <% elsif dato.porcentaje > (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-danger"><%= dato.porcentaje %>%</p>
+                                              <% end %>
+
+                                            <% else %>
+                                              <% if dato.porcentaje >= ficha.meta %>
+                                                <p class="has-text-success"><%= dato.porcentaje %>%</p>
+                                              <% elsif dato.porcentaje < ficha.meta && dato.porcentaje >= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-warning"><%= dato.porcentaje %>%</p>
+                                              <% elsif dato.porcentaje < (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-danger"><%= dato.porcentaje %>%</p>
+                                              <% end %>
+                                            <% end %>
+                                          </td>
+                                      <% end %>                                      
+                                    <% else %>
+                                      <td class="has-text-danger">No exite el año</td> 
+                                    <% end %>
+                                    <td class="has-text-centered has-text-success"><%= ficha.verde %></td> 
+                                    <td class="has-text-centered has-text-warning"><%= ficha.amarillo %></td> 
+                                    <td class="has-text-centered has-text-danger"><%= ficha.rojo %></td> 
+                                                      
+                                    <td>
+                                      
+                                    </td>
+                                  <% end %>
+                                <% else %>
+                                  <td colspan="7">
+                                    <h4 class="title is-4">
+                                        <span class="tag is-warning is-full-width">El indicador no tiene una ficha..!</span>
+                                    </h4>  
+                                  </td>
+                                <% end %>    
+                                 
+                              </tr>
+                              <% end %>
+                                
+                             
+                            </tr>
+                            <% end %>
+                          </tbody>
+                        </table>
+                      <% else %>
+                        <div class="notification is-warning is-fullwidth"> No hay registros ingresados!!!</div>
+                      <% end %>
+                    </div>
+                <!-- end Procesos -->
+
+                <!-- Crecimiento -->
+               
+               
+                <div class="container_item" data-item="aprendizaje-1">
+                  <%-if  @objectivos.perspectiva(4).count > 0 %>
+                    <table class="table is-fullwidth">
+                          <thead>
+                            <tr>
+                              <th>Objectivos</th>
+                              <th>Indicadores</th>
+                              <th>Unidad</th>
+                              <th>Tiempo</th>
+                              <th>Meta</th>
+                              <th>Valor anterior</th>
+                              <th>Valor actual</th>
+                              <th>Semáforo</th>
+                              <th class="has-background-success has-text-white">Verde</th>
+                              <th class="has-background-warning has-text-white">Amarillo</th>
+                              <th class="has-background-danger has-text-white">Rojo</th>
+                              <th>
+                                <span data-label="Comparar años" class="is-black is-top is-medium tooltip">
+                                  <a href="#" data-modal="filtro" class="button is-info">                                  
+                                    <span class="icon">
+                                      <i class="mdi mdi-filter-variant"></i>
+                                    </span> 
+                                  </a>
+                                </span>
+                              </th>
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                            <% @objectivos.perspectiva(4).each do |objectivo| %>
+                            <tr> 
+                              <td><%= objectivo.content %></td>
+                              <% objectivo.indicators.each do |indicator| %>
+                              <tr> 
+                                <td></td>                                
+                                <td><%= indicator.indicador %></td>
+
+                                <% if indicator.fichas.count > 0 %>
+                                  <% indicator.fichas.each do |ficha| %>
+                                    <td class="has-text-centered"><%= ficha.unidad %></td>
+                                    <td class="has-text-centered"><%= ficha.tiempo %></td>
+                                    <td class="has-text-centered"><%= ficha.meta %></td>
+
+                                    <% if indicator.datos.anio(@ano_anterior).count > 0 %>
+                                      <% indicator.datos.anio(@ano_anterior).each do |dato| %>
+                                          <td class="has-text-centered">
+                                            <% if indicator.tipo == "numero" %>
+                                              <%= dato.total %>
+                                            <% else %>
+                                              <%= dato.porcentaje %>%
+                                            <% end %>
+                                          </td>                                        
+                                      <% end %>
+                                    <% else %>
+                                      <td class="has-text-danger">No exite el año</td> 
+                                    <% end %>
+                                    <% if indicator.datos.anio(@ano_actual).count > 0 %>
+                                      <% indicator.datos.anio(@ano_actual).each do |dato| %>
+                                        <td class="has-text-centered">
+                                          <% if indicator.tipo == "numero" %>
+                                            <%= dato.total %>
+                                          <% else %>
+                                            <%= dato.porcentaje %>%
+                                          <% end %>
+                                        </td>
+                                      <% end %>
+                                    <% else %>
+                                      <td class="has-text-danger">No exite el año</td> 
+                                    <% end %>
+                                    <%#= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                    <% if indicator.datos.anio(@semaforo).count > 0 %>
+                                      <% indicator.datos.anio(@semaforo).each do |dato| %>
+                                          <td class="has-text-centered">
+                                            <% if indicator.tipo == "numero" %>
+                                              <% if dato.total >= ficha.meta %>
+                                                <p class="has-text-success"><%= dato.total %></p>
+                                              <% elsif dato.total < ficha.meta && dato.total >= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-warning"><%= dato.total %></p>
+                                              <% elsif dato.total < (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-danger"><%= dato.total %></p>
+                                              <% end %>
+                                            <% elsif indicator.tipo == "reducir" %>
+
+                                              <% if dato.porcentaje <= ficha.meta %>
+                                                <p class="has-text-success"><%= dato.porcentaje %>%</p>
+                                              <% elsif dato.porcentaje > ficha.meta && dato.porcentaje <= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-warning"><%= dato.porcentaje %>%</p>
+                                              <% elsif dato.porcentaje > (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-danger"><%= dato.porcentaje %>%</p>
+                                              <% end %>
+
+                                            <% else %>
+                                              <% if dato.porcentaje >= ficha.meta %>
+                                                <p class="has-text-success"><%= dato.porcentaje %>%</p>
+                                              <% elsif dato.porcentaje < ficha.meta && dato.porcentaje >= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-warning"><%= dato.porcentaje %>%</p>
+                                              <% elsif dato.porcentaje < (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-danger"><%= dato.porcentaje %>%</p>
+                                              <% end %>
+                                            <% end %>
+                                          </td>
+                                      <% end %>                                      
+                                    <% else %>
+                                      <td class="has-text-danger">No exite el año</td> 
+                                    <% end %>
+                                    <td class="has-text-centered has-text-success"><%= ficha.verde %></td> 
+                                    <td class="has-text-centered has-text-warning"><%= ficha.amarillo %></td> 
+                                    <td class="has-text-centered has-text-danger"><%= ficha.rojo %></td> 
+                                                      
+                                    <td>
+                                      
+                                    </td>
+                                  <% end %>
+                                <% else %>
+                                  <td colspan="7">
+                                    <h4 class="title is-4">
+                                        <span class="tag is-warning is-full-width">El indicador no tiene una ficha..!</span>
+                                    </h4>  
+                                  </td>
+                                <% end %>    
+                                 
+                              </tr>
+                              <% end %>
+                                
+                             
+                            </tr>
+                            <% end %>
+                          </tbody>
+                        </table>
+                    <% else %>
+                      <div class="notification is-warning is-fullwidth"> No hay registros ingresados!!!</div>
+                    <% end %>
+                </div>
+                
+                <!-- end Crecimiento -->  
+              </div>
+
+
+
+            </div>
+          </div>          
+
+          
+      </div>
+  </div> 
+
+  
+</div>
+
+ 
+

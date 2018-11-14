@@ -1,0 +1,78 @@
+<%= form_with(model: ficha, local: true) do |form| %>
+  <% if ficha.errors.any? %>
+    <div class="message is-danger">
+      <h2 class="title is-5 has-text-danger"><%= pluralize(ficha.errors.count, "error") %> al realizar la operación:</h2>
+      <div class="message-body">
+        <ul>
+          <% ficha.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :indicator_id, value: @indicator_id %>
+  <div class="field">
+    <%= form.label :unidad, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.text_field :unidad, class: "input is-info" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :tiempo, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.text_field :tiempo, class: "input is-info" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :meta, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.text_field :meta, class: "input is-info" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :verde, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.text_field :verde, class: "input is-info" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :amarillo, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.text_field :amarillo, class: "input is-info" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :rojo, class: "label is-normal" %>
+    <div class="control"> 
+      <%= form.text_field :rojo, class: "input is-info" %>
+    </div>
+  </div>
+  
+
+  <!--<div class="field">
+    <%#= form.label :tipo, class: "label is-normal" %>
+    <div class="control"> 
+      <div class="select is-primary is-fullwidth">
+        <%#= form.select :tipo, @tipos.map { |value| [ value, value ] }, {prompt: "Seleccione el tipo"}%>
+        <select name="ficha[tipo]" id="ficha_tipo">
+          <option value="">Seleccione el tipo</option>          
+          <option value="numero" <%#= if ficha.tipo == 'numero' then 'selected' else '' end %>>Número (Solo cantidad)</option>
+          <option value="incremento" <%#= if ficha.tipo == 'incremento' then 'selected' else '' end %>>Incrementar (%)</option>
+          <option value="reducir" <%#= if ficha.tipo == 'reducir' then 'selected' else '' end %>>Reducir (%)</option>
+          <option value="porcentaje" <%#= if ficha.tipo == 'porcentaje' then 'selected' else '' end %>>Porcentaje normal (Sin reducir o incrementar)</option>
+        </select>
+      </div>
+    </div>
+  </div>-->
+  
+  <div class="field is-grouped margin-small-topons">
+    <%= form.submit "Guardar", class: "button is-primary" %>
+  </div>
+<% end %>
