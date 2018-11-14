@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   resources :perspectives, only: [:edit, :update, :new, :create]
   resources :objectives, :expect => [:show, :new, :edit]
   resources :procesos, :expect => [:update, :show] 
-  resources :datos
+  resources :datos, :fichas
   resources :indicators, :expect => [:new, :edit]
   
   put '/procesos/:id', to: 'procesos#update', as: 'update_proceso'
@@ -55,5 +55,7 @@ Rails.application.routes.draw do
   
   get '/nuevo-dato/:indicator_id', to: "datos#new", as: 'dato_new'
   get '/editar-dato/:id/:indicator_id', to: 'datos#edit', as: 'dato_edit'
+  
+  get '/maestro', to: 'maestro#maestro', as: 'maestro'
 
 end

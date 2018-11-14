@@ -28,6 +28,7 @@ class DatosController < ApplicationController
   # POST /datos.json
   def create
     @dato = Dato.new
+    @indicador = Indicator.find(params[:dato][:indicator_id])
     @dato[:indicator_id] = params[:dato][:indicator_id]
 
     @dato[:anio] = params[:dato][:anio]
@@ -47,9 +48,50 @@ class DatosController < ApplicationController
     @total ||= (@dato[:enero] + @dato[:febrero] + @dato[:marzo] + @dato[:abril] + @dato[:mayo]+ @dato[:junio] + @dato[:julio] + @dato[:agosto] + @dato[:septiembre] + @dato[:octubre] + @dato[:noviembre]  + @dato[:diciembre])
     @dato[:total] = @total
 
-
+    @porcentaje = 0.0
+    @indicador.datos.each do |dato|
+      if @indicador.tipo == 'porcentaje'
+        if @indicador.datos.count >= 1
+          
+          @porcentaje = '%.2f' % ((@total / (@indicador.datos.sum(:total).to_f + @total)) * 100)
+        else
+          @porcentaje = 0
+        end        
+      elsif @indicador.tipo == 'reducir'
+        if @indicador.datos.count >= 1
+          @porcentaje = '%.2f' % (((dato.total.to_f - @total)*100) /  dato.total.to_f)
+          @dato[:anterior] = dato.id
+        else
+          @porcentaje = 0
+        end
+      elsif @indicador.tipo == 'incremento'
+        if @indicador.datos.count >= 1
+          @porcentaje = '%.2f' % (((@total - dato.total.to_f)*100) /  @total)
+          @dato[:anterior] = dato.id
+        else
+          @porcentaje = 0
+        end
+      else
+        @porcentaje = 0
+      end
+    end
+    #render json: @porcentaje
+    #puts @indicador.datos.sum(:total).to_f + @total
+    #puts @porcentaje
+#=begin
+    @dato[:porcentaje] = @porcentaje
+    
     respond_to do |format|
       if @dato.save
+        @indicador.datos.each do |dato|
+          if @indicador.tipo == 'porcentaje'
+            if @indicador.datos.count >= 1              
+              dato[:porcentaje] = '%.2f' % ((dato[:total] / @indicador.datos.sum(:total).to_f) * 100)
+              dato.save
+            end 
+          end
+        end
+
         format.html { redirect_to datos_url, notice: 'Los datos se fue crearon con exitó.' }
         format.json { render :show, status: :created, location: @dato }
       else
@@ -57,13 +99,15 @@ class DatosController < ApplicationController
         format.json { render json: @dato.errors, status: :unprocessable_entity }
       end
     end
+#=end
   end
 
   # PATCH/PUT /datos/1
   # PATCH/PUT /datos/1.json
   def update
     @dato[:indicator_id] = params[:dato][:indicator_id]
-
+    @indicador = Indicator.find(@dato[:indicator_id])
+    
     @dato[:anio] = params[:dato][:anio]
     @dato[:enero] = params[:dato][:enero]
     @dato[:febrero] = params[:dato][:febrero]
@@ -78,11 +122,88 @@ class DatosController < ApplicationController
     @dato[:noviembre] = params[:dato][:noviembre]
     @dato[:diciembre] = params[:dato][:diciembre]
 
-    @total ||= (@dato[:enero] + @dato[:febrero] + @dato[:marzo] + @dato[:abril] + @dato[:mayo]+ @dato[:junio] + @dato[:julio] + @dato[:agosto] + @dato[:septiembre] + @dato[:octubre] + @dato[:noviembre]  + @dato[:diciembre])
-    @dato[:total] = @total
+    @total = (@dato[:enero] + @dato[:febrero] + @dato[:marzo] + @dato[:abril] + @dato[:mayo]+ @dato[:junio] + @dato[:julio] + @dato[:agosto] + @dato[:septiembre] + @dato[:octubre] + @dato[:noviembre]  + @dato[:diciembre])
+    
+    @diferencia = 0
+    if @dato[:total] != @total
+      @diferencia = @dato[:total] - @total
+    end
+    
+    @id = @dato[:id]
+    @porcentaje = 0.0
+    @indicador.datos.each do |dato|
+      if @indicador.tipo == 'porcentaje'
+        if @indicador.datos.count >= 1
+          if @dato[:total] != @total
+            @diferencia = @dato[:total] - @total
+            @porcentaje = '%.2f' % ((@total / (@indicador.datos.sum(:total).to_f - @diferencia)) * 100)
+          else
+            @porcentaje = '%.2f' % ((@dato[:total] / @indicador.datos.sum(:total).to_f) * 100)
+          end
+        else
+          @porcentaje = 0
+        end
+      elsif @indicador.tipo == 'reducir'
+        if @indicador.datos.count >= 1
+          if @dato[:total] != @total
+            if  @id == dato.id
+              @anterior = Dato.find(dato.anterior)
+              @porcentaje = '%.2f' % (((@anterior[:total] - @total)*100) / @anterior[:total])
+              puts "Total año anterior: #{@anterior[:total]}" 
+            end
+          else
+            @porcentaje = dato.porcentaje
+          end
+          puts @total
+          puts @indicador.datos.sum(:total)
+          puts @porcentaje 
+        else
+          @porcentaje = 0
+        end
+      elsif @indicador.tipo == 'incremento'
+        if @indicador.datos.count >= 1
+          if @dato[:total] != @total
+            if  @id == dato.id
+              @anterior = Dato.find(dato.anterior)
+              @porcentaje = '%.2f' % (((@total - @anterior[:total])*100) / @total)
+            end
+          else
+            @porcentaje = dato.porcentaje
+          end
+        else
+          @porcentaje = 0
+        end
+      else
+        @porcentaje = 0
+      end
+    end
+    #render json: @porcentaje
+    #puts (@total / (@indicador.datos.sum(:total).to_f - @diferencia)) * 100
+    #puts @total 
+    #puts @porcentaje 
+    #puts @indicador.datos.sum(:total).to_f - @diferencia
 
+    @dato[:total] = @total
+    @dato[:porcentaje] = @porcentaje
+    
+#=begin    
     respond_to do |format|
       if @dato.save
+        
+        @indicador.datos.each do |dato_db|
+          if @indicador.tipo == 'porcentaje'
+            if @indicador.datos.count >= 1  
+              if  @id == dato_db[:id]
+                  dato_db[:porcentaje] = '%.2f' % ((@total / @indicador.datos.sum(:total).to_f) * 100)
+              else
+                  dato_db[:porcentaje] = '%.2f' % ((dato_db[:total] / @indicador.datos.sum(:total).to_f) * 100)
+              end     
+              #dato_db[:porcentaje] = '%.2f' % ((dato_db[:total] / @indicador.datos.sum(:total).to_f) * 100)
+              dato_db.save
+            end 
+          end
+        end
+        #return true
         format.html { redirect_to datos_url, notice: 'Los datos se fue editaron con exitó.' }
         format.json { render :show, status: :ok, location: @dato }
       else
@@ -90,12 +211,26 @@ class DatosController < ApplicationController
         format.json { render json: @dato.errors, status: :unprocessable_entity }
       end
     end
+#=end
   end
 
   # DELETE /datos/1
   # DELETE /datos/1.json
   def destroy
-    @dato.destroy
+    
+    @indicador = Indicator.find(@dato[:indicator_id])
+    @indicador.datos.each do |dato|
+      if @indicador.tipo == 'porcentaje'
+        if @indicador.datos.count >= 1 
+          @dato.destroy             
+          dato[:porcentaje] = '%.2f' % ((dato[:total] / @indicador.datos.sum(:total).to_f) * 100)
+          dato.save
+        end 
+      else
+        @dato.destroy
+      end
+    end
+
     respond_to do |format|
       format.html { redirect_to datos_url, notice: 'Los datos se fue eliminaron con exitó.' }
       format.json { head :no_content }

@@ -1,12 +1,31 @@
 <% @title = "Objetivos Estratégicos" %>
-<nav class="breadcrumb" aria-label="breadcrumbs">
-  <ul>
-    <li> <%= link_to  "Dashboard", root_path %></li>
-    <li class="is-active">      
-      <a href="#" aria-current="page">Objetivos Estratégicos</a>
-    </li>
-  </ul>
-</nav>
+
+<div class="columns">
+  <div class="column">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li> <%= link_to  "Dashboard", root_path %></li>
+        <li class="is-active">      
+          <a href="#" aria-current="page">Objetivos Estratégicos</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="column is-flex-row-end">
+    <%= link_to mapa_estrategico_relaciones_path, class: "button is-info" do %>
+      <p> Mapa estratégico </p>
+      <span class="icon">
+          <i class="mdi mdi-arrow-right"></i>
+      </span>
+    <% end %>
+    <%= link_to indicators_path, class: "ml-10 button is-info" do %>
+      <p> Indicatores </p>
+      <span class="icon">
+          <i class="mdi mdi-arrow-right"></i>
+      </span>
+    <% end %>
+  </div>
+</div>
 
 
 <div class="columns">

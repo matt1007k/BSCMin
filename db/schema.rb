@@ -50,7 +50,8 @@ ActiveRecord::Schema.define(version: 2018_10_26_134614) do
     t.integer "noviembre", default: 0
     t.integer "diciembre", default: 0
     t.integer "total", default: 0
-    t.integer "porcentaje", default: 0
+    t.decimal "porcentaje", precision: 7, scale: 2, default: "0.0"
+    t.integer "anterior", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["indicator_id"], name: "index_datos_on_indicator_id"

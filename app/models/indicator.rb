@@ -24,6 +24,7 @@ class Indicator < ApplicationRecord
   validates :aclarar, presence: true
   validates :indicador, presence: true
   validates :variable, presence: true
+  validates :tipo, presence: true
 
 
   belongs_to :objective

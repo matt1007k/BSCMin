@@ -1,12 +1,25 @@
 <% @title = "Cadena de valor" %>
-<nav class="breadcrumb" aria-label="breadcrumbs">
-  <ul>
-    <li> <%= link_to  "Dashboard", root_path %></li>
-    <li class="is-active">      
-      <a href="#" aria-current="page">Cadena de valor</a>
-    </li>
-  </ul>
-</nav>
+<div class="columns">
+  <div class="column">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li> <%= link_to  "Dashboard", root_path %></li>
+        <li class="is-active">      
+          <a href="#" aria-current="page">Cadena de valor</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="column is-flex-row-end">
+    <%= link_to evaluar_factor_interno_path, class: "button is-info" do %>
+      <p> Evaluar Factores Internos </p>
+      <span class="icon">
+        <i class="mdi mdi-arrow-right"></i>
+      </span>
+    <% end %>
+  </div>
+</div>
 
 
 <div class="columns">

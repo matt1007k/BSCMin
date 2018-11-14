@@ -20,12 +20,14 @@ class IndicatorsController < ApplicationController
 
   # GET /indicators/new
   def new
+    @tipos = ['numero', 'porcentaje', 'reducir', 'incremento']
     @objective_id = params[:objective_id]
     @indicator = Indicator.new
   end
 
   # GET /indicators/1/edit
   def edit
+    @tipos = ['numero', 'porcentaje', 'reducir', 'incremento']
     @objective_id = params[:objective_id]
   end
 
@@ -77,6 +79,6 @@ class IndicatorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def indicator_params
-      params.require(:indicator).permit(:objective_id, :aclarar, :variable, :indicador)
+      params.require(:indicator).permit(:objective_id, :aclarar, :variable, :indicador, :tipo)
     end
 end

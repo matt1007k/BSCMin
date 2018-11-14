@@ -16,7 +16,8 @@ class CreateDatos < ActiveRecord::Migration[5.2]
       t.integer :noviembre, default: 0
       t.integer :diciembre, default: 0
       t.integer :total, default: 0
-      t.integer :porcentaje, default: 0
+      t.decimal :porcentaje, :precision => 7, :scale => 2, default: 0.00
+      t.integer :anterior, default: 0
       #Ex:- :null => false
 
       t.timestamps
