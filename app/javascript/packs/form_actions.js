@@ -51,13 +51,6 @@ document.addEventListener('turbolinks:load', () => {
                     tipo: this.tipo
                 } 
                 }).then(response => {
-                    Snackbar.open({
-                        duration: 3000,
-                        message: 'La estrategia se modifico con exitó',
-                        type: 'is-success',
-                        position: 'is-top-right',
-                        actionText: 'X'
-                    })
                     window.location.href = '/strategies';
                 }, response => {
                     console.log(response)

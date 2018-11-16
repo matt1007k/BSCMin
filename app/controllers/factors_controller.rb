@@ -5,7 +5,7 @@ class FactorsController < ApplicationController
 
   def index
     @factors = Factor.all
-    @forces = Force.order('name ASC')
+    @forces = Force.all
   end
 
 

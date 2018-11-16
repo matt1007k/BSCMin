@@ -44,8 +44,9 @@
                   <%= proceso.title %>
                 </div>
                 <div class="is-middle mdi mdi-arrow-down mdi-36px"></div>
+                  <div class="notification is-dark">
                   <% proceso.sub_processes.each do |sub_process| %>
-                    <div class="notification is-dark">
+                    
                       <div class="columns">
                         <div class="column is-1">
                           <div class="is-middle mdi mdi-check"></div>
@@ -54,8 +55,9 @@
                           <%= sub_process.title %>.
                         </div>
                       </div>
-                    </div>
+                    
                   <% end %>
+                  </div>
               </div>
             <% end %>
           </div>

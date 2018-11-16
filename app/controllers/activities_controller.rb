@@ -5,7 +5,7 @@ class ActivitiesController < ApplicationController
     
     def index
         @activities = Activity.all
-        @areas = Area.order('name ASC')
+        @areas = Area.all
     end
 
     

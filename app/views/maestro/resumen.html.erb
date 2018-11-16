@@ -64,143 +64,146 @@
 
 
                 <div class="box" id="tab_container">
-                <!-- Finaciera -->
-                  
-                
+                    <!-- Finaciera -->
                     <div class="container_item is-active" data-item="financiera-1">
-                      <%-if  @objectivos.perspectiva(1).count > 0 %>
+                        <%-if  @objectivos.perspectiva(1).count > 0 %>
                         <table class="table is-fullwidth">
-                          <thead>
-                            <tr>
-                              <th>Objectivos Estratégico</th>
-                              <th>Indicador</th>
-                              <th>Meta</th>
-                              <th>Actual</th>
-                              <th>Semáforo</th>                              
-                            </tr>
-                          </thead>
+                            <thead>
+                                <tr>
+                                    <th>Objectivos Estratégico</th>
+                                    <th>Indicador</th>
+                                    <th>Meta</th>
+                                    <th>Actual</th>
+                                    <th>Semáforo</th>                              
+                                </tr>
+                            </thead>
 
-                          <tbody>
-                            <% @objectivos.perspectiva(1).each do |objectivo| %>
-                            <tr> 
-                              <td><%= objectivo.content %></td>
-                              <% objectivo.indicators.each do |indicator| %>
-                              <tr> 
-                                <td></td>                                
-                                <td><%= indicator.indicador %></td>
+                            <tbody>
+                                <% @objectivos.perspectiva(1).each do |objectivo| %>
+                                <tr> 
+                                    <td><%= objectivo.content %></td>
+                                    <% objectivo.indicators.each do |indicator| %>
+                                        <tr> 
+                                        <td></td>                                
+                                        <td><%= indicator.indicador %></td>
 
-                                <% if indicator.fichas.count > 0 %>
-                                  <% indicator.fichas.each do |ficha| %>
-                                    
-                                    <td class="has-text-centered"><%= ficha.meta %></td>
+                                        <% if indicator.fichas.count > 0 %>
+                                            <% indicator.fichas.each do |ficha| %>                                        
+                                                <td class="has-text-centered"><%= ficha.meta %></td>
 
-                                    
-                                    
-                                    <% @dato = indicator.datos.last %>
-                                    <td class="has-text-centered">
-                                        <% if indicator.tipo == "numero" %>
-                                            <%= @dato.total %>
+                                                <% if  indicator.datos.count > 0 %>
+                                                    <% @dato = indicator.datos.last %>
+                                                    <td class="has-text-centered">
+                                                        <% if indicator.tipo == "numero" %>
+                                                            <%= indicator.datos.last.total %>
+                                                        <% else %>
+                                                            <%= indicator.datos.last.porcentaje %>%
+                                                        <% end %>
+                                                    </td>
+                                                <% else %>
+                                                    <td class="has-text-danger">No existe el año</td>
+                                                <% end %>
+                                                <%#= (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                <% if  indicator.datos.count > 0 %>
+                                                    <% @dato = indicator.datos.last %>
+                                                    <td class="has-text-centered">
+                                                        <% if indicator.tipo == "numero" %>
+                                                            <% if @dato.total >= ficha.meta %>
+                                                                <p class="has-text-success">
+                                                                    <span class="icon">
+                                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                    </span> 
+                                                                </p>
+                                                            <% elsif @dato.total < ficha.meta && @dato.total >= (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                                <p class="has-text-warning">
+                                                                    <span class="icon">
+                                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                    </span>
+                                                                </p>
+                                                            <% elsif @dato.total < (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                                <p class="has-text-danger">
+                                                                    <span class="icon">
+                                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                    </span>
+                                                                </p>
+                                                            <% end %>
+                                                        <% elsif indicator.tipo == "reducir" %>
+
+                                                            <% if @dato.porcentaje.round <= ficha.meta %>
+                                                                <p class="has-text-success">
+                                                                    <span class="icon">
+                                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                    </span>
+                                                                </p>
+                                                            <% elsif @dato.porcentaje.round > ficha.meta && @dato.porcentaje.round <= (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                                <p class="has-text-warning">
+                                                                    <span class="icon">
+                                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                    </span>
+                                                                </p>
+                                                            <% elsif @dato.porcentaje.round > (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                                <p class="has-text-danger">
+                                                                    <span class="icon">
+                                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                    </span>
+                                                                </p>
+                                                            <% end %>
+
+                                                        <% else %>
+                                                            <% if @dato.porcentaje.round >= ficha.meta %>
+                                                            <p class="has-text-success">
+                                                                <span class="icon">
+                                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                </span>
+                                                            </p>
+                                                            <% elsif @dato.porcentaje.round < ficha.meta && @dato.porcentaje.round >= (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                            <p class="has-text-warning">
+                                                                <span class="icon">
+                                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                </span>
+                                                            </p>
+                                                            <% elsif @dato.porcentaje.round < (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                            <p class="has-text-danger">
+                                                                <span class="icon">
+                                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                </span>
+                                                            </p>
+                                                            <% end %>
+                                                        <% end %>
+                                                    </td>
+
+                                                <% else %>
+                                                    <td class="has-text-danger">No existe el año</td>
+                                                <% end %>
+                                            <% end %>
                                         <% else %>
-                                            <%= @dato.porcentaje %>%
-                                        <% end %>
-                                    </td>
-                                   
-                                    <%#= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                    <% @dato = indicator.datos.last %>
-                                    <td class="has-text-centered">
-                                        <% if indicator.tipo == "numero" %>
-                                            <% if @dato.total >= ficha.meta %>
-                                                <p class="has-text-success">
-                                                    <span class="icon">
-                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                    </span> 
-                                                </p>
-                                            <% elsif @dato.total < ficha.meta && @dato.total >= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-warning">
-                                                    <span class="icon">
-                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                    </span>
-                                                </p>
-                                            <% elsif @dato.total < (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-danger">
-                                                    <span class="icon">
-                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                    </span>
-                                                </p>
-                                            <% end %>
-                                        <% elsif indicator.tipo == "reducir" %>
-
-                                            <% if @dato.porcentaje <= ficha.meta %>
-                                                <p class="has-text-success">
-                                                    <span class="icon">
-                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                    </span>
-                                                </p>
-                                            <% elsif @dato.porcentaje > ficha.meta && @dato.porcentaje <= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-warning">
-                                                    <span class="icon">
-                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                    </span>
-                                                </p>
-                                            <% elsif @dato.porcentaje > (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-danger">
-                                                    <span class="icon">
-                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                    </span>
-                                                </p>
-                                            <% end %>
-
-                                        <% else %>
-                                            <% if @dato.porcentaje >= ficha.meta %>
-                                            <p class="has-text-success">
-                                                <span class="icon">
-                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                </span>
-                                            </p>
-                                            <% elsif @dato.porcentaje < ficha.meta && @dato.porcentaje >= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                            <p class="has-text-warning">
-                                                <span class="icon">
-                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                </span>
-                                            </p>
-                                            <% elsif @dato.porcentaje < (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                            <p class="has-text-danger">
-                                                <span class="icon">
-                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                </span>
-                                            </p>
-                                            <% end %>
-                                        <% end %>
-                                    </td>
-                                  <% end %>
-                                <% else %>
-                                  <td colspan="7">
-                                    <h4 class="title is-4">
-                                        <span class="tag is-warning is-full-width">El indicador no tiene una ficha..!</span>
-                                    </h4>  
-                                  </td>
-                                <% end %>    
-                                 
-                              </tr>
-                              <% end %>
-                                
-                             
-                            </tr>
-                            <% end %>
-                          </tbody>
+                                            <td colspan="4">
+                                                <h4 class="title is-4">
+                                                    <span class="tag is-warning is-full-width">El indicador no tiene una ficha..!</span>
+                                                </h4>  
+                                            </td>
+                                        <% end %>    
+                                            
+                                        </tr>
+                                    <% end %>
+                                    
+                                    
+                                </tr>
+                                <% end %>
+                            </tbody>
                         </table>
                         <hr>
 
                         <table class="table is-fullwidth">
-                          <thead>
-                            <tr>                              
-                              <th>Indicadores</th>
-                              <th class="has-background-success has-text-white">Verde</th>
-                              <th class="has-background-warning has-text-white">Amarillo</th>
-                              <th class="has-background-danger has-text-white">Rojo</th>                              
-                            </tr>
-                          </thead>
-                          <tbody>
+                            <thead>
+                                <tr>                              
+                                    <th>Indicadores</th>
+                                    <th class="has-background-success has-text-white">Verde</th>
+                                    <th class="has-background-warning has-text-white">Amarillo</th>
+                                    <th class="has-background-danger has-text-white">Rojo</th>                              
+                                </tr>
+                            </thead>
+                            <tbody>
                             <% @objectivos.perspectiva(1).each do |objectivo| %>
                                 
                                 <% objectivo.indicators.each do |indicator| %>
@@ -208,19 +211,19 @@
                                     <td><%= indicator.indicador %></td>
 
                                     <% if indicator.fichas.count > 0 %>
-                                    <% indicator.fichas.each do |ficha| %>                                        
-                                        <td class="has-text-centered">
-                                            <%= ficha.verde %>
-                                        </td>
-                                        <td class="has-text-centered">
-                                            <%= ficha.amarillo %>
-                                        </td>
-                                        <td class="has-text-centered">
-                                            <%= ficha.rojo %>
-                                        </td>
-                                    <% end %>
+                                        <% indicator.fichas.each do |ficha| %>                                        
+                                            <td class="has-text-centered">
+                                                <%= ficha.verde %>
+                                            </td>
+                                            <td class="has-text-centered">
+                                                <%= ficha.amarillo %>
+                                            </td>
+                                            <td class="has-text-centered">
+                                                <%= ficha.rojo %>
+                                            </td>
+                                        <% end %>
                                     <% else %>
-                                    <td colspan="7">
+                                    <td colspan="3">
                                         <h4 class="title is-4">
                                             <span class="tag is-warning is-full-width">El indicador no tiene una ficha..!</span>
                                         </h4>  
@@ -230,152 +233,157 @@
                                 </tr>
                                 <% end %>
                                     
-                                <% end %>
+                            <% end %>
                             </tbody>
                         </table>
-                      <% else %>
+                    <% else %>
                         <div class="notification is-warning is-fullwidth"> No hay registros ingresados!!!</div>
-                      <% end %>
+                    <% end %>
                     </div>
                
-                <!-- end Finaciera -->
+                    <!-- end Finaciera -->
 
 
-                <!-- Cliente -->
-                  <div class="container_item" data-item="cliente-1">
-                    <%-if  @objectivos.perspectiva(2).count > 0 %>
-                      <table class="table is-fullwidth">
-                          <thead>
-                            <tr>
-                              <th>Objectivos Estratégico</th>
-                              <th>Indicador</th>
-                              <th>Meta</th>
-                              <th>Actual</th>
-                              <th>Semáforo</th>                              
-                            </tr>
-                          </thead>
+                    <!-- Cliente -->
+                    <div class="container_item" data-item="cliente-1">
+                        <%if  @objectivos.perspectiva(2).count > 0 %>
+                            <table class="table is-fullwidth">
+                            <thead>
+                                <tr>
+                                    <th>Objectivos Estratégico</th>
+                                    <th>Indicador</th>
+                                    <th>Meta</th>
+                                    <th>Actual</th>
+                                    <th>Semáforo</th>                              
+                                </tr>
+                            </thead>
 
-                          <tbody>
-                            <% @objectivos.perspectiva(2).each do |objectivo| %>
-                            <tr> 
-                              <td><%= objectivo.content %></td>
-                              <% objectivo.indicators.each do |indicator| %>
-                              <tr> 
-                                <td></td>                                
-                                <td><%= indicator.indicador %></td>
+                            <tbody>
+                                <% @objectivos.perspectiva(2).each do |objectivo| %>
+                                <tr> 
+                                    <td><%= objectivo.content %></td>
+                                    <% objectivo.indicators.each do |indicator| %>
+                                        <tr> 
+                                        <td></td>                                
+                                        <td><%= indicator.indicador %></td>
 
-                                <% if indicator.fichas.count > 0 %>
-                                  <% indicator.fichas.each do |ficha| %>
-                                    
-                                    <td class="has-text-centered"><%= ficha.meta %></td>
+                                        <% if indicator.fichas.count > 0 %>
+                                            <% indicator.fichas.each do |ficha| %>                                        
+                                                <td class="has-text-centered"><%= ficha.meta %></td>
 
-                                    
-                                    
-                                    <% @dato = indicator.datos.last %>
-                                    <td class="has-text-centered">
-                                        <% if indicator.tipo == "numero" %>
-                                            <%= @dato.total %>
+                                                <% if  indicator.datos.count > 0 %>
+                                                    <% @dato = indicator.datos.last %>
+                                                    <td class="has-text-centered">
+                                                        <% if indicator.tipo == "numero" %>
+                                                            <%= indicator.datos.last.total %>
+                                                        <% else %>
+                                                            <%= indicator.datos.last.porcentaje %>%
+                                                        <% end %>
+                                                    </td>
+                                                <% else %>
+                                                    <td class="has-text-danger">No existe el año</td>
+                                                <% end %>
+                                                <%#= (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                <% if  indicator.datos.count > 0 %>
+                                                    <% @dato = indicator.datos.last %>
+                                                    <td class="has-text-centered">
+                                                        <% if indicator.tipo == "numero" %>
+                                                            <% if @dato.total >= ficha.meta %>
+                                                                <p class="has-text-success">
+                                                                    <span class="icon">
+                                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                    </span> 
+                                                                </p>
+                                                            <% elsif @dato.total < ficha.meta && @dato.total >= (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                                <p class="has-text-warning">
+                                                                    <span class="icon">
+                                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                    </span>
+                                                                </p>
+                                                            <% elsif @dato.total < (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                                <p class="has-text-danger">
+                                                                    <span class="icon">
+                                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                    </span>
+                                                                </p>
+                                                            <% end %>
+                                                        <% elsif indicator.tipo == "reducir" %>
+
+                                                            <% if @dato.porcentaje.round <= ficha.meta %>
+                                                                <p class="has-text-success">
+                                                                    <span class="icon">
+                                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                    </span>
+                                                                </p>
+                                                            <% elsif @dato.porcentaje.round > ficha.meta && @dato.porcentaje.round <= (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                                <p class="has-text-warning">
+                                                                    <span class="icon">
+                                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                    </span>
+                                                                </p>
+                                                            <% elsif @dato.porcentaje.round > (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                                <p class="has-text-danger">
+                                                                    <span class="icon">
+                                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                    </span>
+                                                                </p>
+                                                            <% end %>
+
+                                                        <% else %>
+                                                            <% if @dato.porcentaje.round >= ficha.meta %>
+                                                            <p class="has-text-success">
+                                                                <span class="icon">
+                                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                </span>
+                                                            </p>
+                                                            <% elsif @dato.porcentaje.round < ficha.meta && @dato.porcentaje.round >= (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                            <p class="has-text-warning">
+                                                                <span class="icon">
+                                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                </span>
+                                                            </p>
+                                                            <% elsif @dato.porcentaje.round < (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                            <p class="has-text-danger">
+                                                                <span class="icon">
+                                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                </span>
+                                                            </p>
+                                                            <% end %>
+                                                        <% end %>
+                                                    </td>
+
+                                                <% else %>
+                                                    <td class="has-text-danger">No existe el año</td>
+                                                <% end %>
+                                            <% end %>
                                         <% else %>
-                                            <%= @dato.porcentaje %>%
-                                        <% end %>
-                                    </td>
-                                   
-                                    <%#= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                    <% @dato = indicator.datos.last %>
-                                    <td class="has-text-centered">
-                                        <% if indicator.tipo == "numero" %>
-                                            <% if @dato.total >= ficha.meta %>
-                                                <p class="has-text-success">
-                                                    <span class="icon">
-                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                    </span> 
-                                                </p>
-                                            <% elsif @dato.total < ficha.meta && @dato.total >= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-warning">
-                                                    <span class="icon">
-                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                    </span>
-                                                </p>
-                                            <% elsif @dato.total < (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-danger">
-                                                    <span class="icon">
-                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                    </span>
-                                                </p>
-                                            <% end %>
-                                        <% elsif indicator.tipo == "reducir" %>
-
-                                            <% if @dato.porcentaje <= ficha.meta %>
-                                                <p class="has-text-success">
-                                                    <span class="icon">
-                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                    </span>
-                                                </p>
-                                            <% elsif @dato.porcentaje > ficha.meta && @dato.porcentaje <= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-warning">
-                                                    <span class="icon">
-                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                    </span>
-                                                </p>
-                                            <% elsif @dato.porcentaje > (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-danger">
-                                                    <span class="icon">
-                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                    </span>
-                                                </p>
-                                            <% end %>
-
-                                        <% else %>
-                                            <% if @dato.porcentaje >= ficha.meta %>
-                                            <p class="has-text-success">
-                                                <span class="icon">
-                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                </span>
-                                            </p>
-                                            <% elsif @dato.porcentaje < ficha.meta && @dato.porcentaje >= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                            <p class="has-text-warning">
-                                                <span class="icon">
-                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                </span>
-                                            </p>
-                                            <% elsif @dato.porcentaje < (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                            <p class="has-text-danger">
-                                                <span class="icon">
-                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                </span>
-                                            </p>
-                                            <% end %>
-                                        <% end %>
-                                    </td>
-                                  <% end %>
-                                <% else %>
-                                  <td colspan="7">
-                                    <h4 class="title is-4">
-                                        <span class="tag is-warning is-full-width">El indicador no tiene una ficha..!</span>
-                                    </h4>  
-                                  </td>
-                                <% end %>    
-                                 
-                              </tr>
-                              <% end %>
-                                
-                             
-                            </tr>
-                            <% end %>
-                          </tbody>
+                                            <td colspan="4">
+                                                <h4 class="title is-4">
+                                                    <span class="tag is-warning is-full-width">El indicador no tiene una ficha..!</span>
+                                                </h4>  
+                                            </td>
+                                        <% end %>    
+                                            
+                                        </tr>
+                                    <% end %>
+                                    
+                                    
+                                </tr>
+                                <% end %>
+                            </tbody>
                         </table>
                         <hr>
 
                         <table class="table is-fullwidth">
-                          <thead>
-                            <tr>                              
-                              <th>Indicadores</th>
-                              <th class="has-background-success has-text-white">Verde</th>
-                              <th class="has-background-warning has-text-white">Amarillo</th>
-                              <th class="has-background-danger has-text-white">Rojo</th>                              
-                            </tr>
-                          </thead>
-                          <tbody>
+                            <thead>
+                                <tr>                              
+                                    <th>Indicadores</th>
+                                    <th class="has-background-success has-text-white">Verde</th>
+                                    <th class="has-background-warning has-text-white">Amarillo</th>
+                                    <th class="has-background-danger has-text-white">Rojo</th>                              
+                                </tr>
+                            </thead>
+                            <tbody>
                             <% @objectivos.perspectiva(2).each do |objectivo| %>
                                 
                                 <% objectivo.indicators.each do |indicator| %>
@@ -383,19 +391,19 @@
                                     <td><%= indicator.indicador %></td>
 
                                     <% if indicator.fichas.count > 0 %>
-                                    <% indicator.fichas.each do |ficha| %>                                        
-                                        <td class="has-text-centered">
-                                            <%= ficha.verde %>
-                                        </td>
-                                        <td class="has-text-centered">
-                                            <%= ficha.amarillo %>
-                                        </td>
-                                        <td class="has-text-centered">
-                                            <%= ficha.rojo %>
-                                        </td>
-                                    <% end %>
+                                        <% indicator.fichas.each do |ficha| %>                                        
+                                            <td class="has-text-centered">
+                                                <%= ficha.verde %>
+                                            </td>
+                                            <td class="has-text-centered">
+                                                <%= ficha.amarillo %>
+                                            </td>
+                                            <td class="has-text-centered">
+                                                <%= ficha.rojo %>
+                                            </td>
+                                        <% end %>
                                     <% else %>
-                                    <td colspan="7">
+                                    <td colspan="3">
                                         <h4 class="title is-4">
                                             <span class="tag is-warning is-full-width">El indicador no tiene una ficha..!</span>
                                         </h4>  
@@ -405,154 +413,159 @@
                                 </tr>
                                 <% end %>
                                     
-                                <% end %>
+                            <% end %>
                             </tbody>
                         </table>
-                      <% else %>
-                        <div class="notification  is-warning is-fullwidth"> No hay registros ingresados!!!</div>
-                      <% end %>
-                  </div>
+                        <% else %>
+                            <div class="notification  is-warning is-fullwidth"> No hay registros ingresados!!!</div>
+                        <% end %>
+                    </div>
                
-                <!-- end cliente -->
+                    <!-- end cliente -->
 
 
-                <!-- Procesos -->
+                    <!-- Procesos -->
                 
                 
                     <div class="container_item" data-item="procesos-1">
-                      <%-if  @objectivos.perspectiva(3).count > 0 %>
+                        <%-if  @objectivos.perspectiva(3).count > 0 %>
                         <table class="table is-fullwidth">
-                          <thead>
-                            <tr>
-                              <th>Objectivos Estratégico</th>
-                              <th>Indicador</th>
-                              <th>Meta</th>
-                              <th>Actual</th>
-                              <th>Semáforo</th>                              
-                            </tr>
-                          </thead>
+                            <thead>
+                                <tr>
+                                    <th>Objectivos Estratégico</th>
+                                    <th>Indicador</th>
+                                    <th>Meta</th>
+                                    <th>Actual</th>
+                                    <th>Semáforo</th>                              
+                                </tr>
+                            </thead>
 
-                          <tbody>
-                            <% @objectivos.perspectiva(3).each do |objectivo| %>
-                            <tr> 
-                              <td><%= objectivo.content %></td>
-                              <% objectivo.indicators.each do |indicator| %>
-                              <tr> 
-                                <td></td>                                
-                                <td><%= indicator.indicador %></td>
+                            <tbody>
+                                <% @objectivos.perspectiva(3).each do |objectivo| %>
+                                <tr> 
+                                    <td><%= objectivo.content %></td>
+                                    <% objectivo.indicators.each do |indicator| %>
+                                        <tr> 
+                                        <td></td>                                
+                                        <td><%= indicator.indicador %></td>
 
-                                <% if indicator.fichas.count > 0 %>
-                                  <% indicator.fichas.each do |ficha| %>
-                                    
-                                    <td class="has-text-centered"><%= ficha.meta %></td>
+                                        <% if indicator.fichas.count > 0 %>
+                                            <% indicator.fichas.each do |ficha| %>                                        
+                                                <td class="has-text-centered"><%= ficha.meta %></td>
 
-                                    
-                                    
-                                    <% @dato = indicator.datos.last %>
-                                    <td class="has-text-centered">
-                                        <% if indicator.tipo == "numero" %>
-                                            <%= @dato.total %>
+                                                <% if  indicator.datos.count > 0 %>
+                                                    <% @dato = indicator.datos.last %>
+                                                    <td class="has-text-centered">
+                                                        <% if indicator.tipo == "numero" %>
+                                                            <%= indicator.datos.last.total %>
+                                                        <% else %>
+                                                            <%= indicator.datos.last.porcentaje %>%
+                                                        <% end %>
+                                                    </td>
+                                                <% else %>
+                                                    <td class="has-text-danger">No existe el año</td>
+                                                <% end %>
+                                                <%#= (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                <% if  indicator.datos.count > 0 %>
+                                                    <% @dato = indicator.datos.last %>
+                                                    <td class="has-text-centered">
+                                                        <% if indicator.tipo == "numero" %>
+                                                            <% if @dato.total >= ficha.meta %>
+                                                                <p class="has-text-success">
+                                                                    <span class="icon">
+                                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                    </span> 
+                                                                </p>
+                                                            <% elsif @dato.total < ficha.meta && @dato.total >= (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                                <p class="has-text-warning">
+                                                                    <span class="icon">
+                                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                    </span>
+                                                                </p>
+                                                            <% elsif @dato.total < (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                                <p class="has-text-danger">
+                                                                    <span class="icon">
+                                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                    </span>
+                                                                </p>
+                                                            <% end %>
+                                                        <% elsif indicator.tipo == "reducir" %>
+
+                                                            <% if @dato.porcentaje.round <= ficha.meta %>
+                                                                <p class="has-text-success">
+                                                                    <span class="icon">
+                                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                    </span>
+                                                                </p>
+                                                            <% elsif @dato.porcentaje.round > ficha.meta && @dato.porcentaje.round <= (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                                <p class="has-text-warning">
+                                                                    <span class="icon">
+                                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                    </span>
+                                                                </p>
+                                                            <% elsif @dato.porcentaje.round > (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                                <p class="has-text-danger">
+                                                                    <span class="icon">
+                                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                    </span>
+                                                                </p>
+                                                            <% end %>
+
+                                                        <% else %>
+                                                            <% if @dato.porcentaje.round >= ficha.meta %>
+                                                            <p class="has-text-success">
+                                                                <span class="icon">
+                                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                </span>
+                                                            </p>
+                                                            <% elsif @dato.porcentaje.round < ficha.meta && @dato.porcentaje.round >= (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                            <p class="has-text-warning">
+                                                                <span class="icon">
+                                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                </span>
+                                                            </p>
+                                                            <% elsif @dato.porcentaje.round < (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                            <p class="has-text-danger">
+                                                                <span class="icon">
+                                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                </span>
+                                                            </p>
+                                                            <% end %>
+                                                        <% end %>
+                                                    </td>
+
+                                                <% else %>
+                                                    <td class="has-text-danger">No existe el año</td>
+                                                <% end %>
+                                            <% end %>
                                         <% else %>
-                                            <%= @dato.porcentaje %>%
-                                        <% end %>
-                                    </td>
-                                   
-                                    <%#= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                    <% @dato = indicator.datos.last %>
-                                    <td class="has-text-centered">
-                                        <% if indicator.tipo == "numero" %>
-                                            <% if @dato.total >= ficha.meta %>
-                                                <p class="has-text-success">
-                                                    <span class="icon">
-                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                    </span> 
-                                                </p>
-                                            <% elsif @dato.total < ficha.meta && @dato.total >= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-warning">
-                                                    <span class="icon">
-                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                    </span>
-                                                </p>
-                                            <% elsif @dato.total < (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-danger">
-                                                    <span class="icon">
-                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                    </span>
-                                                </p>
-                                            <% end %>
-                                        <% elsif indicator.tipo == "reducir" %>
-
-                                            <% if @dato.porcentaje <= ficha.meta %>
-                                                <p class="has-text-success">
-                                                    <span class="icon">
-                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                    </span>
-                                                </p>
-                                            <% elsif @dato.porcentaje > ficha.meta && @dato.porcentaje <= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-warning">
-                                                    <span class="icon">
-                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                    </span>
-                                                </p>
-                                            <% elsif @dato.porcentaje > (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-danger">
-                                                    <span class="icon">
-                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                    </span>
-                                                </p>
-                                            <% end %>
-
-                                        <% else %>
-                                            <% if @dato.porcentaje >= ficha.meta %>
-                                            <p class="has-text-success">
-                                                <span class="icon">
-                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                </span>
-                                            </p>
-                                            <% elsif @dato.porcentaje < ficha.meta && @dato.porcentaje >= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                            <p class="has-text-warning">
-                                                <span class="icon">
-                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                </span>
-                                            </p>
-                                            <% elsif @dato.porcentaje < (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                            <p class="has-text-danger">
-                                                <span class="icon">
-                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                </span>
-                                            </p>
-                                            <% end %>
-                                        <% end %>
-                                    </td>
-                                  <% end %>
-                                <% else %>
-                                  <td colspan="7">
-                                    <h4 class="title is-4">
-                                        <span class="tag is-warning is-full-width">El indicador no tiene una ficha..!</span>
-                                    </h4>  
-                                  </td>
-                                <% end %>    
-                                 
-                              </tr>
-                              <% end %>
-                                
-                             
-                            </tr>
-                            <% end %>
-                          </tbody>
+                                            <td colspan="4">
+                                                <h4 class="title is-4">
+                                                    <span class="tag is-warning is-full-width">El indicador no tiene una ficha..!</span>
+                                                </h4>  
+                                            </td>
+                                        <% end %>    
+                                            
+                                        </tr>
+                                    <% end %>
+                                    
+                                    
+                                </tr>
+                                <% end %>
+                            </tbody>
                         </table>
                         <hr>
 
                         <table class="table is-fullwidth">
-                          <thead>
-                            <tr>                              
-                              <th>Indicadores</th>
-                              <th class="has-background-success has-text-white">Verde</th>
-                              <th class="has-background-warning has-text-white">Amarillo</th>
-                              <th class="has-background-danger has-text-white">Rojo</th>                              
-                            </tr>
-                          </thead>
-                          <tbody>
+                            <thead>
+                                <tr>                              
+                                    <th>Indicadores</th>
+                                    <th class="has-background-success has-text-white">Verde</th>
+                                    <th class="has-background-warning has-text-white">Amarillo</th>
+                                    <th class="has-background-danger has-text-white">Rojo</th>                              
+                                </tr>
+                            </thead>
+                            <tbody>
                             <% @objectivos.perspectiva(3).each do |objectivo| %>
                                 
                                 <% objectivo.indicators.each do |indicator| %>
@@ -560,19 +573,19 @@
                                     <td><%= indicator.indicador %></td>
 
                                     <% if indicator.fichas.count > 0 %>
-                                    <% indicator.fichas.each do |ficha| %>                                        
-                                        <td class="has-text-centered">
-                                            <%= ficha.verde %>
-                                        </td>
-                                        <td class="has-text-centered">
-                                            <%= ficha.amarillo %>
-                                        </td>
-                                        <td class="has-text-centered">
-                                            <%= ficha.rojo %>
-                                        </td>
-                                    <% end %>
+                                        <% indicator.fichas.each do |ficha| %>                                        
+                                            <td class="has-text-centered">
+                                                <%= ficha.verde %>
+                                            </td>
+                                            <td class="has-text-centered">
+                                                <%= ficha.amarillo %>
+                                            </td>
+                                            <td class="has-text-centered">
+                                                <%= ficha.rojo %>
+                                            </td>
+                                        <% end %>
                                     <% else %>
-                                    <td colspan="7">
+                                    <td colspan="3">
                                         <h4 class="title is-4">
                                             <span class="tag is-warning is-full-width">El indicador no tiene una ficha..!</span>
                                         </h4>  
@@ -582,190 +595,193 @@
                                 </tr>
                                 <% end %>
                                     
+                            <% end %>
+                            </tbody>
+                        </table> 
+                        <% else %>
+                            <div class="notification is-warning is-fullwidth"> No hay registros ingresados!!!</div>
+                        <% end %>
+                    </div>
+                    <!-- end Procesos -->
+
+                    <!-- Crecimiento -->
+                    <div class="container_item" data-item="aprendizaje-1">
+                        <%-if  @objectivos.perspectiva(4).count > 0 %>
+                        <table class="table is-fullwidth">
+                            <thead>
+                                <tr>
+                                    <th>Objectivos Estratégico</th>
+                                    <th>Indicador</th>
+                                    <th>Meta</th>
+                                    <th>Actual</th>
+                                    <th>Semáforo</th>                              
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <% @objectivos.perspectiva(4).each do |objectivo| %>
+                                <tr> 
+                                    <td><%= objectivo.content %></td>
+                                    <% objectivo.indicators.each do |indicator| %>
+                                        <tr> 
+                                        <td></td>                                
+                                        <td><%= indicator.indicador %></td>
+
+                                        <% if indicator.fichas.count > 0 %>
+                                            <% indicator.fichas.each do |ficha| %>                                        
+                                                <td class="has-text-centered"><%= ficha.meta %></td>
+
+                                                <% if  indicator.datos.count > 0 %>
+                                                    <% @dato = indicator.datos.last %>
+                                                    <td class="has-text-centered">
+                                                        <% if indicator.tipo == "numero" %>
+                                                            <%= indicator.datos.last.total %>
+                                                        <% else %>
+                                                            <%= indicator.datos.last.porcentaje %>%
+                                                        <% end %>
+                                                    </td>
+                                                <% else %>
+                                                    <td class="has-text-danger">No existe el año</td>
+                                                <% end %>
+                                                <%#= (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                <% if  indicator.datos.count > 0 %>
+                                                    <% @dato = indicator.datos.last %>
+                                                    <td class="has-text-centered">
+                                                        <% if indicator.tipo == "numero" %>
+                                                            <% if @dato.total >= ficha.meta %>
+                                                                <p class="has-text-success">
+                                                                    <span class="icon">
+                                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                    </span> 
+                                                                </p>
+                                                            <% elsif @dato.total < ficha.meta && @dato.total >= (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                                <p class="has-text-warning">
+                                                                    <span class="icon">
+                                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                    </span>
+                                                                </p>
+                                                            <% elsif @dato.total < (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                                <p class="has-text-danger">
+                                                                    <span class="icon">
+                                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                    </span>
+                                                                </p>
+                                                            <% end %>
+                                                        <% elsif indicator.tipo == "reducir" %>
+
+                                                            <% if @dato.porcentaje.round <= ficha.meta %>
+                                                                <p class="has-text-success">
+                                                                    <span class="icon">
+                                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                    </span>
+                                                                </p>
+                                                            <% elsif @dato.porcentaje.round > ficha.meta && @dato.porcentaje.round <= (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                                <p class="has-text-warning">
+                                                                    <span class="icon">
+                                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                    </span>
+                                                                </p>
+                                                            <% elsif @dato.porcentaje.round > (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                                <p class="has-text-danger">
+                                                                    <span class="icon">
+                                                                        <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                    </span>
+                                                                </p>
+                                                            <% end %>
+
+                                                        <% else %>
+                                                            <% if @dato.porcentaje.round >= ficha.meta %>
+                                                            <p class="has-text-success">
+                                                                <span class="icon">
+                                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                </span>
+                                                            </p>
+                                                            <% elsif @dato.porcentaje.round < ficha.meta && @dato.porcentaje.round >= (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                            <p class="has-text-warning">
+                                                                <span class="icon">
+                                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                </span>
+                                                            </p>
+                                                            <% elsif @dato.porcentaje.round < (ficha.rojo[2]<<(if ficha.rojo[3].present? then ficha.rojo[3] else '' end)).to_i %>
+                                                            <p class="has-text-danger">
+                                                                <span class="icon">
+                                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
+                                                                </span>
+                                                            </p>
+                                                            <% end %>
+                                                        <% end %>
+                                                    </td>
+
+                                                <% else %>
+                                                    <td class="has-text-danger">No existe el año</td>
+                                                <% end %>
+                                            <% end %>
+                                        <% else %>
+                                            <td colspan="4">
+                                                <h4 class="title is-4">
+                                                    <span class="tag is-warning is-full-width">El indicador no tiene una ficha..!</span>
+                                                </h4>  
+                                            </td>
+                                        <% end %>    
+                                            
+                                        </tr>
+                                    <% end %>
+                                    
+                                    
+                                </tr>
                                 <% end %>
                             </tbody>
                         </table>
-                      <% else %>
-                        <div class="notification is-warning is-fullwidth"> No hay registros ingresados!!!</div>
-                      <% end %>
-                    </div>
-                <!-- end Procesos -->
+                        <hr>
 
-                <!-- Crecimiento -->
-               
-               
-                <div class="container_item" data-item="aprendizaje-1">
-                  <%-if  @objectivos.perspectiva(4).count > 0 %>
-                    <table class="table is-fullwidth">
-                        <thead>
-                        <tr>
-                            <th>Objectivos Estratégico</th>
-                            <th>Indicador</th>
-                            <th>Meta</th>
-                            <th>Actual</th>
-                            <th>Semáforo</th>                              
-                        </tr>
-                        </thead>
-
-                        <tbody>
-                        <% @objectivos.perspectiva(4).each do |objectivo| %>
-                        <tr> 
-                            <td><%= objectivo.content %></td>
-                            <% objectivo.indicators.each do |indicator| %>
-                            <tr> 
-                            <td></td>                                
-                            <td><%= indicator.indicador %></td>
-
-                            <% if indicator.fichas.count > 0 %>
-                                <% indicator.fichas.each do |ficha| %>
+                        <table class="table is-fullwidth">
+                            <thead>
+                                <tr>                              
+                                    <th>Indicadores</th>
+                                    <th class="has-background-success has-text-white">Verde</th>
+                                    <th class="has-background-warning has-text-white">Amarillo</th>
+                                    <th class="has-background-danger has-text-white">Rojo</th>                              
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <% @objectivos.perspectiva(4).each do |objectivo| %>
                                 
-                                <td class="has-text-centered"><%= ficha.meta %></td>
+                                <% objectivo.indicators.each do |indicator| %>
+                                <tr>                                
+                                    <td><%= indicator.indicador %></td>
 
-                                
-                                
-                                <% @dato = indicator.datos.last %>
-                                <td class="has-text-centered">
-                                    <% if indicator.tipo == "numero" %>
-                                        <%= @dato.total %>
+                                    <% if indicator.fichas.count > 0 %>
+                                        <% indicator.fichas.each do |ficha| %>                                        
+                                            <td class="has-text-centered">
+                                                <%= ficha.verde %>
+                                            </td>
+                                            <td class="has-text-centered">
+                                                <%= ficha.amarillo %>
+                                            </td>
+                                            <td class="has-text-centered">
+                                                <%= ficha.rojo %>
+                                            </td>
+                                        <% end %>
                                     <% else %>
-                                        <%= @dato.porcentaje %>%
-                                    <% end %>
-                                </td>
-                                
-                                <%#= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                <% @dato = indicator.datos.last %>
-                                <td class="has-text-centered">
-                                    <% if indicator.tipo == "numero" %>
-                                        <% if @dato.total >= ficha.meta %>
-                                            <p class="has-text-success">
-                                                <span class="icon">
-                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                </span> 
-                                            </p>
-                                        <% elsif @dato.total < ficha.meta && @dato.total >= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                            <p class="has-text-warning">
-                                                <span class="icon">
-                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                </span>
-                                            </p>
-                                        <% elsif @dato.total < (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                            <p class="has-text-danger">
-                                                <span class="icon">
-                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                </span>
-                                            </p>
-                                        <% end %>
-                                    <% elsif indicator.tipo == "reducir" %>
-
-                                        <% if @dato.porcentaje <= ficha.meta %>
-                                            <p class="has-text-success">
-                                                <span class="icon">
-                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                </span>
-                                            </p>
-                                        <% elsif @dato.porcentaje > ficha.meta && @dato.porcentaje <= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                            <p class="has-text-warning">
-                                                <span class="icon">
-                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                </span>
-                                            </p>
-                                        <% elsif @dato.porcentaje > (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                            <p class="has-text-danger">
-                                                <span class="icon">
-                                                    <i class="mdi mdi-checkbox-blank-circle"></i>
-                                                </span>
-                                            </p>
-                                        <% end %>
-
-                                    <% else %>
-                                        <% if @dato.porcentaje >= ficha.meta %>
-                                        <p class="has-text-success">
-                                            <span class="icon">
-                                                <i class="mdi mdi-checkbox-blank-circle"></i>
-                                            </span>
-                                        </p>
-                                        <% elsif @dato.porcentaje < ficha.meta && @dato.porcentaje >= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                        <p class="has-text-warning">
-                                            <span class="icon">
-                                                <i class="mdi mdi-checkbox-blank-circle"></i>
-                                            </span>
-                                        </p>
-                                        <% elsif @dato.porcentaje < (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                        <p class="has-text-danger">
-                                            <span class="icon">
-                                                <i class="mdi mdi-checkbox-blank-circle"></i>
-                                            </span>
-                                        </p>
-                                        <% end %>
-                                    <% end %>
-                                </td>
+                                    <td colspan="3">
+                                        <h4 class="title is-4">
+                                            <span class="tag is-warning is-full-width">El indicador no tiene una ficha..!</span>
+                                        </h4>  
+                                    </td>
+                                    <% end %>    
+                                    
+                                </tr>
                                 <% end %>
-                            <% else %>
-                                <td colspan="7">
-                                <h4 class="title is-4">
-                                    <span class="tag is-warning is-full-width">El indicador no tiene una ficha..!</span>
-                                </h4>  
-                                </td>
-                            <% end %>    
-                                
-                            </tr>
+                                    
                             <% end %>
-                            
-                            
-                        </tr>
+                            </tbody>
+                        </table>
+                        <% else %>
+                            <div class="notification is-warning is-fullwidth"> No hay registros ingresados!!!</div>
                         <% end %>
-                        </tbody>
-                    </table>
-                    <hr>
-
-                    <table class="table is-fullwidth">
-                        <thead>
-                        <tr>                              
-                            <th>Indicadores</th>
-                            <th class="has-background-success has-text-white">Verde</th>
-                            <th class="has-background-warning has-text-white">Amarillo</th>
-                            <th class="has-background-danger has-text-white">Rojo</th>                              
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <% @objectivos.perspectiva(4).each do |objectivo| %>
-                            
-                            <% objectivo.indicators.each do |indicator| %>
-                            <tr>                                
-                                <td><%= indicator.indicador %></td>
-
-                                <% if indicator.fichas.count > 0 %>
-                                <% indicator.fichas.each do |ficha| %>                                        
-                                    <td class="has-text-centered">
-                                        <%= ficha.verde %>
-                                    </td>
-                                    <td class="has-text-centered">
-                                        <%= ficha.amarillo %>
-                                    </td>
-                                    <td class="has-text-centered">
-                                        <%= ficha.rojo %>
-                                    </td>
-                                <% end %>
-                                <% else %>
-                                <td colspan="7">
-                                    <h4 class="title is-4">
-                                        <span class="tag is-warning is-full-width">El indicador no tiene una ficha..!</span>
-                                    </h4>  
-                                </td>
-                                <% end %>    
-                                
-                            </tr>
-                            <% end %>
-                                
-                            <% end %>
-                        </tbody>
-                    </table>
-                    <% else %>
-                      <div class="notification is-warning is-fullwidth"> No hay registros ingresados!!!</div>
-                    <% end %>
-                </div>
-                
-                <!-- end Crecimiento -->  
+                    </div>
+                    
+                    <!-- end Crecimiento -->  
               </div>
 
 

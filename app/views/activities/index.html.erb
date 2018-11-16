@@ -90,7 +90,7 @@
                         <% end %>
                       </span>
                       <span data-label="<%= t('.remove_link') %>" class="is-black is-top is-medium tooltip">
-                        <%= link_to activity_url(area), method: :delete,  class: "button is-danger", :data => {confirm: '¿Está seguro de eliminar la actividad?'} do %>
+                        <%= link_to activity_url(actividad), method: :delete,  class: "button is-danger", :data => {confirm: '¿Está seguro de eliminar la actividad?'} do %>
                           <span class="icon">
                             <i class="mdi mdi-close"></i>
                           </span>

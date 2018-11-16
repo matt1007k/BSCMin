@@ -39,7 +39,7 @@
 
           <div class="title is-4"> Perspectivas </div>
 
-          <%= render 'pages/form/formFilter' %>
+          <%= render 'pages/form/formFilter', ano_anterior: @ano_anterior, ano_actual: @ano_actual, semaforo: @semaforo %>
           <div class="columns">
             <div class="column">
                 <div class="tabs is-centered is-boxed"  id="tab_header">
@@ -86,9 +86,9 @@
                               <th>Unidad</th>
                               <th>Tiempo</th>
                               <th>Meta</th>
-                              <th>Valor anterior</th>
-                              <th>Valor actual</th>
-                              <th>Semáforo</th>
+                              <th>Valor anterior <span class="has-text-info is-size-6">(<%= @ano_anterior %>)</span></th>
+                              <th>Valor actual <span class="has-text-info is-size-6">(<%= @ano_actual %>)</span></th>
+                              <th class="has-text-centered">Semáforo <span class="has-text-primary is-size-6">(<%= @semaforo %>)</span></th>
                               <th class="has-background-success has-text-white">Verde</th>
                               <th class="has-background-warning has-text-white">Amarillo</th>
                               <th class="has-background-danger has-text-white">Rojo</th>
@@ -125,7 +125,7 @@
                                             <% if indicator.tipo == "numero" %>
                                               <%= dato.total %>
                                             <% else %>
-                                              <%= dato.porcentaje %>%
+                                              <%= dato.porcentaje.round %>%
                                             <% end %>
                                           </td>                                        
                                       <% end %>
@@ -138,7 +138,7 @@
                                           <% if indicator.tipo == "numero" %>
                                             <%= dato.total %>
                                           <% else %>
-                                            <%= dato.porcentaje %>%
+                                            <%= dato.porcentaje.round %>%
                                           <% end %>
                                         </td>
                                       <% end %>
@@ -159,21 +159,21 @@
                                               <% end %>
                                             <% elsif indicator.tipo == "reducir" %>
 
-                                              <% if dato.porcentaje <= ficha.meta %>
-                                                <p class="has-text-success"><%= dato.porcentaje %>%</p>
-                                              <% elsif dato.porcentaje > ficha.meta && dato.porcentaje <= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-warning"><%= dato.porcentaje %>%</p>
-                                              <% elsif dato.porcentaje > (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-danger"><%= dato.porcentaje %>%</p>
+                                              <% if dato.porcentaje.round <= ficha.meta %>
+                                                <p class="has-text-success"><%= dato.porcentaje.round %>%</p>
+                                              <% elsif dato.porcentaje.round > ficha.meta && dato.porcentaje.round <= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-warning"><%= dato.porcentaje.round %>%</p>
+                                              <% elsif dato.porcentaje.round > (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-danger"><%= dato.porcentaje.round %>%</p>
                                               <% end %>
 
                                             <% else %>
-                                              <% if dato.porcentaje >= ficha.meta %>
-                                                <p class="has-text-success"><%= dato.porcentaje %>%</p>
-                                              <% elsif dato.porcentaje < ficha.meta && dato.porcentaje >= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-warning"><%= dato.porcentaje %>%</p>
-                                              <% elsif dato.porcentaje < (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-danger"><%= dato.porcentaje %>%</p>
+                                              <% if dato.porcentaje.round >= ficha.meta %>
+                                                <p class="has-text-success"><%= dato.porcentaje.round %>%</p>
+                                              <% elsif dato.porcentaje.round < ficha.meta && dato.porcentaje.round >= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-warning"><%= dato.porcentaje.round %>%</p>
+                                              <% elsif dato.porcentaje.round < (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-danger"><%= dato.porcentaje.round %>%</p>
                                               <% end %>
                                             <% end %>
                                           </td>
@@ -224,9 +224,9 @@
                               <th>Unidad</th>
                               <th>Tiempo</th>
                               <th>Meta</th>
-                              <th>Valor anterior</th>
-                              <th>Valor actual</th>
-                              <th>Semáforo</th>
+                              <th>Valor anterior <span class="has-text-info is-size-6">(<%= @ano_anterior %>)</span></th>
+                              <th>Valor actual <span class="has-text-info is-size-6">(<%= @ano_actual %>)</span></th>
+                              <th class="has-text-centered">Semáforo <span class="has-text-primary is-size-6">(<%= @semaforo %>)</span></th>
                               <th class="has-background-success has-text-white">Verde</th>
                               <th class="has-background-warning has-text-white">Amarillo</th>
                               <th class="has-background-danger has-text-white">Rojo</th>
@@ -263,7 +263,7 @@
                                             <% if indicator.tipo == "numero" %>
                                               <%= dato.total %>
                                             <% else %>
-                                              <%= dato.porcentaje %>%
+                                              <%= dato.porcentaje.round %>%
                                             <% end %>
                                           </td>                                        
                                       <% end %>
@@ -276,7 +276,7 @@
                                           <% if indicator.tipo == "numero" %>
                                             <%= dato.total %>
                                           <% else %>
-                                            <%= dato.porcentaje %>%
+                                            <%= dato.porcentaje.round %>%
                                           <% end %>
                                         </td>
                                       <% end %>
@@ -297,21 +297,21 @@
                                               <% end %>
                                             <% elsif indicator.tipo == "reducir" %>
 
-                                              <% if dato.porcentaje <= ficha.meta %>
-                                                <p class="has-text-success"><%= dato.porcentaje %>%</p>
-                                              <% elsif dato.porcentaje > ficha.meta && dato.porcentaje <= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-warning"><%= dato.porcentaje %>%</p>
-                                              <% elsif dato.porcentaje > (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-danger"><%= dato.porcentaje %>%</p>
+                                              <% if dato.porcentaje.round <= ficha.meta %>
+                                                <p class="has-text-success"><%= dato.porcentaje.round %>%</p>
+                                              <% elsif dato.porcentaje.round > ficha.meta && dato.porcentaje.round <= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-warning"><%= dato.porcentaje.round %>%</p>
+                                              <% elsif dato.porcentaje.round > (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-danger"><%= dato.porcentaje.round %>%</p>
                                               <% end %>
 
                                             <% else %>
-                                              <% if dato.porcentaje >= ficha.meta %>
-                                                <p class="has-text-success"><%= dato.porcentaje %>%</p>
-                                              <% elsif dato.porcentaje < ficha.meta && dato.porcentaje >= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-warning"><%= dato.porcentaje %>%</p>
-                                              <% elsif dato.porcentaje < (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-danger"><%= dato.porcentaje %>%</p>
+                                              <% if dato.porcentaje.round >= ficha.meta %>
+                                                <p class="has-text-success"><%= dato.porcentaje.round %>%</p>
+                                              <% elsif dato.porcentaje.round < ficha.meta && dato.porcentaje.round >= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-warning"><%= dato.porcentaje.round %>%</p>
+                                              <% elsif dato.porcentaje.round < (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-danger"><%= dato.porcentaje.round %>%</p>
                                               <% end %>
                                             <% end %>
                                           </td>
@@ -364,9 +364,9 @@
                               <th>Unidad</th>
                               <th>Tiempo</th>
                               <th>Meta</th>
-                              <th>Valor anterior</th>
-                              <th>Valor actual</th>
-                              <th>Semáforo</th>
+                              <th>Valor anterior <span class="has-text-info is-size-6">(<%= @ano_anterior %>)</span></th>
+                              <th>Valor actual <span class="has-text-info is-size-6">(<%= @ano_actual %>)</span></th>
+                              <th class="has-text-centered">Semáforo <span class="has-text-primary is-size-6">(<%= @semaforo %>)</span></th>
                               <th class="has-background-success has-text-white">Verde</th>
                               <th class="has-background-warning has-text-white">Amarillo</th>
                               <th class="has-background-danger has-text-white">Rojo</th>
@@ -403,7 +403,7 @@
                                             <% if indicator.tipo == "numero" %>
                                               <%= dato.total %>
                                             <% else %>
-                                              <%= dato.porcentaje %>%
+                                              <%= dato.porcentaje.round %>%
                                             <% end %>
                                           </td>                                        
                                       <% end %>
@@ -416,7 +416,7 @@
                                           <% if indicator.tipo == "numero" %>
                                             <%= dato.total %>
                                           <% else %>
-                                            <%= dato.porcentaje %>%
+                                            <%= dato.porcentaje.round %>%
                                           <% end %>
                                         </td>
                                       <% end %>
@@ -437,21 +437,21 @@
                                               <% end %>
                                             <% elsif indicator.tipo == "reducir" %>
 
-                                              <% if dato.porcentaje <= ficha.meta %>
-                                                <p class="has-text-success"><%= dato.porcentaje %>%</p>
-                                              <% elsif dato.porcentaje > ficha.meta && dato.porcentaje <= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-warning"><%= dato.porcentaje %>%</p>
-                                              <% elsif dato.porcentaje > (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-danger"><%= dato.porcentaje %>%</p>
+                                              <% if dato.porcentaje.round <= ficha.meta %>
+                                                <p class="has-text-success"><%= dato.porcentaje.round %>%</p>
+                                              <% elsif dato.porcentaje.round > ficha.meta && dato.porcentaje.round <= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-warning"><%= dato.porcentaje.round %>%</p>
+                                              <% elsif dato.porcentaje.round > (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-danger"><%= dato.porcentaje.round %>%</p>
                                               <% end %>
 
                                             <% else %>
-                                              <% if dato.porcentaje >= ficha.meta %>
-                                                <p class="has-text-success"><%= dato.porcentaje %>%</p>
-                                              <% elsif dato.porcentaje < ficha.meta && dato.porcentaje >= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-warning"><%= dato.porcentaje %>%</p>
-                                              <% elsif dato.porcentaje < (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-danger"><%= dato.porcentaje %>%</p>
+                                              <% if dato.porcentaje.round >= ficha.meta %>
+                                                <p class="has-text-success"><%= dato.porcentaje.round %>%</p>
+                                              <% elsif dato.porcentaje.round < ficha.meta && dato.porcentaje.round >= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-warning"><%= dato.porcentaje.round %>%</p>
+                                              <% elsif dato.porcentaje.round < (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-danger"><%= dato.porcentaje.round %>%</p>
                                               <% end %>
                                             <% end %>
                                           </td>
@@ -502,9 +502,9 @@
                               <th>Unidad</th>
                               <th>Tiempo</th>
                               <th>Meta</th>
-                              <th>Valor anterior</th>
-                              <th>Valor actual</th>
-                              <th>Semáforo</th>
+                              <th>Valor anterior <span class="has-text-info is-size-6">(<%= @ano_anterior %>)</span></th>
+                              <th>Valor actual <span class="has-text-info is-size-6">(<%= @ano_actual %>)</span></th>
+                              <th class="has-text-centered">Semáforo <span class="has-text-primary is-size-6">(<%= @semaforo %>)</span></th>
                               <th class="has-background-success has-text-white">Verde</th>
                               <th class="has-background-warning has-text-white">Amarillo</th>
                               <th class="has-background-danger has-text-white">Rojo</th>
@@ -541,7 +541,7 @@
                                             <% if indicator.tipo == "numero" %>
                                               <%= dato.total %>
                                             <% else %>
-                                              <%= dato.porcentaje %>%
+                                              <%= dato.porcentaje.round %>%
                                             <% end %>
                                           </td>                                        
                                       <% end %>
@@ -554,7 +554,7 @@
                                           <% if indicator.tipo == "numero" %>
                                             <%= dato.total %>
                                           <% else %>
-                                            <%= dato.porcentaje %>%
+                                            <%= dato.porcentaje.round %>%
                                           <% end %>
                                         </td>
                                       <% end %>
@@ -575,21 +575,21 @@
                                               <% end %>
                                             <% elsif indicator.tipo == "reducir" %>
 
-                                              <% if dato.porcentaje <= ficha.meta %>
-                                                <p class="has-text-success"><%= dato.porcentaje %>%</p>
-                                              <% elsif dato.porcentaje > ficha.meta && dato.porcentaje <= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-warning"><%= dato.porcentaje %>%</p>
-                                              <% elsif dato.porcentaje > (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-danger"><%= dato.porcentaje %>%</p>
+                                              <% if dato.porcentaje.round <= ficha.meta %>
+                                                <p class="has-text-success"><%= dato.porcentaje.round %>%</p>
+                                              <% elsif dato.porcentaje.round > ficha.meta && dato.porcentaje.round <= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-warning"><%= dato.porcentaje.round %>%</p>
+                                              <% elsif dato.porcentaje.round > (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-danger"><%= dato.porcentaje.round %>%</p>
                                               <% end %>
 
                                             <% else %>
-                                              <% if dato.porcentaje >= ficha.meta %>
-                                                <p class="has-text-success"><%= dato.porcentaje %>%</p>
-                                              <% elsif dato.porcentaje < ficha.meta && dato.porcentaje >= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-warning"><%= dato.porcentaje %>%</p>
-                                              <% elsif dato.porcentaje < (ficha.rojo[2]+ficha.rojo[3]).to_i %>
-                                                <p class="has-text-danger"><%= dato.porcentaje %>%</p>
+                                              <% if dato.porcentaje.round >= ficha.meta %>
+                                                <p class="has-text-success"><%= dato.porcentaje.round %>%</p>
+                                              <% elsif dato.porcentaje.round < ficha.meta && dato.porcentaje.round >= (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-warning"><%= dato.porcentaje.round %>%</p>
+                                              <% elsif dato.porcentaje.round < (ficha.rojo[2]+ficha.rojo[3]).to_i %>
+                                                <p class="has-text-danger"><%= dato.porcentaje.round %>%</p>
                                               <% end %>
                                             <% end %>
                                           </td>
